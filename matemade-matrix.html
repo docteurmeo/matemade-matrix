@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MateMade — Brand Territory Matrix</title>
+<script src="research-manifest.js"></script>
+<style>
+  :root{
+    --bg:#11100f; --panel:#1a1917; --panel2:#222019; --ink:#f4efe6; --muted:#a8a093;
+    --line:#34302a; --accent:#e8a0b8; --gold:#d9b06a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--bg);color:var(--ink);font-family:'Segoe UI',-apple-system,system-ui,sans-serif;
+       -webkit-font-smoothing:antialiased;overflow:hidden}
+  #app{display:flex;flex-direction:column;height:100vh}
+  .topbar{padding:12px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;
+          gap:20px;flex:0 0 auto;background:var(--panel);z-index:30}
+  .topbar h1{font-size:18px;font-weight:700;white-space:nowrap}
+  .topbar .sub{color:var(--muted);font-size:12.5px;line-height:1.4;max-width:560px}
+  .topbar .sub b{color:var(--accent)}
+  .tabs{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+  .tab{padding:8px 14px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);
+       border-radius:999px;cursor:pointer;font-size:13px;font-weight:600;transition:.15s;white-space:nowrap}
+  .tab:hover{color:var(--ink);border-color:#4a443c}
+  .tab.active{background:var(--accent);color:#1a1110;border-color:var(--accent)}
+  .stage{position:relative;flex:1 1 auto;overflow:hidden}
+
+  /* ----- pan/zoom world ----- */
+  #viewport{position:absolute;inset:0;overflow:hidden;cursor:grab;
+            background:radial-gradient(circle at 50% 50%,#1e1c18,#121110 60%,#0d0c0b 100%)}
+  #viewport.drag{cursor:grabbing}
+  #world{position:absolute;top:0;left:0;transform-origin:0 0}
+  #world svg{position:absolute;top:0;left:0;pointer-events:none}
+  .node{position:absolute;cursor:pointer;transform:translate(-50%,-50%)}
+  .node:hover{z-index:5}
+  .node:hover .collage{box-shadow:0 8px 22px rgba(0,0,0,.6)}
+  .node.sel .collage{outline:2px solid #fff;outline-offset:2px}
+  .collage{width:210px;border-radius:12px;overflow:hidden;background:var(--panel);
+           border:1px solid var(--line);box-shadow:0 4px 14px rgba(0,0,0,.35)}
+  .collage.me{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent),0 6px 20px rgba(232,160,184,.3)}
+  .masonry{column-count:2;column-gap:3px;padding:3px;background:var(--line)}
+  .masonry img{width:100%;height:auto;display:block;margin-bottom:3px;border-radius:4px;
+               background:var(--panel2);break-inside:avoid;image-rendering:auto}
+  .masonry .ph{display:flex;align-items:center;justify-content:center;height:150px;font-size:22px;
+               color:#6f685d;font-weight:800;border-radius:4px;letter-spacing:1px}
+  .clabel{padding:7px 9px;display:flex;align-items:center;gap:6px}
+  .clabel .nm{font-size:13px;font-weight:700;line-height:1.1}
+  .clabel .ob{width:11px;height:11px;border-radius:50%;flex:0 0 auto;border:1px solid rgba(255,255,255,.28)}
+  .terrlabel{font-size:11px;color:var(--muted);text-align:center;margin-top:3px;font-weight:600}
+  /* dot mode (images hidden) */
+  .dnode{display:flex;flex-direction:column;align-items:center;gap:3px}
+  .dnode .d{width:16px;height:16px;border-radius:50%;border:2px solid rgba(0,0,0,.3);box-shadow:0 2px 6px rgba(0,0,0,.5)}
+  .dnode .l{font-size:12px;font-weight:700;color:var(--ink);white-space:nowrap;text-shadow:0 1px 4px #000,0 0 2px #000}
+  .dnode .t{font-size:10px;font-weight:600;color:var(--muted);white-space:nowrap;text-shadow:0 1px 3px #000}
+  .node.sel .d{outline:2px solid #fff;outline-offset:2px}
+  .dnode.me .d{width:34px;height:34px;border:none;border-radius:0;background:var(--accent)!important;
+    box-shadow:0 0 0 3px rgba(232,160,184,.35),0 0 18px rgba(232,160,184,.75);
+    clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 56%,79% 91%,50% 70%,21% 91%,32% 56%,2% 35%,39% 35%)}
+  .dnode.me .l{color:var(--accent);font-size:13px}
+
+  /* ----- HUD / controls ----- */
+  .hud{position:absolute;left:16px;bottom:16px;display:flex;flex-direction:column;gap:6px;z-index:20}
+  .hud button{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--panel);
+              color:var(--ink);font-size:18px;cursor:pointer;font-weight:600}
+  .hud button:hover{border-color:#4a443c;background:var(--panel2)}
+  .legend{position:absolute;left:16px;top:16px;background:rgba(20,19,17,.85);border:1px solid var(--line);
+          border-radius:12px;padding:12px 14px;z-index:20;backdrop-filter:blur(4px)}
+  .legend .lt{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--gold);font-weight:700;margin-bottom:8px}
+  .legend .row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);margin-top:4px}
+  .legend .dot{width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,.22)}
+
+  /* ----- side detail panel ----- */
+  .detail{position:absolute;right:0;top:0;bottom:0;width:330px;background:var(--panel);
+          border-left:1px solid var(--line);padding:20px;overflow-y:auto;z-index:25;
+          transform:translateX(100%);transition:transform .25s;box-shadow:-10px 0 30px rgba(0,0,0,.3)}
+  .detail.open{transform:translateX(0)}
+  .detail .x{position:absolute;right:14px;top:14px;cursor:pointer;color:var(--muted);font-size:20px;line-height:1}
+  .detail .x:hover{color:var(--ink)}
+  .sidetitle{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--gold);font-weight:700;margin-bottom:10px}
+  .bname{font-size:20px;font-weight:700}
+  .bterr{color:var(--accent);font-size:13px;font-weight:600;margin-top:2px}
+  .bsum{color:var(--muted);font-size:13.5px;line-height:1.55;margin-top:12px}
+  .glabel{color:var(--gold);font-weight:600;font-size:12px;margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .pill{display:inline-block;font-size:11px;padding:3px 9px;border-radius:999px;background:var(--panel2);
+        border:1px solid var(--line);color:var(--muted);margin:3px 4px 0 0}
+  .dgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-top:6px}
+  .dgrid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;display:block}
+  .kvgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px}
+  .kv{display:flex;flex-direction:column;font-size:12.5px}
+  .kv .k{color:#7d756a;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+  .kv .v{color:var(--ink)}
+  ul.learn{margin:4px 0 0 16px;padding:0}
+  ul.learn li{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:3px}
+  .terrlink{margin-top:14px;padding:10px 12px;border:1px dashed var(--accent);border-radius:10px;
+            color:var(--accent);font-size:13px;font-weight:600;cursor:pointer;text-align:center}
+  .terrlink:hover{background:rgba(232,160,184,.08)}
+  .sources{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+  .src{display:flex;align-items:center;gap:8px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;
+       color:var(--muted);font-size:12.5px;text-decoration:none;background:var(--panel2)}
+  .src:hover{border-color:var(--accent);color:var(--ink)}
+  .src .type{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--gold);flex:0 0 auto}
+  .src .txt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .comprow{display:flex;align-items:center;gap:8px;margin-bottom:5px;cursor:pointer;font-size:12.5px}
+  .comprow:hover .cn{color:#fff}
+  .comprow .cn{flex:0 0 96px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .comprow .cbar{flex:1;height:6px;background:var(--panel2);border-radius:4px;overflow:hidden}
+  .comprow .cbar i{display:block;height:100%}
+  .comprow .cd{flex:0 0 30px;text-align:right;color:var(--muted);font-size:11px}
+  .metric{margin-top:8px}
+  .metric .ml{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:3px}
+  .bar{height:6px;background:var(--panel2);border-radius:4px;overflow:hidden}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--gold))}
+
+  /* ----- secondary views ----- */
+  .pad{padding:24px;height:100%;overflow-y:auto}
+  .layout{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start;max-width:1200px;margin:0 auto}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
+  .mapwrap{background:radial-gradient(circle at 50% 46%,#1e1c18,#141311 70%);border:1px solid var(--line);border-radius:16px}
+  svg{display:block;width:100%;height:auto}
+  .nodelabel{font-size:10.5px;fill:var(--ink);font-weight:600}
+  .ringlabel{font-size:10px;fill:#6f685d;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+  .axislabel{font-size:11px;fill:#7d756a;font-weight:600}
+  .hint{color:var(--muted);font-size:13px;line-height:1.5}
+  .chk{display:flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px;cursor:pointer;font-size:13px}
+  .chk:hover{border-color:#4a443c}.chk.on{border-color:var(--accent);background:rgba(232,160,184,.08)}
+  .chk .sw{width:12px;height:12px;border-radius:3px;flex:0 0 auto}
+  .opp{background:linear-gradient(135deg,rgba(232,160,184,.12),rgba(217,176,106,.08));border:1px solid rgba(232,160,184,.3);border-radius:14px;padding:16px;margin-top:14px}
+  .opp h3{font-size:15px;color:var(--accent)}.opp p{color:var(--muted);font-size:13.5px;line-height:1.55;margin-top:8px}
+  .arrow{font-size:13px;color:var(--gold);margin:3px 0;font-weight:600}
+  .scroll{max-height:60vh;overflow-y:auto;padding-right:4px}
+  .legend2{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;font-size:12px;color:var(--muted);justify-content:center}
+  .legend2 span{display:inline-flex;align-items:center;gap:6px}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="topbar">
+    <div>
+      <h1>MateMade — Brand Territory Matrix</h1>
+      <div class="sub">Logic v2.0: <b>Tier × Territory × Modifier</b>. Vòng = Tier (cường độ) · Nan quạt = Territory (phong cách). Scroll zoom · kéo pan · 👁 ẩn ảnh · <b>T/#</b> đổi màu theo Territory/Tier.</div>
+    </div>
+    <div class="tabs" id="tabs"></div>
+  </div>
+  <div class="stage" id="stage"></div>
+</div>
+
+<script>
+"use strict";
+const SVGNS="http://www.w3.org/2000/svg";
+const IMAGES = window.BRAND_IMAGES || {};
+
+/* ---------- DATA ---------- */
+const RINGS=[
+  {r:0.35,label:"Core Mass Feminine"},
+  {r:0.65,label:"Gần trung tâm"},
+  {r:0.95,label:"Lệch rõ — vẫn đại trà"},
+  {r:1.20,label:"Có tính cách rõ"},
+  {r:1.45,label:"Xa / khác hệ"},
+];
+const OCOL=["#cdbfae","#a9c2a0","#e9a7bf","#8fae8a","#5b6470"];
+const METRIC_LABELS=["Sweetness","Coolness","Utility","Craft","Statement","Maturity","Identity"];
+const METRIC_LABELS_VN=["Độ ngọt","Độ cool","Công năng","Thủ công","Tuyên ngôn","Trưởng thành","Bản sắc"];
+const RADAR_COLORS=["#e8a0b8","#d9b06a","#8fae8a","#7aa6c2"];
+
+const BRANDS=[
+  {id:"matemade",slug:"matemade",name:"MateMade",x:-0.75,y:-0.05,orbit:2,territory:"Cute sweet playful / Charmable",summary:"Mass Feminine trẻ hóa + kẹo ngọt hóa; nhiều charm, màu sáng, Gen Z, đang cần lõi riêng.",codes:["pastel","charm","soft shape","playful accessories","social-friendly"],m:[5,1.5,2.5,1.5,2,1.5,2],rel:"— (đây là MateMade)"},
+  {id:"vascara",slug:"vascara",name:"Vascara",x:0.30,y:-0.10,orbit:0,territory:"Core Mass Feminine / Polished daily",summary:"Nữ tính, công sở, dễ phối, ít tuyên ngôn.",codes:["leather-like","neutral","office","versatile"],m:[2.5,2.5,3.5,2,1.5,3.5,2.5],rel:"Thấp"},
+  {id:"juno",slug:"juno",name:"Juno",x:0.10,y:-0.15,orbit:0,territory:"Core Mass Feminine",summary:"Đại trà, giá vừa, dễ mua, nữ tính phổ thông.",codes:["mass","affordable","feminine","everyday"],m:[2.8,2,3,1.5,1,3,1.8],rel:"Thấp"},
+  {id:"hapas",slug:"hapas",name:"Hapas",x:0.20,y:0.00,orbit:0,territory:"Core Mass Feminine / Mass aspiration",summary:"Nữ tính vừa đủ, mass aspiration, không quá sắc cạnh. MateMade kế thừa nền tảng KD của Hapas.",codes:["mass aspiration","soft feminine","clean"],m:[2.6,2.4,3,2,1.5,3.4,2.4],rel:"Nền tảng kế thừa"},
+  {id:"yuumy",slug:"yuumy",name:"Yuumy",x:0.00,y:-0.38,orbit:1,territory:"Mass feminine daily",summary:"Giá mềm, túi nữ tính dễ phối hằng ngày, chất liệu phổ thông.",codes:["synthetic leather","multi-style","feminine daily","crossbody"],m:[2.5,1.5,3.0,1,1,2.5,1.8],rel:"Thấp"},
+  {id:"camelia",slug:"camelia",name:"Camelia",x:0.25,y:-0.75,orbit:1,territory:"Minimal functional canvas",summary:"Canvas, tối giản, tiện dụng, daily.",codes:["canvas","minimal","durable","utility"],m:[1,2.5,4.5,2.5,1.5,2.8,2.4],rel:"Thấp"},
+  {id:"lesac",slug:"lesac",name:"Lesac",x:0.40,y:-0.20,orbit:1,territory:"Minimal young lifestyle",summary:"Minimal, trẻ, nhẹ, dễ tiếp cận.",codes:["minimal","lightweight","young","lifestyle"],m:[2.5,3,3.2,2,1.5,2.6,2.8],rel:"Trung bình"},
+  {id:"toutou",slug:"toutou",name:"Toutou bag",x:-1.15,y:-0.05,orbit:3,territory:"Kawaii trend item",summary:"Cute trend item, Hello Kitty/Kuromi/bow/charm, rất gần kẹo ngọt Shopee.",codes:["Hello Kitty","bow","charm","tote vải","pop color"],m:[5,0.5,2,0.5,1.5,0.5,1.5],rel:"Cao — CẢNH BÁO (đừng quá gần)"},
+  {id:"vanwalk",slug:"vanwalk",name:"Vanwalk",x:-0.88,y:-0.46,orbit:2,territory:"Kawaii campus cute",summary:"Cute kawaii campus: balo bear/bunny, appliqué, stars, pastel. Ngọt ngang hoặc hơn cả MateMade về visual.",codes:["balo","kawaii","bear appliqué","pastel","campus"],m:[4.8,1.3,4,1,1.5,1,2],rel:"Cao"},
+  {id:"oui",slug:"oui",name:"Oui The Brand",x:-0.85,y:-0.25,orbit:2,territory:"Japanese-lite charmable daily",summary:"Daily tote/ví/balo/hobo, naming kiểu Nhật, kèm charm, giá dễ tiếp cận.",codes:["tote","hobo","Japanese naming","charm"],m:[4,2,3.5,1.5,1.5,2,2.2],rel:"Cao"},
+  {id:"samantha_vega",slug:"samantha-vega",name:"Samantha Vega",x:-0.80,y:0.25,orbit:2,territory:"Kawaii-chic",summary:"Cute-mode: cute nhưng có cấu trúc thời trang, girlish nhưng sophisticated hơn.",codes:["bow","structured","cute-mode","polished"],m:[4,2.5,2.8,2.5,2.5,3,3.2],rel:"Cao — hình mẫu nâng cấp"},
+  {id:"carlyn",slug:"carlyn",name:"Carlyn",x:-0.45,y:-0.10,orbit:1,territory:"Soft puffer daily",summary:"Túi mềm, nhẹ, casual, daily, puffer/quilted, mood Hàn.",codes:["puffer","quilted","soft","Korean casual"],m:[3.5,3,3.2,2,2,2.8,3],rel:"Cao"},
+  {id:"karatta",slug:"karatta",name:"Karatta",x:-0.55,y:0.65,orbit:2,territory:"Playful visual design",summary:"Playful shape/name (Loli/Blooming/Bánh Mì Bag), visual signature; túi thiết kế Việt.",codes:["signature shape","playful name","visual","designed"],m:[3.5,2.5,2.8,2.5,3.5,2.5,3.6],rel:"Trung bình–cao (học naming/shape)"},
+  {id:"ngaos",slug:"ngaos",name:"Ngaos",x:-0.52,y:0.87,orbit:3,territory:"Romantic coquette craft",summary:"Full pink coquette: lace, bow, satin, boudoir. Brand đã shift từ embroidery craft sang romantic statement mạnh.",codes:["coquette","pink","bow","lace","romantic","satin"],m:[4.2,1.8,2.2,3.5,3.5,2.8,3.8],rel:"Trung bình"},
+  {id:"thergab",slug:"ther-gab",name:"Ther Gab / R.Gab",x:-0.05,y:0.95,orbit:3,territory:"Heritage self-expression",summary:"Designed & Made in Vietnam, inspired by heritage, túi như self-expression của dynamic youth.",codes:["heritage","made in VN","self-expression","craft"],m:[2.5,3,2.5,4,3.5,3,4],rel:"Trung bình (học story)"},
+  {id:"floralpunk",slug:"floral-punk",name:"Floralpunk",x:0.25,y:0.80,orbit:3,territory:"Urban feminine polish",summary:"Canvas tote, downtown shopper, suede, chain, belt bag, woven, nylon; nữ tính đô thị.",codes:["canvas tote","suede","chain","belt bag","woven"],m:[2,3.5,3,3,3.5,3.5,3.5],rel:"Thấp–trung bình"},
+  {id:"chautfifth",slug:"chau-fifth",name:"Chautfifth",x:0.45,y:1.05,orbit:3,territory:"Playful editorial statement",summary:"Playful editorial: Y2K naming (Y2K Pocket, Cruise, Star), Ruffle Heart, Bakery Box. Statement có edge playful, không phải pure restrained.",codes:["Y2K","playful editorial","statement","eclectic"],m:[2,4,3,3.5,4.5,4,4.5],rel:"Trung bình (học hệ thống charm/strap)"},
+  {id:"standoil",slug:"stand-oil",name:"Stand Oil",x:1.00,y:0.35,orbit:3,territory:"Seoul cool minimal",summary:"Daily nhưng restraint, cool, hiện đại, ít ngọt; khác khách hàng thực tế của MateMade.",codes:["Seoul","cool","minimal","restraint","everyday art"],m:[1.5,4.5,3.2,2.5,3.5,3.8,4.2],rel:"Thấp (học restraint, đừng copy)"},
+  {id:"mossdoom",slug:"mossdoom",name:"Mossdoom",x:0.75,y:-0.35,orbit:2,territory:"Affordable Korean minimal utility",summary:"PU leather, bucket/tote/shoulder bag, vintage/minimal, lightweight, practical.",codes:["PU leather","bucket","minimal","lightweight"],m:[2,3.5,4,2,1.5,2.8,2.6],rel:"Thấp"},
+  {id:"spoiled",slug:"spoiled",name:"Spoiled",x:0.60,y:-0.38,orbit:3,territory:"Fashion accessory premium",summary:"Fashion accessory bag: Flare Bag, Mini Trunk (croc PU), drop culture, League tote. Không phải sporty utility mà là statement accessory có edge.",codes:["croc PU","drop culture","structured","fashion edge"],m:[1.5,3.8,2.8,2,3.5,3.2,3.7],rel:"Thấp"},
+  {id:"saigonswagger",slug:"saigon-swagger",name:"Saigon Swagger",x:0.65,y:-1.10,orbit:4,territory:"Street utility",summary:"Backpack, bumbag, tote, wallet, utility bag, streetwear/unisex.",codes:["backpack","bumbag","streetwear","unisex","utility"],m:[1.2,3.5,4.5,2.5,3,3,3.2],rel:"Thấp (học functional system)"},
+  {id:"aeta",slug:"aeta",name:"Aeta",x:0.30,y:0.88,orbit:3,territory:"Japanese quiet craft minimal",summary:"Osaka minimalist leather goods; quiet slouchy forms, premium construction, timeless and tactile rather than loud statement.",codes:["Japanese minimal","leather","slouchy form","craft","quiet luxury"],m:[0.8,3.8,2.7,4.5,3.5,4.5,4.2],rel:"Thấp — học craft/form discipline"},
+  {id:"osoi",slug:"osoi",name:"OSOI",x:0.82,y:0.78,orbit:3,territory:"Sculptural Seoul minimal",summary:"Original design, timeless value, fresh materials/colors/details; shape and hardware are stronger than decoration.",codes:["sculptural","hardware","timeless","Seoul","minimal"],m:[0.8,4.8,2.8,3.5,4.3,4.2,4.6],rel:"Thấp — học design signature"},
+  {id:"vunque",slug:"vunque",name:"Vunque",x:0.78,y:0.50,orbit:3,territory:"Polished sculptural Korean leather",summary:"Korean leather bag/wallet brand with shell, halfmoon, hobo and rounded structured forms; polished but more sculptural/editorial than daily leather.",codes:["leather","shell","halfmoon","rounded structure","polished"],m:[1.2,4.2,2.8,3.2,3.8,4,4.1],rel:"Thấp–trung bình"},
+  {id:"marge_sherwood",slug:"marge-sherwood",name:"Marge Sherwood",x:0.48,y:0.58,orbit:3,territory:"90s downtown soft leather",summary:"Korean brand with Soft Boston, Grandma Used, Dumpling, Hobo, Boat Shopper; downtown 90s mood with playful color and soft leather shape code.",codes:["90s mood","soft boston","hobo","downtown","playful color"],m:[2.2,4,2.8,3,4,3.6,4.2],rel:"Thấp — học retro shape code"},
+  {id:"minitmute",slug:"minitmute",name:"minitmute",x:0.45,y:-0.02,orbit:2,territory:"Soft compact Korean daily",summary:"Korean compact daily bags: Clo, New Box, Tobo, Soft Chain; pastel/soft colors, wearable, daily-cool rather than cold minimal.",codes:["compact","pastel","box","soft chain","daily"],m:[2.5,3.5,3,2.3,2.8,3.2,3.6],rel:"Trung bình — học compact signature"},
+  {id:"lyn",slug:"lyn",name:"LYN",x:0.35,y:-0.05,orbit:1,territory:"Accessible Thai polished accessory",summary:"Thai high-street accessories: bags, wallets, shoes, accessories; accessible fashion/luxury, trend-led polished mass.",codes:["Thai high-street","polished","trend-led","accessible","occasion bags"],m:[2.2,3,3.2,2,2.5,3.5,3],rel:"Thấp — mass polished benchmark"},
+  {id:"pipatchara",slug:"pipatchara",name:"Pipatchara",x:0.10,y:1.22,orbit:4,territory:"Sustainable craft art piece",summary:"Thai community-made handmade macrame, Italian calf leather, recycled material story, custom one-of-one bag language.",codes:["macrame","community craft","sustainable","custom","art piece"],m:[1.5,3.5,2.2,5,4.8,4.5,4.8],rel:"Thấp — học craft/community story"},
+  {id:"jelly_bunny",slug:"jelly-bunny",name:"Jelly Bunny",x:-0.55,y:-0.35,orbit:1,territory:"Cute IP-accessible Thai daily",summary:"Cute/practical bags for women and teens; colorful, pastel, accessible, with IP/collab energy stronger than first-pass placement.",codes:["cute","pastel","teen","practical","IP collab"],m:[4.4,2.2,3.2,1,2.2,1.3,2.5],rel:"Trung bình — cute mass SEA reference"},
+];
+
+const TERRITORIES=[
+  {name:"Charm Culture",ang:200,d:0.7},{name:"Soft Puffer Daily",ang:160,d:0.75},
+  {name:"Kawaii-chic",ang:120,d:0.8},{name:"Pop Feminine",ang:80,d:0.85},
+  {name:"Playful Utility",ang:240,d:0.7},{name:"Romantic Editorial",ang:55,d:1.12},
+  {name:"Soft Statement",ang:100,d:1.12},{name:"Seoul Soft Cool",ang:35,d:1.18},
+  {name:"Mass Feminine Utility",ang:285,d:0.98},{name:"Statement / Art Object",ang:90,d:1.38},
+  {name:"Functional / Daily",ang:310,d:1.12},
+];
+
+/* ---------- WORLD GEOMETRY ---------- */
+const WORLD=2600, WC=WORLD/2, U=760; // px per unit
+let ox=0, oy=0; // current map center offset (origin brand)
+const wx=x=>WC+(x-ox)*U, wy=y=>WC-(y-oy)*U;
+/* ===== LOGIC v2.0: Tier × Territory × Modifier ===== */
+const TIERS=[
+  {en:"Neutral Mass",vn:"Đại chúng trung tính"},
+  {en:"Mass With Character",vn:"Đại chúng có nét riêng"},
+  {en:"Tasteful Yet Accessible",vn:"Có gu, vẫn dễ gần"},
+  {en:"Distinct Style",vn:"Phong cách rõ nét"},
+  {en:"Experimental Extreme",vn:"Cực tính & thể nghiệm"},
+];
+const TIER_COLOR=["#cdbfae","#a9c2a0","#e9a7bf","#8fae8a","#5b6470"];
+const PROX_LABELS=["MateMade hiện tại","Đối thủ gần nhất","Lân cận có thể mở rộng","Hình mẫu nâng cấp","Khác hệ, học chọn lọc"];
+const CORE_COLOR="#d8bd78";
+// 8 style-territory sectors (center angle in degrees, math convention: 0=E,90=N)
+const SECTORS=[
+  {key:"E", ang:0,   en:"Seoul Cool / Polished Minimal", vn:"Cool Hàn – tối giản chỉn chu", color:"#55b7d4"},
+  {key:"NE",ang:45,  en:"Editorial Cool / Architectural", vn:"Cool biên tập – tối giản kiến trúc", color:"#7d8cf0"},
+  {key:"N", ang:90,  en:"Design Object / Craft Statement", vn:"Đồ vật thiết kế – craft statement", color:"#b56ee0"},
+  {key:"NW",ang:135, en:"Romantic / Coquette / Girlish Craft", vn:"Lãng mạn – coquette – craft", color:"#df64b8"},
+  {key:"W", ang:180, en:"Sweet / Playful / Kawaii", vn:"Ngọt – vui – kawaii", color:"#ff6fa7"},
+  {key:"SW",ang:225, en:"Soft Casual Cute / Daily Charm", vn:"Cute đời thường mềm", color:"#ff9b6b"},
+  {key:"S", ang:270, en:"Everyday Function / Practical Utility", vn:"Công năng hằng ngày – tiện dụng thực tế", color:"#a7c957"},
+  {key:"SE",ang:315, en:"Urban Sport / Street Utility", vn:"Thể thao đô thị – street utility", color:"#6f82a8"},
+];
+const SECTOR_BY_KEY=Object.fromEntries(SECTORS.map(s=>[s.key,s]));
+// proximity evolution-vector labels (per direction)
+const VECTORS={E:"Toward Restraint",NE:"Restrained Signature",N:"Toward Signature",NW:"Romantic Candy Craft",
+  W:"Deeper Candy",SW:"Cute Daily Utility",S:"Toward Function",SE:"Urban Functional"};
+const CORE_TERR={en:"Mass Polished Feminine",vn:"Lõi nữ tính phổ thông"};
+// per-brand v2.0 assignment
+const LOGIC={
+  matemade:{tier:2,terr:"W",str:"strong",mEn:"Charmable Self-expression",mVn:"Kẹo ngọt cá nhân hóa qua charm/phụ kiện",note:"Vùng chiến lược chính: đào sâu tier trong territory Sweet (Modular Candy Utility)."},
+  vascara:{tier:0,terr:"CORE",str:"faint",mEn:"Soft professional mass",mVn:"Công sở mềm, dễ phối",note:"Gu phổ thông nữ tính, ít tuyên ngôn, dễ thay thế."},
+  juno:{tier:0,terr:"CORE",str:"faint",mEn:"Safe mass feminine",mVn:"Nữ tính an toàn",note:"Mass feminine an toàn, giá vừa."},
+  hapas:{tier:0,terr:"CORE",str:"faint",mEn:"Mass aspiration",mVn:"Nữ tính vừa đủ, đại trà nâng cấp nhẹ",note:"Gần tâm nhất, không có style territory cực đoan."},
+  yuumy:{tier:1,terr:"S",str:"faint",mEn:"Affordable feminine daily",mVn:"Túi nữ tính hằng ngày giá mềm",note:"Visual thật là feminine daily, không phải utility canvas. Không phải workbag hay sporty."},
+  camelia:{tier:1,terr:"S",str:"faint",mEn:"Minimal canvas utility",mVn:"Canvas tối giản, tiện dụng",note:"Vẫn gần mass utility hơn aesthetic-led."},
+  lesac:{tier:1,terr:"E",str:"faint",mEn:"Young minimal daily",mVn:"Minimal trẻ, daily",note:"Cool nhẹ nhưng chưa thành aesthetic-led."},
+  carlyn:{tier:2,terr:"SW",str:"medium",mEn:"Signature puffer daily (brand evolving to cool)",mVn:"Puffer mềm casual Hàn — đang evolve sang cool/editorial",note:"Brand-wide daily; signature puffer line gives tier 2 coded-aesthetic status. Collection hiện tại (City Teller, grey nylon) đang shift sang cool/neutral."},
+  vanwalk:{tier:2,terr:"W",str:"medium",mEn:"Kawaii campus cute (CN domestic)",mVn:"Kawaii đi học, bear/bunny appliqué, backpack (brand nội địa Trung)",note:"Visual audit: kawaii mạnh hơn MateMade về hình ảnh. Dịch x về −0.88 (sâu hơn W territory)."},
+  oui:{tier:2,terr:"SW",str:"medium",mEn:"Japanese-lite daily charm",mVn:"Daily charm hơi Nhật",note:"Gần MateMade ở cute daily và charm."},
+  samantha_vega:{tier:2,terr:"NW",str:"medium",mEn:"Kawaii-chic / Cute Mode",mVn:"Cute-mode, kawaii có polish",note:"Reference để nâng MateMade từ candy sang cute-mode."},
+  karatta:{tier:2,terr:"N",str:"medium",mEn:"Playful visual design, minimal-leaning",mVn:"Thiết kế thị giác, form tối giản hơn là kẹo",note:"Tên playful nhưng form sản phẩm thật thiên minimal-design (đã hạ x về gần trung tính)."},
+  mossdoom:{tier:2,terr:"E",str:"medium",mEn:"Affordable Korean-style minimal (ID origin)",mVn:"Minimal kiểu Hàn giá dễ tiếp cận (gốc Indonesia)",note:"Brand Indonesia (Bandung 2009) marketing phong cách Hàn. Gần mass hơn Stand Oil, cùng hướng cool/minimal."},
+  toutou:{tier:3,terr:"W",str:"strong",mEn:"Trend-extreme / IP-borrowed cute",mVn:"Cực cute theo trend / mượn IP",note:"CẢNH BÁO: xa tâm vì cực cute, KHÔNG đồng nghĩa premium/bản sắc bền.",sig:"trend-extreme"},
+  ngaos:{tier:3,terr:"NW",str:"strong",mEn:"Romantic coquette craft (pink/lace/bow)",mVn:"Coquette/lãng mạn mạnh: pink, lace, bow, boudoir",note:"Brand đã shift từ embroidery craft sang full coquette/romantic. Dịch x về −0.52 (ngọt hơn, gần W hơn)."},
+  thergab:{tier:3,terr:"N",str:"strong",mEn:"Soft sculptural VN design / heritage-informed craft",mVn:"Túi sculptural hữu cơ, hình blob/cloud, heritage-informed",note:"Bags có form hữu cơ/sculptural (mint, pink cloud shapes) — nghệ thuật hơn là heritage trực tiếp."},
+  floralpunk:{tier:3,terr:"NE",str:"strong",mEn:"Urban feminine polish / subtly statement",mVn:"Urban feminine polish, hơi statement",note:"BST gần đây (Ivy Chain/suede) design hơn — giữ y vừa phải, không craft-heavy như Chautfifth/Ngaos."},
+  chautfifth:{tier:3,terr:"NE",str:"strong",mEn:"Playful editorial / contemporary statement",mVn:"Statement đương đại có chất playful Y2K và editorial",note:"Visual: Y2K Pocket, Ruffle Heart, Bakery Box — eclectic hơn 'restrained'. Đúng NE territory nhưng có sắc thái pop/playful, không phải quiet-minimal."},
+  standoil:{tier:3,terr:"E",str:"strong",mEn:"Daily fashion cool / sculptural practicality",mVn:"Daily bag cool, thực dụng sculptural",note:"Campaign pop/eclectic hơn tưởng — không phải quiet luxury. Core sản phẩm (Chubby, Baguette) vẫn minimal; không nên copy style, học restraint shape."},
+  spoiled:{tier:3,terr:"E",str:"medium",mEn:"Fashion accessory with edge (drop culture)",mVn:"Fashion accessory bag có edge: Flare, Trunk, League",note:"Visual audit: sản phẩm thật là structured fashion bags (croc PU, drop model), không phải sporty utility. Dịch về E territory, y nâng lên −0.38."},
+  saigonswagger:{tier:4,terr:"SE",str:"strong",mEn:"Category-adjacent carry system",mVn:"Hệ carry street/utility",note:"Khác category logic; chỉ học chọn lọc cấu trúc sản phẩm.",catAdj:true},
+  aeta:{tier:3,terr:"N",str:"strong",mEn:"Quiet Japanese craft minimal",mVn:"Tối giản Nhật, chất liệu và cấu trúc dẫn dắt",note:"Visual audit: quiet/slouchy craft-minimal, ít art-statement hơn dự đoán nên hạ y nhẹ; vẫn là chuẩn form discipline và material quality."},
+  osoi:{tier:3,terr:"NE",str:"strong",mEn:"Sculptural Seoul minimal",mVn:"Tối giản Hàn có form/hardware signature",note:"OSOI nằm cao hơn Stand Oil về design object: shape/hardware tạo bản sắc, ít decoration."},
+  vunque:{tier:3,terr:"NE",str:"strong",mEn:"Polished sculptural Korean leather",mVn:"Da Hàn polished, form shell/rounded có statement",note:"Visual audit: nhiều shell/rounded structured bag, color pop và styling editorial hơn 'daily leather'; nâng lên NE border."},
+  marge_sherwood:{tier:3,terr:"NE",str:"strong",mEn:"90s downtown soft leather",mVn:"Da mềm downtown 90s, retro/playful shape code",note:"Visual audit: retro/downtown đúng nhưng playful/feminine/color nhiều hơn OSOI; kéo x bớt cool."},
+  minitmute:{tier:2,terr:"E",str:"medium",mEn:"Soft compact Korean daily",mVn:"Túi Hàn compact, pastel/soft, daily-cool",note:"Visual audit: pastel/compact/soft cute nhiều hơn cool-minimal lạnh; kéo gần tâm hơn."},
+  lyn:{tier:1,terr:"CORE",str:"faint",mEn:"Accessible polished Thai high-street",mVn:"Phụ kiện Thái polished, trend-led, dễ tiếp cận",note:"LYN là mass polished benchmark Đông Nam Á: gần Vascara/Juno/Hapas hơn nhóm design-led."},
+  pipatchara:{tier:4,terr:"N",str:"strong",mEn:"Sustainable craft art piece",mVn:"Macrame thủ công, cộng đồng, custom, art-piece",note:"Pipatchara là Niche Specialist: craft/community/sustainability story mạnh, xa MateMade nhưng hữu ích để học storytelling và material system."},
+  jelly_bunny:{tier:1,terr:"SW",str:"medium",mEn:"Cute IP-accessible Thai daily",mVn:"Cute practical mass, pastel/IP/collab cho nữ trẻ",note:"Visual audit: pastel/IP/cute mạnh hơn first-pass, kéo sang trái gần W/SW; vẫn mass accessible, chưa phải signature tier 2."},
+};
+// merge logic onto brands
+BRANDS.forEach(b=>{const L=LOGIC[b.id];if(L)Object.assign(b,L);});
+// ===== positions-final-reconciled (Claude + ChatGPT) — tọa độ kiểm chứng =====
+const FINAL_POS={
+  matemade:[-0.78,-0.06], vascara:[0.29,-0.09], juno:[0.11,-0.16], hapas:[0.23,0.01],
+  yuumy:[0.01,-0.38], camelia:[0.22,-0.76], lesac:[0.39,-0.21], toutou:[-1.20,-0.10],
+  vanwalk:[-0.88,-0.46], oui:[-0.68,-0.28], samantha_vega:[-0.79,0.30], carlyn:[-0.42,-0.05],
+  karatta:[-0.25,0.62], ngaos:[-0.52,0.87], thergab:[-0.05,0.97], floralpunk:[0.30,0.68],
+  chautfifth:[0.50,1.07], standoil:[0.99,0.37], mossdoom:[0.70,-0.42], spoiled:[0.60,-0.38],
+  saigonswagger:[0.70,-1.15], aeta:[0.30,0.88], osoi:[0.82,0.78], vunque:[0.78,0.50],
+  marge_sherwood:[0.48,0.58], minitmute:[0.45,-0.02], lyn:[0.35,-0.05], pipatchara:[0.10,1.22],
+  jelly_bunny:[-0.55,-0.35],
+};
+BRANDS.forEach(b=>{const p=FINAL_POS[b.id];if(p){b.x=p[0];b.y=p[1];}});
+
+/* ===== A. TERRITORY DOSSIER (từ điển phong cách) ===== */
+const DOSSIER={
+  W:{def:"Ngọt, vui, dễ thương, nữ tính trẻ — túi để 'chơi' và chụp hình. Dễ mua, dễ phối, social-friendly.",
+     codes:["shape tròn/mềm, mini bag","glossy PU / nylon","pastel, hồng, baby blue, bơ","bow, heart, charm, quilt"],
+     persona:"Nữ Gen Z 16–24, đang thử phong cách, thích charm & phụ kiện, chưa có gu cố định.",
+     examples:"MateMade, Toutou (cực đoan) · ngoài: Sanrio, Sandy Liang massified",
+     learn:"Đây là LÕI của MateMade — giữ. Nâng cấp bằng hệ charm/strap có chủ đích thay vì treo charm ngẫu nhiên.",
+     vs:"Khác SW: W 'kẹo' và trang trí hơn; SW mềm/casual daily, bớt ngọt."},
+  SW:{def:"Cute đời thường, mềm, dễ dùng hằng ngày; nữ tính nhẹ, không quá búp bê.",
+     codes:["puffer / quilted","nylon, tote, balo","milk / powder tone","charm nhẹ, strap to"],
+     persona:"Nữ trẻ đi học/đi làm, thích nhẹ – tiện – xinh, dùng hằng ngày.",
+     examples:"Carlyn, Oui, Vanwalk",
+     learn:"Vùng MateMade dễ mở rộng tới. 'Modular Candy Utility' nằm giữa W ↔ SW (thêm chút N).",
+     vs:"Khác W: bớt kẹo, thiên công năng; khác S: vẫn cute, không thuần utility."},
+  S:{def:"Túi dùng được, bền, nhiều ngăn, giá tốt; ít tuyên ngôn — công năng dẫn dắt.",
+     codes:["canvas / PU","tote, balo, nhiều ngăn","neutral, đen, nâu, be","khóa/ngăn tiện dụng"],
+     persona:"Sinh viên/người đi làm cần tiện & rẻ, không đòi gu mạnh.",
+     examples:"Yuumy, Camelia",
+     learn:"Học logic công năng (ngăn/strap) để charm system 'dùng được'. Tránh sa vào đây kẻo nhạt bản sắc.",
+     vs:"Khác SE: S là utility nữ tính phổ thông; SE thêm chất thể thao/street."},
+  SE:{def:"Năng động, street, unisex, công năng cao; coolness của lifestyle đô thị.",
+     codes:["sling, bumbag, backpack","nylon / PU / PVC","đen, hardware, logo patch","chống nước, nhiều ngăn"],
+     persona:"Người trẻ năng động, lifestyle street/sport, thường unisex.",
+     examples:"Spoiled, Saigon Swagger",
+     learn:"Shape & functional system đáng học. Xa cảm xúc MateMade — chỉ học nguyên lý.",
+     vs:"Khác S: SE 'ngầu'/thể thao; S thiên nữ tính daily."},
+  E:{def:"Cool, tối giản, hiện đại, ít ngọt — gu Hàn (Seoul). Daily nhưng restraint.",
+     codes:["form sạch, shoulder/hobo","vegan leather, leather-like","neutral, đen, ivory, nâu","logo nhỏ, ít chi tiết"],
+     persona:"Nữ có gu nền ổn định, fashion-aware, thích cool girl Seoul.",
+     examples:"Stand Oil, Mossdoom, Lesac",
+     learn:"Học restraint & shape discipline. KHÔNG copy nguyên — khác tệp khách thật của MateMade.",
+     vs:"Khác NE: E daily-wearable cool; NE editorial/statement hơn."},
+  NE:{def:"Tối giản nhưng có tuyên ngôn thiết kế — 'có gu' rõ, ít trang trí.",
+     codes:["shape lạ tiết chế","muted palette","hardware tinh","ít decoration, mỗi đường nét có lý do"],
+     persona:"Người yêu thời trang, mua vì quan điểm thẩm mỹ.",
+     examples:"Chautfifth, Floralpunk",
+     learn:"Cách 'có gu mà không decoration'; hệ thống hóa thiết kế — benchmark cho việc nâng tầng MateMade.",
+     vs:"Khác N: NE thiên cool/minimal; N thiên craft/heritage/object kể chuyện."},
+  N:{def:"Túi như tác phẩm / kể chuyện văn hóa, thủ công — design object.",
+     codes:["sculptural, odd shape","woven, embroidery","made-in-VN, story","signature name"],
+     persona:"Người mua vì câu chuyện & cá tính, coi túi là biểu đạt.",
+     examples:"Ther Gab, Karatta",
+     learn:"Gắn sản phẩm với câu chuyện/heritage để tạo brand memory bền — bài học chống 'chung chung'.",
+     vs:"Khác NW: N trung tính/design/heritage; NW nữ tính lãng mạn ngọt hơn."},
+  NW:{def:"Lãng mạn, nữ tính, coquette, thủ công ngọt — nữ tính có chiều sâu.",
+     codes:["thêu, hoa, ribbon","pearl, bead","nostalgia, vintage","kawaii-chic polish"],
+     persona:"Nữ thích nữ tính có chiều sâu, tránh Shopee-trend.",
+     examples:"Ngaos, Samantha Vega",
+     learn:"Hướng tiến hóa tiềm năng: nâng 'kẹo ngọt' thành 'Romantic Candy Craft' — nữ tính sâu hơn, khác Toutou.",
+     vs:"Khác W: NW nữ tính/craft hơn; W trẻ con/pop hơn."},
+  CORE:{def:"Lõi gu phổ thông nữ Việt: dễ dùng, dễ đẹp, nữ tính vừa phải, ít tuyên ngôn — Mass Polished Feminine.",
+     codes:["tote/shoulder/crossbody","da/leather-like","neutral, form quen","ít chi tiết cực đoan"],
+     persona:"Nữ 22–35 đại trà, đi làm/đi chơi, muốn an toàn & dễ phối.",
+     examples:"Vascara, Juno, Hapas",
+     learn:"Đừng rời quá xa core — đây là nơi có volume. MateMade cần đủ gần để bán đại trà.",
+     vs:"Gần tâm → territory mờ; brand ở đây nên mô tả bằng Tier, không bằng phong cách."},
+};
+
+/* ===== B. THÔNG TIN CHI TIẾT BRAND ===== */
+const BRAND_INFO={
+  matemade:{price:"~300–600k",origin:"Việt Nam",cat:"Túi nữ Gen Z",sig:"Candy / Mochi / Luna / Everyday Tote",persona:"Nữ Gen Z thử phong cách, mê charm",learn:["Đây là chủ thể — giữ lõi Sweet","Hệ thống hóa charm → Modular Candy Utility"]},
+  vascara:{price:"~500k–1.5M",origin:"Việt Nam",cat:"Giày + túi + phụ kiện",sig:"Tote/shoulder công sở",persona:"Nữ 25–35 đi làm",learn:["Chuẩn mực 'core mass' để đo độ lệch"]},
+  juno:{price:"~400–900k",origin:"Việt Nam",cat:"Giày + túi mass",sig:"Hobo/top-handle/baguette nhỏ",persona:"Nữ đại trà, giá vừa",learn:["Mass feminine an toàn — tham chiếu giá/accessibility"]},
+  hapas:{price:"~300k–1M+",origin:"Việt Nam",cat:"Túi & phụ kiện",sig:"La Muse, ô trám, set quà",persona:"Nữ mass aspiration, giftable",learn:["Nền tảng KD MateMade kế thừa — mid-price polished"]},
+  yuumy:{price:"~200–500k",origin:"Việt Nam",cat:"Túi value",sig:"Túi da nữ dễ phối",persona:"Nữ cần rẻ – nhiều mẫu",learn:["Volume từ value; xa bản sắc MateMade"]},
+  camelia:{price:"~300–600k",origin:"Việt Nam",cat:"Canvas/tote utility",sig:"Premium Canvas Tote",persona:"Người thích minimal tiện dụng",learn:["Logic canvas utility bền – tiện"]},
+  lesac:{price:"~300–600k",origin:"Việt Nam",cat:"Minimal bags",sig:"PU trơn form basic",persona:"Nữ trẻ thích minimal nhẹ",learn:["Minimal trẻ accessible — bớt kẹo"]},
+  toutou:{price:"~150–300k",origin:"VN / Shopee",cat:"Cute trend item",sig:"Hello Kitty/Kuromi tote, charm",persona:"Teen mê IP cute giá rẻ",learn:["CẢNH BÁO: trend-extreme mượn IP, dễ thay — đừng quá gần"],conf:"low"},
+  vanwalk:{price:"~800k–1.3M",origin:"Nội địa Trung",cat:"Balo/túi campus",sig:"Fun Market, Fruit Power",persona:"Nữ sinh năng động",learn:["Cute + utility campus; vẫn rất accessible"]},
+  oui:{price:"~300–600k",origin:"VN (HCMC, 2017)",cat:"Da minimal daily",sig:"Chizuko, Hifumi, Hotaru tote",persona:"Nữ thích daily leather + charm",learn:["Naming/charm Nhật; daily leather, bớt ngọt hơn MateMade"]},
+  samantha_vega:{price:"~1.5–4M",origin:"Nhật (Samantha Thavasa)",cat:"Kawaii-chic",sig:"Cute-Mode collab bags",persona:"Nữ trẻ thích cute có cấu trúc",learn:["Biến cute thành hệ thiết kế có discipline — hình mẫu nâng cấp"]},
+  carlyn:{price:"~1.7–4M ($69–169)",origin:"Hàn Quốc",cat:"Puffer signature",sig:"Soft/Cozy puffer, Jelly Mini",persona:"Gen Z trendy, theo celeb Hàn",learn:["Sức mạnh của MỘT signature shape (puffer) — bài học codified aesthetic"]},
+  karatta:{price:"~400–800k",origin:"Việt Nam",cat:"Túi thiết kế",sig:"Loli Bag, Belt Tote, Air Bag",persona:"Nữ thích design playful-minimal",learn:["Đặt tên/shape tạo memory hook; form thật minimal hơn tên gọi"]},
+  ngaos:{price:"~600k–1.5M",origin:"VN (Hà Nội, 2015)",cat:"Thêu thủ công",sig:"Flower Bed Bag, thêu hoa",persona:"Nữ yêu craft lãng mạn",learn:["Craft/thêu tạo bản sắc khó sao chép"]},
+  thergab:{price:"~1–3M+",origin:"VN (HCMC, 2022)",cat:"Heritage craft",sig:"Boat Bag, Haven Bag",persona:"Youth design-conscious, quốc tế",learn:["Gắn heritage + made-in-VN; đã ra HBX/Singapore"]},
+  floralpunk:{price:"~500k–1.2M",origin:"VN (HCMC)",cat:"Phụ kiện thời trang",sig:"Downtown Shopper, Ivy Chain",persona:"Nữ đô thị student/đi làm",learn:["Urban feminine polish; BST gần đây design hơn"]},
+  chautfifth:{price:"~1–2.5M",origin:"VN (2021)",cat:"Design-led slow fashion",sig:"Flower Log, shapeshifting bags",persona:"Người yêu thời trang edgy minimal",learn:["'Every line exists for a reason' — restraint có hệ thống"]},
+  standoil:{price:"~2.5–5M ($100–200)",origin:"Hàn Quốc",cat:"Seoul cool minimal",sig:"Oblong/New Bucket bag",persona:"Nữ fashion-aware, gu cool",learn:["Học restraint & sculptural shape; KHÔNG copy cool girl"]},
+  mossdoom:{price:"~200–500k",origin:"Indonesia (Bandung 2009, Korean-look marketing)",cat:"Minimal utility affordable",sig:"Renee shoulder bag",persona:"Nữ thích minimal Hàn giá mềm",learn:["Brand Indonesia gốc Bandung — 'Korean' là định hướng phong cách/marketing, không phải xuất xứ"]},
+  spoiled:{price:"~900k–1.3M",origin:"VN (2022)",cat:"Fashion accessory bag",sig:"Flare Bag, Mini Trunk (croc PU), League tote",persona:"Người trẻ confident, drop culture, fashion edge",learn:["Fashion accessory bag với drop model; structured croc PU bags — không phải sporty utility"]},
+  saigonswagger:{price:"~700k–1.5M",origin:"VN (2014)",cat:"Balo/carry system",sig:"SGS Lune backpack",persona:"Người trẻ đô thị, unisex",learn:["Functional carry-system; khác category túi nữ"]},
+  aeta:{price:"~¥30k–70k / $200–650+",origin:"Nhật Bản (Osaka)",cat:"Minimal leather goods",sig:"Cylinder / Boston / Deer leather / Nylon collections",persona:"Người mua gu tối giản, ưu tiên chất liệu và form",learn:["Chuẩn craft-minimal Nhật: ít decoration, nhiều quiet/slouchy form, chất liệu và cấu trúc tạo nhớ"]},
+  osoi:{price:"~KRW 300k–700k",origin:"Hàn Quốc (Seoul)",cat:"Design-led bags & shoes",sig:"Shoulder Brocle, Shell Brot, Boat Wide Mini",persona:"Fashion-aware, thích cool minimal có form signature",learn:["Shape/hardware có thể tạo bản sắc mạnh mà không cần ngọt/charm"]},
+  vunque:{price:"~$160–370",origin:"Hàn Quốc (Seoul)",cat:"Leather bags/wallets",sig:"Occam Shell, Halfmoon Flac, Toque, Hey Round",persona:"Nữ trưởng thành thích leather polished có form lạ",learn:["Một hệ leather daily có thể tạo statement bằng shell/rounded structure và campaign color pop"]},
+  marge_sherwood:{price:"~KRW 269k–398k",origin:"Hàn Quốc",cat:"90s mood leather bags",sig:"Soft Boston, Grandma Used, Dumpling Tote, Hobo",persona:"Cool girl downtown thích retro shape nhưng không ngại màu/playful",learn:["Retro/90s shape code là signature rõ; visual mềm/playful hơn OSOI nên không đọc quá cold"]},
+  minitmute:{price:"~KRW 95k–338k / $190–408",origin:"Hàn Quốc (Seoul)",cat:"Soft compact daily bags",sig:"Clo, New Box, Tobo, Soft Chain",persona:"Nữ trẻ thích compact daily, pastel/soft nhưng vẫn có gu Hàn",learn:["Compact form + màu mềm có thể là cầu nối giữa cute và cool"]},
+  lyn:{price:"~1–3M VND / ~Php4,100",origin:"Thái Lan (Jaspal Group, 2001)",cat:"High-street accessories",sig:"Shoulder bag, handbag, tote, wallets, shoes",persona:"Nữ đô thị muốn trend/polish giá dễ tiếp cận",learn:["Benchmark mass polished SEA: gần core, mạnh về retail/category breadth"]},
+  pipatchara:{price:"~$750–830+ / ฿18k–30k+",origin:"Thái Lan",cat:"Sustainable craft accessories",sig:"Infinitude / Marine / Aqua, handmade macrame",persona:"Người mua design/craft/story, sẵn sàng trả premium",learn:["Community craft + customization tạo story rất mạnh nhưng xa volume mass"]},
+  jelly_bunny:{price:"~฿700–2,800",origin:"Thái Lan",cat:"Cute fashion bags/shoes/accessories",sig:"Cole, Roewis, Rondo, Kuromi/Powerpuff/Tom & Jerry collections",persona:"Teen/nữ trẻ thích cute practical giá dễ tiếp cận",learn:["Cute/IP mass SEA; hữu ích để so độ ngọt dễ bán nhưng cần tránh thành trend/IP-only"]},
+};
+BRANDS.forEach(b=>{const I=BRAND_INFO[b.id];if(I)b.info=I;});
+
+/* ===== RESEARCH SOURCES ===== */
+const BRAND_SOURCES={
+  matemade:[
+    {type:"official",label:"MateMade official",url:"https://matemade.vn/"},
+    {type:"market",label:"MateMade Shopee",url:"https://shopee.vn/matemade.vn"},
+    {type:"press",label:"Mosia profile",url:"https://mosia.io/mate-made/"}
+  ],
+  vascara:[
+    {type:"official",label:"Vascara official",url:"https://www.vascara.com/"},
+    {type:"market",label:"Vascara Shopee official",url:"https://shopee.vn/vascara.official"},
+    {type:"review",label:"UrBox brand note",url:"https://urbox.vn/thu-vien/blog/Vascara"}
+  ],
+  juno:[
+    {type:"official",label:"Juno official",url:"https://juno.vn/"},
+    {type:"market",label:"Juno Shopee official",url:"https://shopee.vn/juno.officialstore"},
+    {type:"review",label:"Websosanh review",url:"https://websosanh.vn/tin-tuc/nhung-uu-diem-dang-mua-cua-tui-xach-juno-c39-20211025113915714.htm"}
+  ],
+  hapas:[
+    {type:"official",label:"Hapas website",url:"https://hapas.vn/"},
+    {type:"market",label:"Hapas Shopee official",url:"https://shopee.vn/hapas.official"},
+    {type:"social",label:"Hapas Facebook",url:"https://www.facebook.com/p/Hapas-T%C3%BAi-X%C3%A1ch-V%C3%A0-Ph%E1%BB%A5-Ki%E1%BB%87n-61560795564553/"}
+  ],
+  yuumy:[
+    {type:"official",label:"Yuumy official",url:"https://yuumy.vn/"},
+    {type:"market",label:"Metric market report",url:"https://metric.vn/ereport/thi-phan-tui-xach-yuumy"},
+    {type:"social",label:"Yuumy Facebook",url:"https://www.facebook.com/p/YUUMY-SHOP-H%C3%80-N%E1%BB%98I-100063636416168/"}
+  ],
+  camelia:[
+    {type:"official",label:"Camelia website",url:"https://cameliabrand.com/"},
+    {type:"social",label:"Camelia Facebook",url:"https://www.facebook.com/camelia.vn/"},
+    {type:"market",label:"Camelia Shopee listing",url:"https://shopee.vn/T%C3%BAi-CAMELIA-BRAND%C2%AE-Premium-Canvas-Tote-i.233235070.24307615135"}
+  ],
+  lesac:[
+    {type:"official",label:"Lesac official",url:"https://lesac.vn/"},
+    {type:"market",label:"Lesac Shopee",url:"https://shopee.vn/tuixachlesac"},
+    {type:"review",label:"Riokupon Lesac review",url:"https://riokupon.com/vn/blog/goi-y-5-mau-tui-xach-lesac-dang-mua-nhat-he-nay/2815"}
+  ],
+  toutou:[
+    {type:"official",label:"Toutou Bag official",url:"https://toutoubag.com/"},
+    {type:"market",label:"Shopee Toutou bag search",url:"https://shopee.vn/list/toutou%20bag"},
+    {type:"market",label:"Shopee Hello Kitty tote search",url:"https://shopee.vn/list/t%C3%BAi%20tote/hello%20kitty"}
+  ],
+  vanwalk:[
+    {type:"market",label:"Vanwalk Shopee VN",url:"https://shopee.vn/vanwalkvn.vn"},
+    {type:"official",label:"Vanwalk Indonesia",url:"https://vanwalk.id/"},
+    {type:"retail",label:"Vanwalk Pinkoi",url:"https://en.pinkoi.com/product/h269exq2"},
+    {type:"review",label:"Matoc nội địa Trung",url:"https://matoc.com.vn/balo-noi-dia-trung-quoc/"}
+  ],
+  oui:[
+    {type:"market",label:"Oui Shopee",url:"https://shopee.vn/oui.thebrand"},
+    {type:"social",label:"Oui Instagram",url:"https://www.instagram.com/oui.thebrand/"},
+    {type:"press",label:"Mosia Oui profile",url:"https://mosia.io/oui-thebrand/"}
+  ],
+  samantha_vega:[
+    {type:"official",label:"Samantha Vega official",url:"https://www.samantha.co.jp/Samantha_Vega_en/"},
+    {type:"social",label:"Samantha Vega Instagram",url:"https://www.instagram.com/samantha.vega_official/"},
+    {type:"official",label:"Samantha Thavasa group",url:"https://www.samantha.co.jp/"}
+  ],
+  carlyn:[
+    {type:"official",label:"Carlyn official mall",url:"https://carlynmall.net/Mobile/"},
+    {type:"official",label:"Carlyn bag category",url:"https://www.carlynmall.com/shop/shopbrand.html?type=Y&xcode=008"},
+    {type:"retail",label:"W Concept Carlyn",url:"https://www.wconcept.com/brand/CARLYN/4155.html"},
+    {type:"social",label:"Carlyn Instagram",url:"https://www.instagram.com/carlynbag/"}
+  ],
+  karatta:[
+    {type:"official",label:"Karatta official",url:"https://karattaofficial.com/"},
+    {type:"press",label:"Mosia Karatta profile",url:"https://mosia.io/karatta-thuong-hieu-tui-xach-thiet-ke-viet-nam/"},
+    {type:"social",label:"Karatta Instagram",url:"https://www.instagram.com/karatta.official/"}
+  ],
+  ngaos:[
+    {type:"official",label:"Ngaos official",url:"https://ngaos.com/"},
+    {type:"market",label:"Ngaos Shopee official",url:"https://shopee.vn/ngaos.official"},
+    {type:"press",label:"Mosia Ngaos profile",url:"https://mosia.io/ngaos/"},
+    {type:"press",label:"SR Fashion Awards 2022",url:"https://style-republik.com/sr-fashion-awards-2022-cong-bo-de-cu-thuong-hieu-tui-xach/"}
+  ],
+  thergab:[
+    {type:"official",label:"Ther Gab official",url:"https://thergab.com/"},
+    {type:"official",label:"Ther Gab about",url:"https://thergab.com/pages/about-us"},
+    {type:"press",label:"Inside Retail Asia profile",url:"https://insideretail.asia/2024/10/15/the-story-behind-the-emerging-vietnamese-bag-label-ther-gab/"},
+    {type:"retail",label:"HBX Ther Gab",url:"https://hbx.com/women/brands/ther-gab"}
+  ],
+  floralpunk:[
+    {type:"official",label:"Floralpunk official",url:"https://floralpunk.com/"},
+    {type:"market",label:"Floralpunk Shopee",url:"https://shopee.vn/floralpunkofficial"},
+    {type:"social",label:"Floralpunk Facebook",url:"https://www.facebook.com/Floralpunk/"}
+  ],
+  chautfifth:[
+    {type:"official",label:"Chautfifth official",url:"https://chautfifth.com/en"},
+    {type:"official",label:"Design philosophy",url:"https://sg.chautfifth.com/pages/design-philosophy"},
+    {type:"press",label:"The Luxury Reports profile",url:"https://theluxuryreports.id/get-to-know-chautfifth-local-brand-asal-vietnam-yang-edgy/"}
+  ],
+  standoil:[
+    {type:"official",label:"Stand Oil about",url:"https://en.standoil.kr/about.html"},
+    {type:"retail",label:"Musinsa Stand Oil",url:"https://global.musinsa.com/vn/brands/standoil?category1DepthCode=004"},
+    {type:"press",label:"Teen Vogue Stand Oil",url:"https://www.teenvogue.com/story/stand-oils-everyday-purses-made-it-bags-by-olivia-rodrigo-huh-yunjin-more"}
+  ],
+  mossdoom:[
+    {type:"market",label:"Mossdoom Shopee VN",url:"https://shopee.vn/mossdoom.vn"},
+    {type:"market",label:"Mossdoom Shopee TH",url:"https://shopee.co.th/mossdoom.th"},
+    {type:"social",label:"Mossdoom Thailand Instagram",url:"https://www.instagram.com/mossdoom_th/"}
+  ],
+  spoiled:[
+    {type:"official",label:"Spoiled about",url:"https://spoiledworldwide.com/about/"},
+    {type:"official",label:"Spoiled store",url:"https://spoiledworldwide.com/"},
+    {type:"social",label:"Spoiled Instagram",url:"https://www.instagram.com/spoiled___official/"}
+  ],
+  saigonswagger:[
+    {type:"official",label:"Saigon Swagger bags",url:"https://saigonswagger.com/collections/bags"},
+    {type:"official",label:"Lune Nomad Backpack",url:"https://saigonswagger.com/products/sgs-lune-nomad-backpack"},
+    {type:"official",label:"Lune Orbit Backpack",url:"https://saigonswagger.com/products/sgs-lune-orbit-backpack"},
+    {type:"press",label:"Vietcetera profile",url:"https://vietcetera.com/en/saigon-swagger-hustle-and-bustle-in-a-bag"}
+  ],
+  aeta:[
+    {type:"official",label:"Aeta official store",url:"https://store.aeta.website/"},
+    {type:"retail",label:"Namu Shop Aeta profile",url:"https://www.namu-shop.com/collections/aeta"}
+  ],
+  osoi:[
+    {type:"official",label:"OSOI about",url:"https://en.osoi.co.kr/about.html"},
+    {type:"official",label:"OSOI bag category",url:"https://osoi.co.kr/category/bag/42/"},
+    {type:"social",label:"OSOI Instagram",url:"https://www.instagram.com/osoi_official/"}
+  ],
+  vunque:[
+    {type:"official",label:"Vunque bags",url:"https://en.vunque.com/category/bag/24/"},
+    {type:"official",label:"Vunque line/category",url:"https://en.vunque.com/category/line/225/"},
+    {type:"social",label:"Vunque Instagram",url:"https://www.instagram.com/vunque_official/"}
+  ],
+  marge_sherwood:[
+    {type:"official",label:"Marge Sherwood official",url:"https://margesherwood.com/"},
+    {type:"official",label:"Marge Sherwood bags",url:"https://margesherwood.com/category/bags/154/"},
+    {type:"social",label:"Marge Sherwood Instagram",url:"https://www.instagram.com/margesherwood_official/"}
+  ],
+  minitmute:[
+    {type:"official",label:"minitmute Korea",url:"https://minitmute.com/"},
+    {type:"official",label:"minitmute US bags",url:"https://minitmute.us/collections/bags"},
+    {type:"social",label:"minitmute Instagram",url:"https://www.instagram.com/minitmute/"}
+  ],
+  lyn:[
+    {type:"official",label:"LYN Vietnam",url:"https://lynvn.com/"},
+    {type:"official",label:"LYN bags",url:"https://www.lynaccs.com/en/collections/view-bags"},
+    {type:"press",label:"MEGA Asia LYN profile",url:"https://mega-asia.com/magazine/meet-thai-high-street-brand-lyn/"}
+  ],
+  pipatchara:[
+    {type:"official",label:"Pipatchara USD store",url:"https://store-usd.pipatchara.com/"},
+    {type:"official",label:"Pipatchara Thai site",url:"https://pipatchara.com/"},
+    {type:"social",label:"Pipatchara Instagram",url:"https://www.instagram.com/pipatchara/"}
+  ],
+  jelly_bunny:[
+    {type:"official",label:"Jelly Bunny official",url:"https://jellybunny.com/en"},
+    {type:"official",label:"Jelly Bunny bags",url:"https://jellybunny.com/en/collections/view-bags"}
+  ],
+};
+
+/* ===== SEMANTIC LAYERS (emotional codes · shape language · outfit role · benchmark · evidence) ===== */
+const EMO_KEYS=["sweet","playful","romantic","cool","mature","edgy","artistic","crafted"];
+const EMO_VN={sweet:"Ngọt",playful:"Vui",romantic:"Lãng mạn",cool:"Cool",mature:"Trưởng thành",edgy:"Sắc cạnh",artistic:"Nghệ thuật",crafted:"Thủ công"};
+const EMO_COL={sweet:"#f5a9c4",playful:"#f4c542",romantic:"#e7a6d4",cool:"#7aa6c2",mature:"#9a8f7e",edgy:"#5b5560",artistic:"#8a7fc2",crafted:"#b08968"};
+const SHP_KEYS=["soft","compact","oversized","odd","classic","modular"];
+const SHP_VN={soft:"Mềm",compact:"Gọn",oversized:"To",odd:"Kỳ lạ",classic:"Cổ điển",modular:"Modular"};
+const SHP_COL={soft:"#e8a0b8",compact:"#8fae8a",oversized:"#c2895b",odd:"#8a7fc2",classic:"#9a8f7e",modular:"#d9b06a"};
+const ROLE_KEYS=["bg","pop","main","toy","taste"];
+const ROLE_VN={bg:"Phụ kiện nền",pop:"Điểm nhấn",main:"Nhân vật chính",toy:"Đồ chơi cá nhân",taste:"Biểu tượng gu"};
+const ROLE_COL={bg:"#9a8f7e",pop:"#f4c542",main:"#e8556a",toy:"#e8a0b8",taste:"#7aa6c2"};
+const BENCH_VN={brand_benchmark:"Brand benchmark",category_adjacent:"Category-adjacent",trend_cluster:"Trend/IP cluster",low_conf:"Low-confidence ref"};
+const BENCH_COL={brand_benchmark:"#8fae8a",category_adjacent:"#d9b06a",trend_cluster:"#e8a0b8",low_conf:"#9a8f7e"};
+const CONF_COL={high:"#8fae8a",medium:"#d9b06a",low:"#c87a7a"};
+const EV_KEYS=["official","marketplace","social","press","ugc","sku"];
+// emo:[sweet,playful,romantic,cool,mature,edgy,artistic,crafted] shape:[soft,compact,oversized,odd,classic,modular] role:[bg,pop,main,toy,taste] ev:[official,marketplace,social,press,ugc,sku]
+const SEM_RAW={
+  matemade:{bench:"brand_benchmark",conf:"high",emo:[5,4,3,1,2,0,1,1],shape:[4,4,1,1,2,5],role:[2,4,2,5,3],ev:[1,1,1,0,1,15]},
+  vascara:{bench:"brand_benchmark",conf:"high",emo:[2,1,2,3,4,1,1,1],shape:[2,3,2,1,4,1],role:[4,2,2,1,3],ev:[1,1,1,1,0,12]},
+  juno:{bench:"brand_benchmark",conf:"high",emo:[3,2,2,2,3,0,1,1],shape:[2,3,2,1,4,1],role:[4,3,2,1,2],ev:[1,1,1,0,0,10]},
+  hapas:{bench:"brand_benchmark",conf:"medium",emo:[3,2,3,2,3,0,1,2],shape:[3,3,2,1,4,2],role:[4,3,2,2,3],ev:[1,1,0,1,1,8]},
+  yuumy:{bench:"brand_benchmark",conf:"medium",emo:[3,2,2,1,2,0,0,1],shape:[2,3,3,0,4,1],role:[5,2,1,1,1],ev:[1,1,1,1,0,6]},
+  camelia:{bench:"brand_benchmark",conf:"medium",emo:[1,2,1,3,2,0,1,3],shape:[1,2,4,0,3,2],role:[5,2,1,1,2],ev:[1,1,1,0,1,6]},
+  lesac:{bench:"brand_benchmark",conf:"medium",emo:[2,2,1,4,2,1,1,1],shape:[3,3,2,1,3,1],role:[4,3,2,1,3],ev:[1,1,1,1,1,8]},
+  toutou:{bench:"trend_cluster",conf:"low",emo:[5,5,2,0,0,1,1,0],shape:[3,3,1,4,1,2],role:[1,5,3,5,1],ev:[1,1,0,0,0,3]},
+  vanwalk:{bench:"brand_benchmark",conf:"medium",emo:[5,4,2,1,0,0,0,1],shape:[3,2,3,2,2,3],role:[2,4,2,5,1],ev:[0,1,1,0,1,5]},
+  oui:{bench:"brand_benchmark",conf:"medium",emo:[3,2,3,2,3,0,1,3],shape:[3,3,2,1,3,2],role:[4,2,2,3,3],ev:[1,1,1,0,0,5]},
+  samantha_vega:{bench:"brand_benchmark",conf:"high",emo:[4,3,4,1,2,0,1,2],shape:[4,3,2,1,3,2],role:[2,4,3,4,3],ev:[1,1,0,1,0,6]},
+  carlyn:{bench:"brand_benchmark",conf:"high",emo:[3,2,2,4,3,1,2,1],shape:[5,3,3,2,2,2],role:[3,3,4,2,4],ev:[1,1,0,1,1,8]},
+  karatta:{bench:"brand_benchmark",conf:"medium",emo:[2,3,1,3,3,1,4,2],shape:[2,3,3,3,3,2],role:[3,3,3,2,4],ev:[1,0,1,1,1,5]},
+  ngaos:{bench:"brand_benchmark",conf:"high",emo:[4,2,5,0,1,0,3,4],shape:[4,3,2,2,2,1],role:[1,4,4,3,3],ev:[1,0,1,1,0,5]},
+  thergab:{bench:"brand_benchmark",conf:"high",emo:[2,2,3,2,3,1,5,4],shape:[4,2,2,4,2,1],role:[1,3,5,2,4],ev:[1,0,1,1,0,5]},
+  floralpunk:{bench:"brand_benchmark",conf:"medium",emo:[2,2,3,4,3,2,2,2],shape:[3,3,2,1,3,1],role:[3,3,3,2,4],ev:[1,0,1,0,1,5]},
+  chautfifth:{bench:"brand_benchmark",conf:"high",emo:[3,4,2,3,2,3,4,2],shape:[3,3,2,4,2,2],role:[2,4,4,3,4],ev:[1,0,1,1,0,6]},
+  standoil:{bench:"brand_benchmark",conf:"high",emo:[1,2,1,5,4,2,3,2],shape:[4,3,3,3,2,1],role:[3,3,4,1,5],ev:[1,1,1,1,1,8]},
+  mossdoom:{bench:"brand_benchmark",conf:"medium",emo:[1,1,1,4,3,1,2,3],shape:[3,3,3,2,3,1],role:[4,2,2,1,3],ev:[1,1,1,1,0,5]},
+  spoiled:{bench:"brand_benchmark",conf:"high",emo:[1,3,1,4,2,4,2,1],shape:[2,3,2,2,4,2],role:[2,4,4,2,4],ev:[1,0,1,0,1,5]},
+  saigonswagger:{bench:"category_adjacent",conf:"high",emo:[0,2,0,4,3,3,1,2],shape:[2,2,4,1,3,5],role:[4,2,2,1,3],ev:[1,1,1,1,1,6]},
+  aeta:{bench:"brand_benchmark",conf:"medium",emo:[1,1,1,4,5,0,3,5],shape:[4,3,2,3,3,1],role:[2,1,3,1,5],ev:[1,0,1,1,0,6]},
+  osoi:{bench:"brand_benchmark",conf:"high",emo:[1,2,1,5,4,2,5,3],shape:[3,3,2,5,2,1],role:[2,3,5,1,5],ev:[1,1,1,1,0,8]},
+  vunque:{bench:"brand_benchmark",conf:"high",emo:[1,2,2,4,4,1,4,3],shape:[3,3,2,4,4,1],role:[3,3,4,1,4],ev:[1,1,1,0,1,8]},
+  marge_sherwood:{bench:"brand_benchmark",conf:"high",emo:[2,3,2,4,4,3,3,3],shape:[4,3,2,3,4,1],role:[3,4,4,1,5],ev:[1,1,1,1,1,8]},
+  minitmute:{bench:"brand_benchmark",conf:"high",emo:[3,3,1,3,3,1,2,2],shape:[3,5,1,2,3,1],role:[4,3,3,1,4],ev:[1,1,1,0,1,8]},
+  lyn:{bench:"brand_benchmark",conf:"high",emo:[2,2,2,3,4,1,1,1],shape:[2,3,3,1,4,1],role:[5,2,2,1,3],ev:[1,1,1,1,0,10]},
+  pipatchara:{bench:"brand_benchmark",conf:"high",emo:[2,2,2,3,4,1,5,5],shape:[3,2,3,5,1,3],role:[1,3,5,3,5],ev:[1,1,1,1,0,8]},
+  jelly_bunny:{bench:"brand_benchmark",conf:"medium",emo:[5,4,2,1,1,0,1,1],shape:[3,3,2,2,3,2],role:[4,4,2,4,2],ev:[1,1,1,0,1,6]},
+};
+function zip(keys,arr){const o={};keys.forEach((k,i)=>o[k]=arr[i]);return o;}
+const SEM={};
+for(const id in SEM_RAW){const r=SEM_RAW[id];SEM[id]={bench:r.bench,conf:r.conf,emo:zip(EMO_KEYS,r.emo),shape:zip(SHP_KEYS,r.shape),role:zip(ROLE_KEYS,r.role),ev:zip(EV_KEYS,r.ev)};}
+BRANDS.forEach(b=>{const S=SEM[b.id];if(S)b.sem=S;});
+function domKey(obj){let k=null,mx=-1;for(const kk in obj){if(obj[kk]>mx){mx=obj[kk];k=kk;}}return k;}
+function confOf(b){return (b.sem&&b.sem.conf)||(b.info&&b.info.conf)||b.confidence||"medium";}
+function topCodes(obj,vnMap,colMap,n){return Object.entries(obj).sort((a,b)=>b[1]-a[1]).slice(0,n)
+  .map(([k,v])=>h("span",{class:"pill",style:"border-color:"+colMap[k]+";color:"+colMap[k]},vnMap[k]+" "+v));}
+const LENSES=[["position","Vị trí"],["emotion","Cảm xúc"],["shape","Hình khối"],["role","Vai trò outfit"],["benchmark","Benchmark"],["confidence","Độ tin cậy"]];
+function lensColor(b){const s=b.sem;if(!s)return"#9a8f7e";
+  switch(state.lens){
+    case"emotion":return EMO_COL[domKey(s.emo)];
+    case"shape":return SHP_COL[domKey(s.shape)];
+    case"role":return ROLE_COL[domKey(s.role)];
+    case"benchmark":return BENCH_COL[s.bench];
+    case"confidence":return CONF_COL[confOf(b)];
+    default:return null;}}
+function terrInfo(b){return b.terr==="CORE"?CORE_TERR:SECTOR_BY_KEY[b.terr];}
+function brandColor(b){
+  if(state.lens&&state.lens!=="position"){const c=lensColor(b);if(c)return c;}
+  return state.colorMode==="tier"?TIER_COLOR[b.tier]:(b.terr==="CORE"?CORE_COLOR:SECTOR_BY_KEY[b.terr].color);}
+
+/* ===== C. PHÂN TÍCH CHIẾN LƯỢC (helpers) ===== */
+function tierOf(r){return r<0.35?0:r<0.65?1:r<0.95?2:r<1.20?3:4;}
+function sectorKeyOf(x,y){const r=Math.hypot(x,y);if(r<0.30)return"CORE";let a=Math.atan2(y,x)*180/Math.PI;if(a<0)a+=360;
+  let best="E",bd=999;SECTORS.forEach(s=>{let d=Math.abs(a-s.ang);d=Math.min(d,360-d);if(d<bd){bd=d;best=s.key;}});return best;}
+function describePoint(x,y){const k=sectorKeyOf(x,y),t=tierOf(Math.hypot(x,y));
+  const sn=k==="CORE"?"Core":SECTOR_BY_KEY[k].en;return sn+" · Tier "+t;}
+function densityAt(x,y){let s=0;const sig=0.33;BRANDS.forEach(b=>{const d2=(x-b.x)**2+(y-b.y)**2;s+=Math.exp(-d2/(2*sig*sig));});return s;}
+function nearestToMate(){const mm=BRANDS.find(b=>b.id==="matemade");
+  return BRANDS.filter(b=>b.id!=="matemade").map(b=>({b,d:Math.hypot(b.x-mm.x,b.y-mm.y)})).sort((p,q)=>p.d-q.d);}
+function findGaps(){
+  const cells=[];
+  for(let gx=-1.2;gx<=1.2;gx+=0.3)for(let gy=-1.2;gy<=1.2;gy+=0.3){
+    const r=Math.hypot(gx,gy);if(r<0.4||r>1.15)continue;
+    cells.push({x:gx,y:gy,d:densityAt(gx,gy)});
+  }
+  cells.sort((a,b)=>a.d-b.d);
+  const picked=[];
+  for(const c of cells){if(picked.every(p=>Math.hypot(p.x-c.x,p.y-c.y)>0.55)){picked.push(c);if(picked.length>=4)break;}}
+  return picked;
+}
+function heatmapSVG(){
+  const svg=el("svg",{width:WORLD,height:WORLD,viewBox:`0 0 ${WORLD} ${WORLD}`,style:"pointer-events:none"});
+  const defs=el("defs");
+  const rg=el("radialGradient",{id:"heatBlob",cx:"50%",cy:"50%",r:"50%"});
+  rg.appendChild(el("stop",{offset:"0%","stop-color":"#ff4f73","stop-opacity":"0.42"}));
+  rg.appendChild(el("stop",{offset:"42%","stop-color":"#e8556a","stop-opacity":"0.22"}));
+  rg.appendChild(el("stop",{offset:"100%","stop-color":"#e8556a","stop-opacity":"0"}));
+  defs.appendChild(rg);svg.appendChild(defs);
+  BRANDS.forEach(b=>{
+    const px=wx(b.x),py=wy(b.y);
+    svg.appendChild(el("circle",{cx:px,cy:py,r:0.42*U,fill:"url(#heatBlob)"}));
+  });
+  findGaps().forEach(g=>{const px=wx(g.x),py=wy(g.y);
+    svg.appendChild(el("circle",{cx:px,cy:py,r:0.22*U,fill:"none",stroke:"#7ee0c0","stroke-width":3,"stroke-dasharray":"9 9"}));
+    svg.appendChild(el("text",{x:px,y:py,"text-anchor":"middle","dominant-baseline":"middle",style:"font-size:14px;fill:#7ee0c0;font-weight:700"},"trống"));});
+  return svg;
+}
+let heatEl=null;
+function toggleHeatmap(){
+  state.heatmap=!state.heatmap;
+  if(state.heatmap){if(!heatEl){heatEl=heatmapSVG();worldEl.insertBefore(heatEl,worldEl.children[1]);}}
+  else if(heatEl){heatEl.remove();heatEl=null;}
+  if(hudHeat)hudHeat.style.opacity=state.heatmap?"1":"0.55";
+}
+
+/* ---------- DOM HELPERS ---------- */
+function el(tag,a,k){const e=document.createElementNS(SVGNS,tag);if(a)for(const p in a)e.setAttribute(p,a[p]);
+  if(k)(Array.isArray(k)?k:[k]).forEach(c=>e.appendChild(typeof c==="string"?document.createTextNode(c):c));return e;}
+function h(tag,a,k){const e=document.createElement(tag);
+  if(a)for(const p in a){if(p==="class")e.className=a[p];else if(p==="html")e.innerHTML=a[p];
+    else if(p.slice(0,2)==="on")e.addEventListener(p.slice(2),a[p]);else if(a[p]!=null)e.setAttribute(p,a[p]);}
+  if(k)(Array.isArray(k)?k:[k]).forEach(c=>{if(c==null)return;e.appendChild(typeof c==="string"?document.createTextNode(c):c);});return e;}
+
+/* ---------- STATE ---------- */
+let state={tab:"orbit", sel:null, picks:["matemade","carlyn","standoil"], showImages:true, colorMode:"territory", heatmap:false, lens:"position"};
+let view={k:1,tx:0,ty:0}; // world transform
+let worldEl=null, vpEl=null, hudEye=null, hudColor=null, hudHeat=null, curMate=false, lensBarEl=null;
+function setLens(k){state.lens=k;rebuildNodes();const old=lensBarEl;const nb=buildLensBar();if(old)old.replaceWith(nb);refreshLegend();}
+function buildLensBar(){
+  lensBarEl=h("div",{style:"position:absolute;top:10px;left:50%;transform:translateX(-50%);display:flex;gap:4px;flex-wrap:wrap;justify-content:center;align-items:center;background:rgba(20,18,16,0.82);padding:5px 7px;border-radius:999px;z-index:30;max-width:92%;box-shadow:0 2px 12px #0007"},
+    [h("span",{style:"font-size:11px;color:#8a8278;font-weight:700;padding:0 4px"},"LENS"),
+    ...LENSES.map(([k,lb])=>h("button",{style:"border:none;cursor:pointer;font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:999px;white-space:nowrap;transition:.15s;"+(state.lens===k?"background:#e8a0b8;color:#1a1614":"background:transparent;color:#cfc6ba"),onclick:()=>setLens(k)},lb))]);
+  return lensBarEl;
+}
+function rebuildNodes(){
+  worldEl.querySelectorAll(".node").forEach(n=>n.remove());
+  BRANDS.forEach(b=>worldEl.appendChild(collage(b)));
+  markSel();
+}
+function toggleImages(){
+  state.showImages=!state.showImages;
+  rebuildNodes();
+  if(hudEye)hudEye.textContent=state.showImages?"👁":"🙈";
+}
+function toggleColorMode(){
+  state.colorMode=state.colorMode==="territory"?"tier":"territory";
+  rebuildNodes();
+  if(hudColor)hudColor.textContent=state.colorMode==="territory"?"T":"#";
+  refreshLegend();
+}
+
+/* ---------- COLLAGE NODE ---------- */
+function collage(b){
+  const isMe=b.id==="matemade";
+  const col=brandColor(b);
+  const subLabel=b.mVn||(terrInfo(b)?terrInfo(b).vn:"");
+  let content;
+  if(state.showImages){
+    const imgs=(IMAGES[b.slug]||[]).slice(0,8);
+    let inner;
+    if(imgs.length){
+      inner=h("div",{class:"masonry"}, imgs.map(s=>h("img",{src:s,loading:"lazy",alt:b.name})));
+    }else{
+      inner=h("div",{class:"masonry"}, h("div",{class:"ph",style:"background:"+col+"22;color:"+col}, b.name.slice(0,2).toUpperCase()));
+    }
+    const wrap=h("div",{class:"collage"+(isMe?" me":""),style:"border-color:"+col+"66"},[
+      inner,
+      h("div",{class:"clabel"},[h("span",{class:"ob",style:"background:"+col}),h("span",{class:"nm"},b.name)])
+    ]);
+    content=[wrap, h("div",{class:"terrlabel"},subLabel)];
+  }else{
+    content=[h("div",{class:"dnode"+(isMe?" me":"")},[
+      h("div",{class:"d",style:"background:"+col}),
+      h("div",{class:"l"},b.name),
+      h("div",{class:"t"},subLabel)
+    ])];
+  }
+  const node=h("div",{class:"node"+(state.sel===b.id?" sel":""),
+    style:`left:${wx(b.x)}px;top:${wy(b.y)}px`,
+    onclick:(e)=>{e.stopPropagation();state.sel=b.id;openDetail();markSel();}},
+    content);
+  node.dataset.id=b.id;
+  return node;
+}
+function markSel(){document.querySelectorAll("#world .node").forEach(n=>n.classList.toggle("sel",n.dataset.id===state.sel));}
+
+/* ---------- LEGEND ---------- */
+let legendEl=null;
+function buildLegendEl(mate){
+  const ringArr=mate?PROX_LABELS:TIERS.map(t=>t.vn);
+  const rows=[h("div",{class:"lt"},mate?"Vòng = Tương cận chiến lược":"Vòng = Tier (cường độ)"),
+    ...ringArr.map((lb,i)=>h("div",{class:"row"},[h("span",{class:"dot",style:"background:"+TIER_COLOR[i]}),(mate?"Vòng "+i:"Tier "+i)+" · "+lb]))];
+  if(state.lens&&state.lens!=="position"){
+    const lname=LENSES.find(l=>l[0]===state.lens)[1];
+    rows.push(h("div",{class:"lt",style:"margin-top:12px"},"Màu node = Lens: "+lname));
+    const cmap={emotion:[EMO_VN,EMO_COL,EMO_KEYS],shape:[SHP_VN,SHP_COL,SHP_KEYS],role:[ROLE_VN,ROLE_COL,ROLE_KEYS]}[state.lens];
+    if(cmap){cmap[2].forEach(k=>rows.push(h("div",{class:"row"},[h("span",{class:"dot",style:"background:"+cmap[1][k]}),cmap[0][k]])));
+      rows.push(h("div",{class:"hint",style:"font-style:italic;margin-top:4px"},"Node hiển thị mã trội nhất của brand."));}
+    else if(state.lens==="benchmark"){for(const bk in BENCH_VN)rows.push(h("div",{class:"row"},[h("span",{class:"dot",style:"background:"+BENCH_COL[bk]}),BENCH_VN[bk]]));}
+    else if(state.lens==="confidence"){["high","medium","low"].forEach(c=>rows.push(h("div",{class:"row"},[h("span",{class:"dot",style:"background:"+CONF_COL[c]}),"Độ tin cậy: "+c])));}
+  }else if(state.colorMode==="territory"){
+    rows.push(h("div",{class:"lt",style:"margin-top:12px"},"Node color = Territory"));
+    SECTORS.forEach(s=>rows.push(h("div",{class:"row",style:"cursor:pointer",title:"Xem định nghĩa phong cách",
+      onclick:()=>openTerritory(s.key)},[h("span",{class:"dot",style:"background:"+s.color}),s.en+" ›"])));
+  }else rows.push(h("div",{class:"lt",style:"margin-top:12px"},"Màu node = Tier"));
+  legendEl=h("div",{class:"legend",style:"max-height:82vh;overflow-y:auto"},rows);
+  return legendEl;
+}
+function refreshLegend(){if(!legendEl)return;const nw=buildLegendEl(curMate);legendEl.replaceWith(nw);}
+
+/* ---------- WORLD BACKGROUND (rings + axes) ---------- */
+function ptAng(deg,r){const a=deg*Math.PI/180;return [WC+Math.cos(a)*r, WC-Math.sin(a)*r];}
+function addSectors(svg,mate){
+  const R=1.45*U;
+  SECTORS.forEach(s=>{
+    const pts=[[WC,WC]];
+    for(let d=s.ang-22.5; d<=s.ang+22.5; d+=4.5) pts.push(ptAng(d,R));
+    pts.push(ptAng(s.ang+22.5,R));
+    svg.appendChild(el("polygon",{points:pts.map(p=>p.join(",")).join(" "),
+      fill:s.color,"fill-opacity":0.10,stroke:s.color,"stroke-opacity":0.22,"stroke-width":1.25}));
+    const [lx,ly]=ptAng(s.ang,R*0.82);
+    const label=mate?(VECTORS[s.key]||""):s.en;
+    const t=el("text",{x:lx,y:ly,"text-anchor":"middle","dominant-baseline":"middle",
+      style:`font-size:15px;font-weight:800;fill:${s.color};opacity:1;text-shadow:0 1px 5px rgba(0,0,0,.75)`+(mate?"":";pointer-events:auto;cursor:pointer")},label);
+    if(!mate)t.addEventListener("click",e=>{e.stopPropagation();openTerritory(s.key);});
+    svg.appendChild(t);
+  });
+}
+function worldSVG(opts){
+  const opportunity=opts.opportunity, mate=opts.center==="mate";
+  const labels=mate?PROX_LABELS:TIERS.map((t,i)=>"Tier "+i+" · "+t.vn);
+  const svg=el("svg",{width:WORLD,height:WORLD,viewBox:`0 0 ${WORLD} ${WORLD}`});
+  addSectors(svg,mate);
+  if(opportunity){
+    svg.appendChild(el("path",{d:`M ${WC} ${WC} L ${wx(-1.3)} ${wy(-0.4)} A ${1.36*U} ${1.36*U} 0 0 1 ${wx(-0.3)} ${wy(-1.2)} Z`,
+      fill:"rgba(232,160,184,0.07)",stroke:"none"}));
+  }
+  RINGS.slice().reverse().forEach((rg,i)=>{const idx=RINGS.length-1-i;
+    svg.appendChild(el("circle",{cx:WC,cy:WC,r:rg.r*U,fill:"none",stroke:OCOL[idx],"stroke-opacity":0.22,
+      "stroke-width":2,"stroke-dasharray":idx===0?"none":"5 7"}));});
+  RINGS.forEach((rg,i)=>svg.appendChild(el("text",{class:"ringlabel",x:WC,y:WC-rg.r*U-8,"text-anchor":"middle",
+    style:"font-size:14px;fill:#6f685d"},labels[i])));
+  svg.appendChild(el("line",{x1:WC-1.5*U,y1:WC,x2:WC+1.5*U,y2:WC,stroke:"#3a352e","stroke-width":1.5}));
+  svg.appendChild(el("line",{x1:WC,y1:WC-1.5*U,x2:WC,y2:WC+1.5*U,stroke:"#3a352e","stroke-width":1.5}));
+  const ax={"font-size":"15px",fill:"#7d756a","font-weight":"600"};
+  svg.appendChild(el("text",Object.assign({x:WC-1.5*U+10,y:WC-12},ax),"← Cute / Sweet / Playful"));
+  svg.appendChild(el("text",Object.assign({x:WC+1.5*U-10,y:WC-12,"text-anchor":"end"},ax),"Cool / Minimal / Polished →"));
+  svg.appendChild(el("text",Object.assign({x:WC+12,y:WC-1.5*U+22},ax),"↑ Statement / Design / Craft"));
+  svg.appendChild(el("text",Object.assign({x:WC+12,y:WC+1.5*U-12},ax),"↓ Daily / Utility / Value"));
+  if(!mate){
+    svg.appendChild(el("circle",{cx:WC,cy:WC,r:8,fill:"#d9b06a"}));
+    svg.appendChild(el("text",{x:WC,y:WC+26,"text-anchor":"middle",style:"font-size:15px;fill:#d9b06a;font-weight:700"},"Mass Feminine VN"));
+  }
+  if(opportunity){
+    svg.appendChild(el("text",{x:wx(-0.75),y:wy(-0.05)-150,"text-anchor":"middle",
+      style:"font-size:15px;fill:#e8a0b8;font-weight:700"},"◆ VÙNG CƠ HỘI: Modular Candy Utility"));
+  }
+  return svg;
+}
+
+/* ---------- PAN / ZOOM ---------- */
+function applyView(){worldEl.style.transform=`translate(${view.tx}px,${view.ty}px) scale(${view.k})`;}
+function fitView(){
+  const r=vpEl.getBoundingClientRect();
+  const span=2.0*1.45*U; // diameter of outer ring-ish
+  const k=Math.min(r.width,r.height)/span*0.92;
+  view.k=k;
+  view.tx=r.width/2 - WC*k;
+  view.ty=r.height/2 - WC*k;
+  applyView();
+}
+function zoomAt(cx,cy,factor){
+  const nk=Math.max(0.15,Math.min(4,view.k*factor));
+  const r=vpEl.getBoundingClientRect();
+  const px=cx-r.left, py=cy-r.top;
+  // world point under cursor stays fixed
+  const wxp=(px-view.tx)/view.k, wyp=(py-view.ty)/view.k;
+  view.k=nk;
+  view.tx=px-wxp*nk; view.ty=py-wyp*nk;
+  applyView();
+}
+function buildWorld(mode){
+  // mode: 'orbit' | 'opp' | 'proximity'
+  const mate=mode==="proximity";
+  if(mate){const mm=BRANDS.find(b=>b.id==="matemade");ox=mm.x;oy=mm.y;}else{ox=0;oy=0;}
+  vpEl=h("div",{id:"viewport"});
+  worldEl=h("div",{id:"world",style:`width:${WORLD}px;height:${WORLD}px`});
+  worldEl.appendChild(worldSVG({center:mate?"mate":"mass",opportunity:mode==="opp"}));
+  BRANDS.forEach(b=>worldEl.appendChild(collage(b)));
+  heatEl=null;
+  if(state.heatmap){heatEl=heatmapSVG();worldEl.insertBefore(heatEl,worldEl.children[1]);}
+  vpEl.appendChild(worldEl);
+
+  // wheel zoom
+  vpEl.addEventListener("wheel",e=>{e.preventDefault();zoomAt(e.clientX,e.clientY,e.deltaY<0?1.12:0.893);},{passive:false});
+  // drag pan
+  let drag=false,sx,sy,stx,sty,moved;
+  vpEl.addEventListener("pointerdown",e=>{drag=true;moved=false;sx=e.clientX;sy=e.clientY;stx=view.tx;sty=view.ty;});
+  vpEl.addEventListener("pointermove",e=>{if(!drag)return;const dx=e.clientX-sx,dy=e.clientY-sy;
+    if(!moved&&Math.abs(dx)+Math.abs(dy)>3){moved=true;vpEl.classList.add("drag");vpEl.setPointerCapture(e.pointerId);}
+    if(moved){view.tx=stx+dx;view.ty=sty+dy;applyView();}});
+  vpEl.addEventListener("pointerup",e=>{drag=false;vpEl.classList.remove("drag");
+    if(vpEl.hasPointerCapture&&vpEl.hasPointerCapture(e.pointerId))vpEl.releasePointerCapture(e.pointerId);});
+  vpEl.addEventListener("click",e=>{if(!moved&&e.target===vpEl){state.sel=null;closeDetail();}});
+
+  // HUD
+  const eyeBtn=h("button",{title:"Bật/tắt ảnh",onclick:toggleImages,style:"font-size:15px"},
+    state.showImages?"👁":"🙈");
+  const colBtn=h("button",{title:"Đổi màu: Territory / Tier",onclick:toggleColorMode,style:"font-size:12px;font-weight:700"},
+    state.colorMode==="territory"?"T":"#");
+  hudColor=colBtn;
+  const heatBtn=h("button",{title:"Heatmap mật độ + vùng trống",onclick:toggleHeatmap,style:"font-size:14px;opacity:"+(state.heatmap?"1":"0.55")},"🔥");
+  hudHeat=heatBtn;
+  const anaBtn=h("button",{title:"Phân tích chiến lược",onclick:openAnalysis,style:"font-size:14px"},"📊");
+  const hud=h("div",{class:"hud"},[
+    h("button",{onclick:()=>{const r=vpEl.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,1.25);}},"+"),
+    h("button",{onclick:()=>{const r=vpEl.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,0.8);}},"−"),
+    h("button",{title:"Fit",onclick:fitView,style:"font-size:13px"},"⤢"),
+    eyeBtn, colBtn, heatBtn, anaBtn,
+  ]);
+  hudEye=eyeBtn;
+  curMate=mate;
+  const legend=buildLegendEl(mate);
+
+  const stage=document.getElementById("stage");
+  stage.appendChild(vpEl);stage.appendChild(hud);stage.appendChild(legend);
+  stage.appendChild(buildLensBar());
+  stage.appendChild(detailPanel());
+  requestAnimationFrame(fitView);
+}
+
+/* ---------- DETAIL PANEL ---------- */
+let detailEl=null;
+function detailPanel(){detailEl=h("div",{class:"detail"});return detailEl;}
+function closeDetail(){if(detailEl)detailEl.classList.remove("open");markSel();}
+function openDetail(){
+  const b=BRANDS.find(x=>x.id===state.sel);if(!b||!detailEl)return;
+  const imgs=IMAGES[b.slug]||[];
+  detailEl.innerHTML="";
+  detailEl.appendChild(h("div",{class:"x",onclick:closeDetail},"✕"));
+  const ti=terrInfo(b);
+  detailEl.appendChild(h("div",{class:"sidetitle"},"Brand detail"));
+  detailEl.appendChild(h("div",{class:"bname"},b.name));
+  detailEl.appendChild(h("div",{class:"bterr"},(ti?ti.en:"")+(b.mEn?" · "+b.mEn:"")));
+  detailEl.appendChild(h("div",{class:"bsum"},b.summary));
+  // v2.0 logic block
+  const tags=[];
+  tags.push(h("span",{class:"pill",style:"border-color:"+TIER_COLOR[b.tier]+"99"},"Tier "+b.tier+" — "+TIERS[b.tier].en));
+  if(ti)tags.push(h("span",{class:"pill",style:"border-color:"+brandColor(b)+"99"},"Territory: "+ti.en+(b.str?" ("+b.str+")":"")));
+  if(b.mVn)tags.push(h("span",{class:"pill"},"Modifier: "+b.mVn));
+  if(b.catAdj)tags.push(h("span",{class:"pill",style:"color:#d9b06a"},"⚑ category-adjacent"));
+  if(b.sig==="trend-extreme")tags.push(h("span",{class:"pill",style:"color:#e8a0b8"},"⚠ trend-extreme"));
+  if(b.coordCheck)tags.push(h("span",{class:"pill",style:"color:#d9b06a"},"◎ coord-check"));
+  detailEl.appendChild(h("div",{class:"glabel"},"Định vị (v2.0)"));
+  detailEl.appendChild(h("div",null,tags));
+  if(b.note)detailEl.appendChild(h("div",{class:"hint",style:"margin-top:8px"},b.note));
+  // ----- B. thông tin chi tiết -----
+  const I=b.info;
+  if(I){
+    detailEl.appendChild(h("div",{class:"glabel"},"Thông tin"));
+    const kv=(k,v)=>h("div",{class:"kv"},[h("span",{class:"k"},k),h("span",{class:"v"},v)]);
+    const grid=h("div",{class:"kvgrid"},[
+      kv("Giá",I.price),kv("Xuất xứ",I.origin),kv("Category",I.cat),kv("Signature",I.sig),
+    ]);
+    detailEl.appendChild(grid);
+    detailEl.appendChild(h("div",{class:"kv",style:"margin-top:4px"},[h("span",{class:"k"},"Khách"),h("span",{class:"v"},I.persona)]));
+    if(I.learn&&I.learn.length){
+      detailEl.appendChild(h("div",{class:"glabel"},"MateMade học được gì"));
+      detailEl.appendChild(h("ul",{class:"learn"},I.learn.map(x=>h("li",null,x))));
+    }
+    const conf=I.conf||b.confidence||"medium";
+    detailEl.appendChild(h("div",{class:"hint",style:"margin-top:6px;font-style:italic"},"Độ tin cậy dữ liệu: "+conf));
+  }
+  // link mở dossier territory
+  if(b.terr){
+    const tk=b.terr;
+    detailEl.appendChild(h("div",{class:"terrlink",onclick:()=>openTerritory(tk)},
+      "📖 Xem định nghĩa phong cách: "+(terrInfo(b)?terrInfo(b).en:tk)+" →"));
+  }
+  if(imgs.length){detailEl.appendChild(h("div",{class:"glabel"},"Sản phẩm ("+imgs.length+")"));
+    detailEl.appendChild(h("div",{class:"dgrid"},imgs.slice(0,9).map(s=>h("img",{src:s,loading:"lazy"}))));}
+  else detailEl.appendChild(h("div",{class:"hint",style:"margin-top:12px;font-style:italic"},
+    "Chưa có ảnh — thả ảnh vào images/"+b.slug+"/ rồi chạy gen-manifest.ps1."));
+  detailEl.appendChild(h("div",{class:"glabel"},"Product code"));
+  detailEl.appendChild(h("div",null,b.codes.map(c=>h("span",{class:"pill"},c))));
+  detailEl.appendChild(h("div",{class:"glabel"},"Metrics"));
+  METRIC_LABELS.forEach((lb,i)=>detailEl.appendChild(h("div",{class:"metric"},[
+    h("div",{class:"ml"},[h("span",null,lb),h("span",null,b.m[i].toFixed(1))]),
+    h("div",{class:"bar"},h("i",{style:"width:"+(b.m[i]/5*100)+"%"}))])));
+  // ----- Semantic layers -----
+  if(b.sem){
+    const s=b.sem;
+    detailEl.appendChild(h("div",{class:"glabel"},"Semantic profile"));
+    const kv2=(k,v,col)=>h("div",{class:"kv"},[h("span",{class:"k"},k),h("span",{class:"v",style:col?"color:"+col:""},v)]);
+    detailEl.appendChild(h("div",{class:"kvgrid"},[
+      kv2("Benchmark",BENCH_VN[s.bench],BENCH_COL[s.bench]),
+      kv2("Vai trò outfit",ROLE_VN[domKey(s.role)],ROLE_COL[domKey(s.role)]),
+    ]));
+    detailEl.appendChild(h("div",{class:"hint",style:"margin-top:8px;margin-bottom:3px"},"Cảm xúc trội"));
+    detailEl.appendChild(h("div",null,topCodes(s.emo,EMO_VN,EMO_COL,3)));
+    detailEl.appendChild(h("div",{class:"hint",style:"margin-top:6px;margin-bottom:3px"},"Hình khối trội"));
+    detailEl.appendChild(h("div",null,topCodes(s.shape,SHP_VN,SHP_COL,3)));
+    const ev=s.ev, evtxt=["official","marketplace","social","press","ugc"].filter(k=>ev[k]).join(" · ")||"—";
+    detailEl.appendChild(h("div",{class:"hint",style:"margin-top:8px;font-style:italic"},
+      "Evidence: "+evtxt+" · SKU mẫu: "+ev.sku+" · Độ tin cậy: "+confOf(b)));
+  }
+  const srcs=BRAND_SOURCES[b.id]||[];
+  if(srcs.length){
+    detailEl.appendChild(h("div",{class:"glabel"},"Research sources"));
+    detailEl.appendChild(h("div",{class:"sources"},srcs.map(s=>h("a",{
+      class:"src",href:s.url,target:"_blank",rel:"noopener noreferrer",title:s.url
+    },[h("span",{class:"type"},s.type),h("span",{class:"txt"},s.label)]))));
+  }
+  detailEl.appendChild(h("div",{style:"margin-top:16px;padding-top:14px;border-top:1px solid var(--line)"},[
+    h("div",{class:"hint",html:"<b style='color:var(--ink)'>Liên quan MateMade:</b> "+b.rel})]));
+  detailEl.classList.add("open");
+}
+
+/* ---------- A. TERRITORY DOSSIER ---------- */
+function openTerritory(key){
+  if(!detailEl)return;
+  const d=DOSSIER[key];if(!d)return;
+  const info=key==="CORE"?CORE_TERR:SECTOR_BY_KEY[key];
+  const col=key==="CORE"?CORE_COLOR:SECTOR_BY_KEY[key].color;
+  const inTerr=BRANDS.filter(b=>b.terr===key);
+  detailEl.innerHTML="";
+  detailEl.appendChild(h("div",{class:"x",onclick:closeDetail},"✕"));
+  detailEl.appendChild(h("div",{class:"sidetitle"},"Style Territory"));
+  detailEl.appendChild(h("div",{class:"bname",style:"display:flex;align-items:center;gap:8px"},
+    [h("span",{style:"width:14px;height:14px;border-radius:4px;display:inline-block;background:"+col}),info.en]));
+  detailEl.appendChild(h("div",{class:"bterr"},info.vn||info.en));
+  detailEl.appendChild(h("div",{class:"bsum"},d.def));
+  detailEl.appendChild(h("div",{class:"glabel"},"Aesthetic codes"));
+  detailEl.appendChild(h("div",null,d.codes.map(c=>h("span",{class:"pill"},c))));
+  detailEl.appendChild(h("div",{class:"glabel"},"Persona khách"));
+  detailEl.appendChild(h("div",{class:"hint"},d.persona));
+  detailEl.appendChild(h("div",{class:"glabel"},"MateMade học được gì"));
+  detailEl.appendChild(h("div",{class:"hint",style:"color:var(--accent)"},d.learn));
+  detailEl.appendChild(h("div",{class:"glabel"},"Phân biệt"));
+  detailEl.appendChild(h("div",{class:"hint"},d.vs));
+  detailEl.appendChild(h("div",{class:"glabel"},"Brand trong lãnh thổ này ("+inTerr.length+")"));
+  detailEl.appendChild(h("div",null, inTerr.length?inTerr.map(b=>
+    h("span",{class:"pill",style:"cursor:pointer;border-color:"+col+"66",onclick:()=>{state.sel=b.id;openDetail();markSel();}},b.name)
+  ):[h("span",{class:"hint"},"—")]));
+  detailEl.appendChild(h("div",{class:"hint",style:"margin-top:10px;font-style:italic"},"Mẫu ngoài 21 brand: "+d.examples));
+  detailEl.classList.add("open");
+}
+
+/* ---------- C. ANALYSIS PANEL ---------- */
+function openAnalysis(){
+  if(!detailEl)return;detailEl.innerHTML="";
+  detailEl.appendChild(h("div",{class:"x",onclick:closeDetail},"✕"));
+  detailEl.appendChild(h("div",{class:"sidetitle"},"Phân tích chiến lược"));
+  // 1. đối thủ gần MateMade
+  detailEl.appendChild(h("div",{class:"glabel"},"Đối thủ gần MateMade nhất"));
+  const near=nearestToMate(),maxd=near[near.length-1].d;
+  near.slice(0,8).forEach(({b,d})=>{
+    detailEl.appendChild(h("div",{class:"comprow",onclick:()=>{state.sel=b.id;openDetail();markSel();}},[
+      h("span",{class:"cn"},b.name),
+      h("div",{class:"cbar"},h("i",{style:"width:"+(100-d/maxd*92)+"%;background:"+brandColor(b)})),
+      h("span",{class:"cd"},d.toFixed(2)),
+    ]));
+  });
+  detailEl.appendChild(h("div",{class:"hint",style:"margin-top:4px;font-style:italic"},"Số nhỏ = gần MateMade nhất (dễ thay thế / đối thủ trực tiếp)."));
+  // 2. khoảng trống
+  detailEl.appendChild(h("div",{class:"glabel"},"Khoảng trống thị trường (white-space)"));
+  findGaps().forEach(g=>detailEl.appendChild(h("div",{class:"hint",style:"color:#7ee0c0"},"◍ "+describePoint(g.x,g.y))));
+  detailEl.appendChild(h("div",{class:"hint",style:"margin-top:4px;font-style:italic"},"Vùng ít/không có brand — cơ hội định vị (nếu khả thi sản xuất)."));
+  // 3. mật độ theo lãnh thổ
+  detailEl.appendChild(h("div",{class:"glabel"},"Mật độ theo lãnh thổ"));
+  const cnt={};BRANDS.forEach(b=>{cnt[b.terr]=(cnt[b.terr]||0)+1;});
+  Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]).forEach(k=>{
+    const nm=k==="CORE"?"Core":SECTOR_BY_KEY[k].en;
+    detailEl.appendChild(h("div",{class:"comprow"},[h("span",{class:"cn"},nm),
+      h("div",{class:"cbar"},h("i",{style:"width:"+(cnt[k]/5*100)+"%;background:"+(k==="CORE"?CORE_COLOR:SECTOR_BY_KEY[k].color)})),
+      h("span",{class:"cd"},cnt[k]+"")]));
+  });
+  detailEl.appendChild(h("div",{class:"hint",style:"margin-top:10px;font-style:italic"},"Bật 🔥 (HUD) để xem heatmap mật độ + vùng trống ngay trên bản đồ."));
+  detailEl.classList.add("open");
+}
+
+/* ---------- SECONDARY VIEWS (Proximity / Radar) ---------- */
+const S=620,CX=S/2,CY=S/2,SC=192,toPx=(x,y)=>[CX+x*SC,CY-y*SC];
+function proximitySVG(){
+  const svg=el("svg",{viewBox:`0 0 ${S} ${S}`});const[mx,my]=toPx(0,0);
+  [0.55,0.9,1.25].forEach(r=>svg.appendChild(el("circle",{cx:CX,cy:CY,r:r*SC,fill:"none",stroke:"#e8a0b8","stroke-opacity":0.18,"stroke-dasharray":"3 5"})));
+  TERRITORIES.forEach(t=>{const a=t.ang*Math.PI/180,tx=CX+Math.cos(a)*t.d*SC,ty=CY-Math.sin(a)*t.d*SC;
+    svg.appendChild(el("line",{x1:CX,y1:CY,x2:tx,y2:ty,stroke:"#3a352e","stroke-opacity":0.5}));
+    svg.appendChild(el("circle",{cx:tx,cy:ty,r:4,fill:"#8fae8a"}));
+    svg.appendChild(el("text",{class:"nodelabel",x:tx,y:ty-9,"text-anchor":"middle",style:"fill:var(--muted)"},t.name));});
+  svg.appendChild(el("path",{d:`M ${mx} ${my} Q ${mx-70} ${my-70} ${mx-40} ${my-135}`,fill:"none",stroke:"#d9b06a","stroke-width":2,"stroke-dasharray":"4 4"}));
+  svg.appendChild(el("text",{class:"ringlabel",x:mx-40,y:my-145,"text-anchor":"middle",style:"fill:#d9b06a"},"→ Modular Candy Utility"));
+  svg.appendChild(el("circle",{cx:mx,cy:my,r:13,fill:"#e8a0b8",stroke:"#fff","stroke-width":2.5}));
+  svg.appendChild(el("text",{class:"nodelabel",x:mx,y:my+30,"text-anchor":"middle",style:"fill:#fff;font-size:13px"},"MateMade"));
+  svg.appendChild(el("text",{class:"ringlabel",x:mx,y:my+45,"text-anchor":"middle"},"Generic Candy Sweet"));
+  return svg;
+}
+function radarSVG(){
+  const N=7,R=160,cx=210,cy=215,pt=(i,v)=>{const a=-Math.PI/2+i*2*Math.PI/N;return[cx+Math.cos(a)*R*v/5,cy+Math.sin(a)*R*v/5];};
+  const svg=el("svg",{viewBox:"0 0 420 450"});
+  [1,2,3,4,5].forEach(l=>svg.appendChild(el("polygon",{points:Array.from({length:N},(_,i)=>pt(i,l).join(",")).join(" "),fill:"none",stroke:"#34302a"})));
+  for(let i=0;i<N;i++){const[x,y]=pt(i,5);svg.appendChild(el("line",{x1:cx,y1:cy,x2:x,y2:y,stroke:"#34302a"}));}
+  METRIC_LABELS.forEach((lb,i)=>{const[x,y]=pt(i,5.8);
+    svg.appendChild(el("text",{x,y:y-7,"text-anchor":"middle","dominant-baseline":"middle",style:"font-size:11px;fill:var(--ink);font-weight:700"},lb));
+    svg.appendChild(el("text",{x,y:y+8,"text-anchor":"middle","dominant-baseline":"middle",style:"font-size:10px;fill:var(--muted);font-weight:600"},METRIC_LABELS_VN[i]));
+  });
+  state.picks.forEach((id,k)=>{const b=BRANDS.find(x=>x.id===id);if(!b)return;
+    svg.appendChild(el("polygon",{points:b.m.map((v,i)=>pt(i,v).join(",")).join(" "),fill:RADAR_COLORS[k],"fill-opacity":0.15,stroke:RADAR_COLORS[k],"stroke-width":2}));});
+  return svg;
+}
+function viewProximity(){
+  const stage=document.getElementById("stage");
+  stage.appendChild(h("div",{class:"pad"},h("div",{class:"layout"},[
+    h("div",{class:"mapwrap"},proximitySVG()),
+    h("div",{class:"card"},[h("div",{class:"sidetitle"},"MateMade-centered"),
+      h("p",{class:"hint"},"Tâm bản đồ là MateMade hiện tại (Generic Candy Sweet). Node xanh là các territory lân cận có thể dịch chuyển tới."),
+      h("div",{class:"opp"},[h("h3",null,"Recommended path"),
+        h("p",null,"Đường gold nét đứt là opportunity corridor: từ kẹo ngọt chung chung → hệ phụ kiện có chủ đích."),
+        h("div",{class:"arrow"},"Charm Culture → Playful Utility"),
+        h("div",{class:"arrow"},"→ Modular Self-expression"),
+        h("div",{class:"arrow"},"→ Modular Candy Utility")])])])));
+}
+function viewRadar(){
+  const stage=document.getElementById("stage");
+  const metricHint=h("div",{class:"hint",style:"margin-top:10px;font-size:12px;line-height:1.6"},
+    METRIC_LABELS.map((lb,i)=>lb+" = "+METRIC_LABELS_VN[i]).join(" · "));
+  const left=h("div",{class:"card"},[radarSVG(),h("div",{class:"legend2"},
+    state.picks.map((id,k)=>h("span",null,[h("span",{class:"dot",style:"width:11px;height:11px;border-radius:50%;background:"+RADAR_COLORS[k]}),BRANDS.find(b=>b.id===id).name]))),metricHint]);
+  const list=h("div",{class:"scroll"},BRANDS.map(b=>{const on=state.picks.includes(b.id);
+    return h("div",{class:"chk"+(on?" on":""),onclick:()=>{if(on)state.picks=state.picks.filter(x=>x!==b.id);
+      else if(state.picks.length<4)state.picks.push(b.id);renderTab();}},
+      [h("span",{class:"sw",style:"background:"+(on?RADAR_COLORS[state.picks.indexOf(b.id)]:"var(--line)")}),b.name]);}));
+  stage.appendChild(h("div",{class:"pad"},h("div",{class:"layout"},
+    [left,h("div",{class:"card"},[h("div",{class:"sidetitle"},"Chọn 2–4 brand so sánh"),list])])));
+}
+
+/* ---------- RENDER ---------- */
+const TABS=[["orbit","🗺 Orbit Map"],["proximity","◎ MateMade Proximity"],["radar","△ Brand Comparison"],["opp","◆ Strategic Opportunity"]];
+function renderTab(){
+  const stage=document.getElementById("stage");stage.innerHTML="";detailEl=null;
+  if(state.tab==="orbit")buildWorld("orbit");
+  else if(state.tab==="opp")buildWorld("opp");
+  else if(state.tab==="proximity")buildWorld("proximity");
+  else viewRadar();
+}
+function renderTabs(){const t=document.getElementById("tabs");t.innerHTML="";
+  TABS.forEach(([k,l])=>t.appendChild(h("div",{class:"tab"+(state.tab===k?" active":""),
+    onclick:()=>{state.tab=k;renderTabs();renderTab();}},l)));}
+renderTabs();renderTab();
+window.addEventListener("resize",()=>{if(state.tab!=="radar"&&vpEl)fitView();});
+</script>
+</body>
+</html>

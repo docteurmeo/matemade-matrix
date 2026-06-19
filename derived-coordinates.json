@@ -1,0 +1,1334 @@
+{
+  "method": "Derived from AI brand-analysis.json via keyword scoring",
+  "axes": {
+    "x": "Cute/Sweet/Playful (-1.2) ↔ Cool/Minimal/Polished (+1.2)",
+    "y": "Daily/Utility/Value (-1.2) ↔ Statement/Design/Craft (+1.2)"
+  },
+  "brands": [
+    {
+      "id": "matemade",
+      "name": "MateMade",
+      "x": -0.85,
+      "y": -0.05,
+      "rawX": -5.95,
+      "rawY": -0.35,
+      "xTrace": [
+        "gen-z(-0.4)",
+        "charm-heavy(-1)",
+        "sweet(-1)",
+        "expressive(-0.5)",
+        "playful(-0.9)",
+        "bow-core(-1.1)",
+        "sincere-cute(-1)",
+        "price:affordable(-0.05)"
+      ],
+      "yTrace": [
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)",
+        "price:affordable(-0.1)"
+      ]
+    },
+    {
+      "id": "sandy-liang",
+      "name": "Sandy Liang",
+      "x": -0.61,
+      "y": 0.06,
+      "rawX": -4.3,
+      "rawY": 0.4,
+      "xTrace": [
+        "girlhood(-0.9)",
+        "bow-core(-1.1)",
+        "feminine-maximalist(-0.7)",
+        "girlish(-0.8)",
+        "downtown(+0.5)",
+        "maximalist(-0.6)",
+        "coquette(-0.8)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)",
+        "occasion:evening(+0.45)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "floral-punk",
+      "name": "Floral Punk",
+      "x": -0.38,
+      "y": -0.05,
+      "rawX": -2.65,
+      "rawY": -0.35,
+      "xTrace": [
+        "bold-print(-0.5)",
+        "maximalist(-0.6)",
+        "feminine-punk(-0.3)",
+        "local-statement(-0.3)",
+        "playful(-0.9)",
+        "price:affordable(-0.05)"
+      ],
+      "yTrace": [
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)",
+        "price:affordable(-0.1)"
+      ]
+    },
+    {
+      "id": "saabi",
+      "name": "Saabi",
+      "x": -0.36,
+      "y": -0.21,
+      "rawX": -2.5,
+      "rawY": -1.45,
+      "xTrace": [
+        "cute(-1)",
+        "feminine(-0.15)",
+        "colorful(-0.5)",
+        "accessible-fashion(-0.5)",
+        "accessible(-0.3)",
+        "price:affordable(-0.05)"
+      ],
+      "yTrace": [
+        "accessible-fashion(-0.5)",
+        "accessible(-0.5)",
+        "occasion:everyday(-0.35)",
+        "price:affordable(-0.1)"
+      ]
+    },
+    {
+      "id": "cou-cou",
+      "name": "Cou Cou Intimates",
+      "x": -0.29,
+      "y": 0.06,
+      "rawX": -2,
+      "rawY": 0.45,
+      "xTrace": [
+        "soft-feminine(-0.7)",
+        "cotton-candy(-0.8)",
+        "indie-girl(-0.5)"
+      ],
+      "yTrace": [
+        "slow-fashion(+0.7)",
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)"
+      ]
+    },
+    {
+      "id": "by-far",
+      "name": "By Far",
+      "x": -0.19,
+      "y": 0.2,
+      "rawX": -1.35,
+      "rawY": 1.4,
+      "xTrace": [
+        "feminine(-0.15)",
+        "nostalgic(-0.4)",
+        "playful(-0.9)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "sculptural(+1.1)",
+        "occasion:evening(+0.45)",
+        "occasion:everyday(-0.35)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "jacquemus",
+      "name": "Jacquemus",
+      "x": -0.17,
+      "y": 0.41,
+      "rawX": -1.2,
+      "rawY": 2.9,
+      "xTrace": [
+        "playful(-0.9)",
+        "romantic(-0.4)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "statement(+1)",
+        "sculptural(+1.1)",
+        "viral-moment(+0.5)",
+        "occasion:evening(+0.45)",
+        "occasion:everyday(-0.35)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "marimekko",
+      "name": "Marimekko",
+      "x": -0.16,
+      "y": -0.07,
+      "rawX": -1.1,
+      "rawY": -0.5,
+      "xTrace": [
+        "bold-print(-0.5)",
+        "maximalist(-0.6)"
+      ],
+      "yTrace": [
+        "occasion:everyday(-0.35)",
+        "occasion:travel(-0.15)"
+      ]
+    },
+    {
+      "id": "juno",
+      "name": "Juno",
+      "x": -0.15,
+      "y": -0.35,
+      "rawX": -1.05,
+      "rawY": -2.45,
+      "xTrace": [
+        "feminine(-0.15)",
+        "colorful(-0.5)",
+        "accessible(-0.3)",
+        "price:budget(-0.1)"
+      ],
+      "yTrace": [
+        "mass-market(-0.6)",
+        "practical(-0.7)",
+        "accessible(-0.5)",
+        "occasion:everyday(-0.35)",
+        "price:budget(-0.3)"
+      ]
+    },
+    {
+      "id": "vascara",
+      "name": "Vascara",
+      "x": -0.14,
+      "y": -0.23,
+      "rawX": -1,
+      "rawY": -1.6,
+      "xTrace": [
+        "mass-aspiration(-0.1)",
+        "feminine(-0.15)",
+        "fashion-accessible(-0.2)",
+        "accessible(-0.3)",
+        "mainstream(-0.2)",
+        "price:affordable(-0.05)"
+      ],
+      "yTrace": [
+        "mass-aspiration(-0.4)",
+        "accessible(-0.5)",
+        "occasion:office(-0.25)",
+        "occasion:everyday(-0.35)",
+        "price:affordable(-0.1)"
+      ]
+    },
+    {
+      "id": "sezane",
+      "name": "Sézane",
+      "x": -0.14,
+      "y": -0.06,
+      "rawX": -0.95,
+      "rawY": -0.4,
+      "xTrace": [
+        "feminine(-0.15)",
+        "nostalgic(-0.4)",
+        "romantic(-0.4)"
+      ],
+      "yTrace": [
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)",
+        "occasion:travel(-0.15)"
+      ]
+    },
+    {
+      "id": "paloma-wool",
+      "name": "Paloma Wool",
+      "x": -0.13,
+      "y": 0.34,
+      "rawX": -0.9,
+      "rawY": 2.35,
+      "xTrace": [
+        "playful(-0.9)"
+      ],
+      "yTrace": [
+        "indie-artsy(+0.8)",
+        "spanish-craft(+0.7)",
+        "wearable-art(+1.1)",
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)"
+      ]
+    },
+    {
+      "id": "doen",
+      "name": "Dôen",
+      "x": -0.12,
+      "y": -0.01,
+      "rawX": -0.85,
+      "rawY": -0.05,
+      "xTrace": [
+        "feminine(-0.15)",
+        "nostalgic(-0.4)",
+        "romantic(-0.4)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "occasion:weekend(+0.1)",
+        "occasion:everyday(-0.35)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "ader-error",
+      "name": "Ader Error",
+      "x": -0.11,
+      "y": 0.15,
+      "rawX": -0.8,
+      "rawY": 1.05,
+      "xTrace": [
+        "playful(-0.9)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "conceptual(+1.1)",
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "hapas",
+      "name": "Hapas",
+      "x": -0.09,
+      "y": -0.39,
+      "rawX": -0.6,
+      "rawY": -2.7,
+      "xTrace": [
+        "mass-aspiration(-0.1)",
+        "feminine(-0.15)",
+        "accessible(-0.3)",
+        "price:affordable(-0.05)"
+      ],
+      "yTrace": [
+        "mass-aspiration(-0.4)",
+        "accessible(-0.5)",
+        "practical(-0.7)",
+        "ol-image(-0.4)",
+        "occasion:office(-0.25)",
+        "occasion:everyday(-0.35)",
+        "price:affordable(-0.1)"
+      ]
+    },
+    {
+      "id": "chau-fifth",
+      "name": "Châu Fifth",
+      "x": -0.07,
+      "y": -0.14,
+      "rawX": -0.5,
+      "rawY": -0.95,
+      "xTrace": [
+        "accessible(-0.3)",
+        "feminine(-0.15)",
+        "price:affordable(-0.05)"
+      ],
+      "yTrace": [
+        "accessible(-0.5)",
+        "occasion:everyday(-0.35)",
+        "price:affordable(-0.1)"
+      ]
+    },
+    {
+      "id": "staud",
+      "name": "Staud",
+      "x": -0.06,
+      "y": 0.03,
+      "rawX": -0.4,
+      "rawY": 0.2,
+      "xTrace": [
+        "structured(+0.5)",
+        "playful(-0.9)"
+      ],
+      "yTrace": [
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)",
+        "occasion:evening(+0.45)"
+      ]
+    },
+    {
+      "id": "andgather",
+      "name": "Andgather",
+      "x": -0.03,
+      "y": 0.04,
+      "rawX": -0.2,
+      "rawY": 0.25,
+      "xTrace": [
+        "feminine(-0.15)",
+        "price:affordable(-0.05)"
+      ],
+      "yTrace": [
+        "local-craft(+0.6)",
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)",
+        "price:affordable(-0.1)"
+      ]
+    },
+    {
+      "id": "ganni",
+      "name": "Ganni",
+      "x": 0,
+      "y": 0.06,
+      "rawX": 0,
+      "rawY": 0.4,
+      "xTrace": [
+        "scandi-playful(+0.4)",
+        "colorful(-0.5)",
+        "playful(-0.9)",
+        "cool(+0.9)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)",
+        "occasion:evening(+0.45)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "loeffler-randall",
+      "name": "Loeffler Randall",
+      "x": 0,
+      "y": -0.04,
+      "rawX": 0,
+      "rawY": -0.25,
+      "xTrace": [],
+      "yTrace": [
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)"
+      ]
+    },
+    {
+      "id": "kayu",
+      "name": "Kayu",
+      "x": 0,
+      "y": 0.08,
+      "rawX": 0,
+      "rawY": 0.55,
+      "xTrace": [],
+      "yTrace": [
+        "artisan-summer(+0.6)",
+        "occasion:weekend(+0.1)",
+        "occasion:travel(-0.15)"
+      ]
+    },
+    {
+      "id": "cult-gaia",
+      "name": "Cult Gaia",
+      "x": 0,
+      "y": 0.44,
+      "rawX": 0,
+      "rawY": 3.05,
+      "xTrace": [],
+      "yTrace": [
+        "sculptural(+1.1)",
+        "instagram-viral(+0.4)",
+        "statement(+1)",
+        "occasion:evening(+0.45)",
+        "occasion:weekend(+0.1)"
+      ]
+    },
+    {
+      "id": "hunting-season",
+      "name": "Hunting Season",
+      "x": 0.01,
+      "y": 0.54,
+      "rawX": 0.1,
+      "rawY": 3.8,
+      "xTrace": [
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "exotic-materials(+0.9)",
+        "artisan(+0.9)",
+        "unique(+0.7)",
+        "collector-piece(+1)",
+        "occasion:evening(+0.45)",
+        "occasion:everyday(-0.35)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "cesta-collective",
+      "name": "Cesta Collective",
+      "x": 0.01,
+      "y": 0.17,
+      "rawX": 0.1,
+      "rawY": 1.2,
+      "xTrace": [
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "artisan-story(+0.9)",
+        "conscious(+0.5)",
+        "occasion:weekend(+0.1)",
+        "occasion:travel(-0.15)",
+        "occasion:everyday(-0.35)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "jw-anderson",
+      "name": "JW Anderson",
+      "x": 0.01,
+      "y": 0.56,
+      "rawX": 0.1,
+      "rawY": 3.9,
+      "xTrace": [
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "conceptual(+1.1)",
+        "quirky(+0.8)",
+        "british-wit(+0.7)",
+        "conversation-starter(+1)",
+        "occasion:evening(+0.45)",
+        "occasion:everyday(-0.35)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "simone-rocha",
+      "name": "Simone Rocha",
+      "x": 0.01,
+      "y": 0.46,
+      "rawX": 0.1,
+      "rawY": 3.2,
+      "xTrace": [
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "dark-romantic(+0.7)",
+        "floral-ornate(+0.7)",
+        "feminine-strong(+0.6)",
+        "editorial(+0.9)",
+        "occasion:evening(+0.45)",
+        "occasion:everyday(-0.35)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "bottega-veneta",
+      "name": "Bottega Veneta",
+      "x": 0.02,
+      "y": 0.44,
+      "rawX": 0.15,
+      "rawY": 3.05,
+      "xTrace": [
+        "price:luxury(+0.15)"
+      ],
+      "yTrace": [
+        "intrecciato-craft(+1.1)",
+        "no-logo(+0.6)",
+        "sculptural(+1.1)",
+        "occasion:evening(+0.45)",
+        "occasion:office(-0.25)",
+        "occasion:everyday(-0.35)",
+        "price:luxury(+0.4)"
+      ]
+    },
+    {
+      "id": "hender-scheme",
+      "name": "Hender Scheme",
+      "x": 0.06,
+      "y": 0.1,
+      "rawX": 0.4,
+      "rawY": 0.7,
+      "xTrace": [
+        "functional(+0.3)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "japanese-craft(+1)",
+        "functional(-0.8)",
+        "wabi-sabi(+0.9)",
+        "occasion:everyday(-0.35)",
+        "occasion:office(-0.25)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "porter",
+      "name": "Porter (Yoshida)",
+      "x": 0.07,
+      "y": -0.51,
+      "rawX": 0.5,
+      "rawY": -3.55,
+      "xTrace": [
+        "utilitarian(+0.2)",
+        "functional(+0.3)"
+      ],
+      "yTrace": [
+        "functional-excellence(-0.8)",
+        "nylon-craft(-0.3)",
+        "utilitarian(-0.9)",
+        "functional(-0.8)",
+        "occasion:everyday(-0.35)",
+        "occasion:travel(-0.15)",
+        "occasion:office(-0.25)"
+      ]
+    },
+    {
+      "id": "manu-atelier",
+      "name": "Manu Atelier",
+      "x": 0.09,
+      "y": 0.15,
+      "rawX": 0.6,
+      "rawY": 1.05,
+      "xTrace": [
+        "structured(+0.5)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "artisan-craft(+1)",
+        "occasion:office(-0.25)",
+        "occasion:evening(+0.45)",
+        "occasion:everyday(-0.35)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "strathberry",
+      "name": "Strathberry",
+      "x": 0.09,
+      "y": 0.33,
+      "rawX": 0.6,
+      "rawY": 2.3,
+      "xTrace": [
+        "structured(+0.5)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "heritage-craft(+0.9)",
+        "british(+0.4)",
+        "royal-adjacent(+0.6)",
+        "occasion:office(-0.25)",
+        "occasion:evening(+0.45)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "nanushka",
+      "name": "Nanushka",
+      "x": 0.09,
+      "y": 0.24,
+      "rawX": 0.6,
+      "rawY": 1.65,
+      "xTrace": [
+        "contemporary(+0.5)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "sustainable-luxe(+0.6)",
+        "eastern-european(+0.5)",
+        "conscious(+0.5)",
+        "occasion:everyday(-0.35)",
+        "occasion:office(-0.25)",
+        "occasion:evening(+0.45)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "vasic",
+      "name": "Vasic",
+      "x": 0.09,
+      "y": -0.25,
+      "rawX": 0.6,
+      "rawY": -1.75,
+      "xTrace": [
+        "structured(+0.5)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "commuter-chic(-0.5)",
+        "practical(-0.7)",
+        "occasion:office(-0.25)",
+        "occasion:travel(-0.15)",
+        "occasion:everyday(-0.35)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "tod-s",
+      "name": "Tod's",
+      "x": 0.1,
+      "y": 0.04,
+      "rawX": 0.7,
+      "rawY": 0.25,
+      "xTrace": [
+        "classic(+0.6)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "old-money(+0.8)",
+        "occasion:office(-0.25)",
+        "occasion:everyday(-0.35)",
+        "occasion:travel(-0.15)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "87mm",
+      "name": "87MM",
+      "x": 0.13,
+      "y": -0.3,
+      "rawX": 0.9,
+      "rawY": -2.1,
+      "xTrace": [
+        "streetwear-adjacent(+0.4)",
+        "functional(+0.3)",
+        "utilitarian(+0.2)"
+      ],
+      "yTrace": [
+        "functional(-0.8)",
+        "utilitarian(-0.9)",
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)",
+        "occasion:travel(-0.15)"
+      ]
+    },
+    {
+      "id": "toteme-ref",
+      "name": "Lemaire",
+      "x": 0.13,
+      "y": 0.01,
+      "rawX": 0.9,
+      "rawY": 0.05,
+      "xTrace": [
+        "intellectual(+0.8)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "intellectual(+0.6)",
+        "occasion:office(-0.25)",
+        "occasion:everyday(-0.35)",
+        "occasion:travel(-0.15)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "the-wayward",
+      "name": "The Wayward",
+      "x": 0.14,
+      "y": -0.1,
+      "rawX": 0.95,
+      "rawY": -0.7,
+      "xTrace": [
+        "minimal(+1)",
+        "price:affordable(-0.05)"
+      ],
+      "yTrace": [
+        "occasion:everyday(-0.35)",
+        "occasion:office(-0.25)",
+        "price:affordable(-0.1)"
+      ]
+    },
+    {
+      "id": "arket",
+      "name": "Arket",
+      "x": 0.14,
+      "y": -0.36,
+      "rawX": 0.95,
+      "rawY": -2.5,
+      "xTrace": [
+        "natural-minimal(+0.8)",
+        "utilitarian(+0.2)",
+        "price:affordable(-0.05)"
+      ],
+      "yTrace": [
+        "natural-minimal(-0.2)",
+        "utilitarian(-0.9)",
+        "quality-basics(-0.4)",
+        "earthy(-0.2)",
+        "practical(-0.7)",
+        "conscious(+0.5)",
+        "occasion:everyday(-0.35)",
+        "occasion:travel(-0.15)",
+        "price:affordable(-0.1)"
+      ]
+    },
+    {
+      "id": "celine",
+      "name": "Celine",
+      "x": 0.14,
+      "y": 0.16,
+      "rawX": 0.95,
+      "rawY": 1.15,
+      "xTrace": [
+        "sophisticated(+0.8)",
+        "price:luxury(+0.15)"
+      ],
+      "yTrace": [
+        "luxury-reference(+0.9)",
+        "occasion:office(-0.25)",
+        "occasion:evening(+0.45)",
+        "occasion:everyday(-0.35)",
+        "price:luxury(+0.4)"
+      ]
+    },
+    {
+      "id": "loewe",
+      "name": "Loewe",
+      "x": 0.16,
+      "y": 0.15,
+      "rawX": 1.15,
+      "rawY": 1.05,
+      "xTrace": [
+        "architectural(+1)",
+        "price:luxury(+0.15)"
+      ],
+      "yTrace": [
+        "design-forward(+0.8)",
+        "occasion:evening(+0.45)",
+        "occasion:office(-0.25)",
+        "occasion:everyday(-0.35)",
+        "price:luxury(+0.4)"
+      ]
+    },
+    {
+      "id": "aeta",
+      "name": "Aeta",
+      "x": 0.16,
+      "y": 0.19,
+      "rawX": 1.1,
+      "rawY": 1.3,
+      "xTrace": [
+        "minimal(+1)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "natural-aging(+0.8)",
+        "wabi-sabi(+0.9)",
+        "occasion:everyday(-0.35)",
+        "occasion:office(-0.25)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "boyy",
+      "name": "BOYY",
+      "x": 0.16,
+      "y": 0.01,
+      "rawX": 1.1,
+      "rawY": 0.05,
+      "xTrace": [
+        "architectural(+1)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "occasion:evening(+0.45)",
+        "occasion:office(-0.25)",
+        "occasion:everyday(-0.35)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "danse-lente",
+      "name": "Danse Lente",
+      "x": 0.16,
+      "y": 0.12,
+      "rawX": 1.1,
+      "rawY": 0.85,
+      "xTrace": [
+        "architectural(+1)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "geometric-patchwork(+0.8)",
+        "occasion:everyday(-0.35)",
+        "occasion:office(-0.25)",
+        "occasion:evening(+0.45)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "yuzefi",
+      "name": "Yuzefi",
+      "x": 0.16,
+      "y": 0.46,
+      "rawX": 1.1,
+      "rawY": 3.2,
+      "xTrace": [
+        "architectural(+1)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "sculptural-knot(+0.9)",
+        "editorial(+0.9)",
+        "sculptural(+1.1)",
+        "occasion:evening(+0.45)",
+        "occasion:everyday(-0.35)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "matin-kim",
+      "name": "Matin Kim",
+      "x": 0.17,
+      "y": -0.17,
+      "rawX": 1.2,
+      "rawY": -1.2,
+      "xTrace": [
+        "korean-chic(+0.7)",
+        "structured(+0.5)"
+      ],
+      "yTrace": [
+        "practical(-0.7)",
+        "occasion:office(-0.25)",
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)"
+      ]
+    },
+    {
+      "id": "rejina-pyo",
+      "name": "Rejina Pyo",
+      "x": 0.2,
+      "y": 0.16,
+      "rawX": 1.4,
+      "rawY": 1.15,
+      "xTrace": [
+        "contemporary(+0.5)",
+        "sophisticated(+0.8)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "sculptural(+1.1)",
+        "occasion:office(-0.25)",
+        "occasion:evening(+0.45)",
+        "occasion:everyday(-0.35)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "flore-paris",
+      "name": "Flore Paris",
+      "x": 0.21,
+      "y": -0.16,
+      "rawX": 1.5,
+      "rawY": -1.1,
+      "xTrace": [
+        "minimal(+1)",
+        "clean(+0.8)",
+        "accessible(-0.3)"
+      ],
+      "yTrace": [
+        "accessible(-0.5)",
+        "occasion:everyday(-0.35)",
+        "occasion:office(-0.25)"
+      ]
+    },
+    {
+      "id": "a-wang",
+      "name": "Alexander Wang",
+      "x": 0.21,
+      "y": 0,
+      "rawX": 1.5,
+      "rawY": 0,
+      "xTrace": [
+        "downtown(+0.5)",
+        "edgy(+0.6)",
+        "sporty(+0.3)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "sporty(-0.4)",
+        "occasion:evening(+0.45)",
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "cuyana",
+      "name": "Cuyana",
+      "x": 0.26,
+      "y": -0.24,
+      "rawX": 1.8,
+      "rawY": -1.65,
+      "xTrace": [
+        "minimal(+1)",
+        "timeless(+0.7)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "fewer-better(-0.3)",
+        "functional-luxury(-0.1)",
+        "practical(-0.7)",
+        "occasion:office(-0.25)",
+        "occasion:everyday(-0.35)",
+        "occasion:travel(-0.15)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "wandler",
+      "name": "Wandler",
+      "x": 0.26,
+      "y": 0.17,
+      "rawX": 1.8,
+      "rawY": 1.2,
+      "xTrace": [
+        "geometric(+0.7)",
+        "architectural(+1)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "editorial(+0.9)",
+        "occasion:everyday(-0.35)",
+        "occasion:evening(+0.45)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "acne-studios",
+      "name": "Acne Studios",
+      "x": 0.26,
+      "y": 0.09,
+      "rawX": 1.8,
+      "rawY": 0.65,
+      "xTrace": [
+        "intellectual(+0.8)",
+        "cool(+0.9)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "intellectual(+0.6)",
+        "occasion:everyday(-0.35)",
+        "occasion:office(-0.25)",
+        "occasion:evening(+0.45)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "andersson-bell",
+      "name": "Andersson Bell",
+      "x": 0.26,
+      "y": -0.15,
+      "rawX": 1.8,
+      "rawY": -1.05,
+      "xTrace": [
+        "korean-contemporary(+0.6)",
+        "functional(+0.3)",
+        "cool(+0.9)"
+      ],
+      "yTrace": [
+        "functional(-0.8)",
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)"
+      ]
+    },
+    {
+      "id": "low-classic",
+      "name": "Low Classic",
+      "x": 0.27,
+      "y": 0.54,
+      "rawX": 1.9,
+      "rawY": 3.8,
+      "xTrace": [
+        "architectural(+1)",
+        "intellectual(+0.8)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "avant-garde(+1)",
+        "deconstructed(+1)",
+        "art-world(+0.9)",
+        "intellectual(+0.6)",
+        "occasion:evening(+0.45)",
+        "occasion:everyday(-0.35)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "the-row",
+      "name": "The Row",
+      "x": 0.28,
+      "y": 0.12,
+      "rawX": 1.95,
+      "rawY": 0.85,
+      "xTrace": [
+        "minimal(+1)",
+        "intellectual(+0.8)",
+        "price:luxury(+0.15)"
+      ],
+      "yTrace": [
+        "intellectual(+0.6)",
+        "occasion:evening(+0.45)",
+        "occasion:office(-0.25)",
+        "occasion:everyday(-0.35)",
+        "price:luxury(+0.4)"
+      ]
+    },
+    {
+      "id": "lak-store",
+      "name": "Lak Store",
+      "x": 0.29,
+      "y": -0.21,
+      "rawX": 2.05,
+      "rawY": -1.5,
+      "xTrace": [
+        "minimal(+1)",
+        "clean(+0.8)",
+        "functional(+0.3)",
+        "price:affordable(-0.05)"
+      ],
+      "yTrace": [
+        "functional(-0.8)",
+        "occasion:everyday(-0.35)",
+        "occasion:office(-0.25)",
+        "price:affordable(-0.1)"
+      ]
+    },
+    {
+      "id": "cos",
+      "name": "COS",
+      "x": 0.29,
+      "y": -0.1,
+      "rawX": 2.05,
+      "rawY": -0.7,
+      "xTrace": [
+        "ultra-minimal(+1.1)",
+        "minimal(+1)",
+        "price:affordable(-0.05)"
+      ],
+      "yTrace": [
+        "functional-first(-0.6)",
+        "no-logo(+0.6)",
+        "occasion:everyday(-0.35)",
+        "occasion:office(-0.25)",
+        "price:affordable(-0.1)"
+      ]
+    },
+    {
+      "id": "savette",
+      "name": "Savette",
+      "x": 0.29,
+      "y": 0.01,
+      "rawX": 2,
+      "rawY": 0.05,
+      "xTrace": [
+        "refined(+0.9)",
+        "architectural(+1)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "occasion:evening(+0.45)",
+        "occasion:office(-0.25)",
+        "occasion:everyday(-0.35)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "other-stories",
+      "name": "& Other Stories",
+      "x": 0.32,
+      "y": -0.27,
+      "rawX": 2.25,
+      "rawY": -1.9,
+      "xTrace": [
+        "editorial-accessible(+0.3)",
+        "minimal(+1)",
+        "structured(+0.5)",
+        "accessible(-0.3)",
+        "clean(+0.8)",
+        "price:affordable(-0.05)"
+      ],
+      "yTrace": [
+        "accessible(-0.5)",
+        "practical(-0.7)",
+        "occasion:everyday(-0.35)",
+        "occasion:office(-0.25)",
+        "price:affordable(-0.1)"
+      ]
+    },
+    {
+      "id": "mansur-gavriel",
+      "name": "Mansur Gavriel",
+      "x": 0.37,
+      "y": -0.04,
+      "rawX": 2.6,
+      "rawY": -0.3,
+      "xTrace": [
+        "new-york-minimal(+0.9)",
+        "pastel-neutral(-0.2)",
+        "understated(+1)",
+        "clean(+0.8)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "occasion:everyday(-0.35)",
+        "occasion:office(-0.25)",
+        "occasion:weekend(+0.1)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "marhen-j",
+      "name": "Marhen.J",
+      "x": 0.41,
+      "y": -0.19,
+      "rawX": 2.9,
+      "rawY": -1.3,
+      "xTrace": [
+        "architectural-minimal(+1.1)",
+        "structured(+0.5)",
+        "korean-functional(+0.5)",
+        "clean(+0.8)"
+      ],
+      "yTrace": [
+        "practical(-0.7)",
+        "occasion:everyday(-0.35)",
+        "occasion:office(-0.25)"
+      ]
+    },
+    {
+      "id": "stand-oil",
+      "name": "Stand Oil",
+      "x": 0.51,
+      "y": -0.04,
+      "rawX": 3.6,
+      "rawY": -0.25,
+      "xTrace": [
+        "korean-cool(+1)",
+        "understated(+1)",
+        "timeless(+0.7)",
+        "cool(+0.9)"
+      ],
+      "yTrace": [
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)"
+      ]
+    },
+    {
+      "id": "toteme",
+      "name": "Toteme",
+      "x": 0.57,
+      "y": -0.08,
+      "rawX": 4,
+      "rawY": -0.55,
+      "xTrace": [
+        "scandi-minimal(+1)",
+        "architectural(+1)",
+        "quiet-luxury(+1)",
+        "cool(+0.9)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "occasion:office(-0.25)",
+        "occasion:everyday(-0.35)",
+        "occasion:travel(-0.15)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "wood-wood",
+      "name": "Wood Wood",
+      "x": 0.6,
+      "y": -0.16,
+      "rawX": 4.2,
+      "rawY": -1.15,
+      "xTrace": [
+        "copenhagen-street(+0.5)",
+        "sporty-minimal(+0.7)",
+        "clean(+0.8)",
+        "sporty(+0.3)",
+        "understated(+1)",
+        "cool(+0.9)"
+      ],
+      "yTrace": [
+        "sporty-minimal(-0.5)",
+        "sporty(-0.4)",
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)"
+      ]
+    },
+    {
+      "id": "noirer",
+      "name": "Noirer",
+      "x": 0.67,
+      "y": 0.01,
+      "rawX": 4.7,
+      "rawY": 0.1,
+      "xTrace": [
+        "dark-minimal(+1)",
+        "structured(+0.5)",
+        "contemporary(+0.5)",
+        "clean(+0.8)",
+        "cool(+0.9)",
+        "understated(+1)"
+      ],
+      "yTrace": [
+        "occasion:everyday(-0.35)",
+        "occasion:evening(+0.45)"
+      ]
+    },
+    {
+      "id": "apc",
+      "name": "A.P.C.",
+      "x": 0.71,
+      "y": 0.04,
+      "rawX": 5,
+      "rawY": 0.3,
+      "xTrace": [
+        "french-minimal(+1)",
+        "clean(+0.8)",
+        "understated(+1)",
+        "classic-with-edge(+0.7)",
+        "intellectual(+0.8)",
+        "classic(+0.6)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "intellectual(+0.6)",
+        "occasion:everyday(-0.35)",
+        "occasion:office(-0.25)",
+        "occasion:weekend(+0.1)",
+        "price:premium(+0.2)"
+      ]
+    },
+    {
+      "id": "second-layer",
+      "name": "Second/Layer",
+      "x": 0.77,
+      "y": -0.11,
+      "rawX": 5.4,
+      "rawY": -0.75,
+      "xTrace": [
+        "monochrome-minimal(+1)",
+        "korean-cool(+1)",
+        "sporty-minimal(+0.7)",
+        "clean(+0.8)",
+        "cool(+0.9)",
+        "minimal(+1)"
+      ],
+      "yTrace": [
+        "sporty-minimal(-0.5)",
+        "occasion:everyday(-0.35)",
+        "occasion:weekend(+0.1)"
+      ]
+    },
+    {
+      "id": "polene",
+      "name": "Polène",
+      "x": 0.83,
+      "y": -0.18,
+      "rawX": 5.8,
+      "rawY": -1.25,
+      "xTrace": [
+        "parisian-minimal(+1)",
+        "architectural(+1)",
+        "quiet-luxury(+1)",
+        "restrained(+1)",
+        "geometric(+0.7)",
+        "french-minimal(+1)",
+        "price:premium(+0.1)"
+      ],
+      "yTrace": [
+        "practical(-0.7)",
+        "occasion:everyday(-0.35)",
+        "occasion:office(-0.25)",
+        "occasion:travel(-0.15)",
+        "price:premium(+0.2)"
+      ]
+    }
+  ]
+}
