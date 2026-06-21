@@ -301,16 +301,6 @@ const COORD_HISTORY=[
     marge_sherwood:[0.48,0.58], minitmute:[0.45,-0.02], lyn:[0.35,-0.05], pipatchara:[0.10,1.22],
     jelly_bunny:[-0.55,-0.35],
   }},
-  {id:"v1",label:"Sau deep-dive Stand Oil & Carlyn",date:"2026-06-21",pos:{
-    matemade:[-0.78,-0.06], vascara:[0.29,-0.09], juno:[0.11,-0.16], hapas:[0.23,0.01],
-    yuumy:[0.01,-0.38], camelia:[0.22,-0.76], lesac:[0.39,-0.21], toutou:[-1.20,-0.10],
-    vanwalk:[-0.88,-0.46], oui:[-0.68,-0.28], samantha_vega:[-0.79,0.30], carlyn:[-0.26,0.03],
-    karatta:[-0.25,0.62], ngaos:[-0.52,0.87], thergab:[-0.05,0.97], floralpunk:[0.30,0.68],
-    chautfifth:[0.50,1.07], standoil:[0.42,0.20], mossdoom:[0.70,-0.42], spoiled:[0.60,-0.38],
-    saigonswagger:[0.70,-1.15], aeta:[0.30,0.88], osoi:[0.82,0.78], vunque:[0.78,0.50],
-    marge_sherwood:[0.48,0.58], minitmute:[0.45,-0.02], lyn:[0.35,-0.05], pipatchara:[0.10,1.22],
-    jelly_bunny:[-0.55,-0.35],
-  }},
 ];
 function coordSnapshotNow(){const o={};BRANDS.forEach(b=>{o[b.id]=FINAL_POS[b.id]||[b.x,b.y];});return o;}
 function coordVersionsAll(){return [...COORD_HISTORY,{id:"now",label:"Hiện tại",date:"live",pos:coordSnapshotNow()}];}
