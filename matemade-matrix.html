@@ -727,7 +727,10 @@ function applyVersion(id){
   state.activeVersion=id;
   const v=coordVersionsAll().find(x=>x.id===id);
   if(v)BRANDS.forEach(b=>{const p=v.pos[b.id];if(p){b.x=p[0];b.y=p[1];}});
-  renderTab();
+  if(state.tab==="history"){renderTab();return;}
+  // world view: redraw tại chỗ, GIỮ NGUYÊN zoom/pan
+  rebuildNodes();
+  if(versionBarEl){const nb=buildVersionBar();versionBarEl.replaceWith(nb);}
 }
 function buildVersionBar(){
   const versions=coordVersionsAll();
