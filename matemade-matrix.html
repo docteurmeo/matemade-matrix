@@ -730,7 +730,7 @@ function applyVersion(id){
   if(state.tab==="history"){renderTab();return;}
   // world view: redraw tại chỗ, GIỮ NGUYÊN zoom/pan
   rebuildNodes();
-  if(versionBarEl){const nb=buildVersionBar();versionBarEl.replaceWith(nb);}
+  const old=versionBarEl;const nb=buildVersionBar();if(old)old.replaceWith(nb);
 }
 function buildVersionBar(){
   const versions=coordVersionsAll();
