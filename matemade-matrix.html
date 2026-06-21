@@ -1157,6 +1157,78 @@ function viewProximity(){
         h("div",{class:"arrow"},"→ Modular Self-expression"),
         h("div",{class:"arrow"},"→ Modular Candy Utility")])])])));
 }
+function viewAbout(){
+  const stage=document.getElementById("stage");
+  const wrap=h("div",{style:"max-width:920px;margin:0 auto;display:flex;flex-direction:column;gap:18px"});
+  const H=(t)=>h("div",{class:"sidetitle",style:"margin-bottom:0"},t);
+  const P=(t)=>h("p",{class:"hint",style:"font-size:13.5px;line-height:1.7"},t);
+  const card=(children)=>h("div",{class:"card"},children);
+
+  // --- Hero ---
+  wrap.appendChild(card([
+    h("div",{class:"bname",style:"font-size:22px"},"MateMade — Brand Territory Matrix"),
+    h("div",{class:"bterr",style:"margin-bottom:10px"},"Bản đồ định vị phong cách túi xách nữ tại Việt Nam"),
+    P("Ma trận này định vị các thương hiệu túi xách trong một không gian thẩm mỹ hai chiều, lấy phân khúc đại chúng (mass) làm điểm tham chiếu trung tâm. Mục tiêu: làm rõ MateMade đang đứng ở đâu, các thương hiệu lân cận và hình mẫu nâng cấp nằm ở vùng nào, và đâu là khoảng trống định vị có thể khai thác."),
+  ]));
+
+  // --- 2 trục ---
+  wrap.appendChild(card([
+    H("1 · Mô hình hai trục, lấy mass làm tâm"),
+    P("Tâm bản đồ là sản phẩm đại chúng — lõi “Mass Polished Feminine” (nữ tính phổ thông, dễ dùng, dễ phối, ít tuyên ngôn). Mọi thương hiệu được đọc theo độ lệch khỏi tâm này trên hai trục độc lập:"),
+    h("div",{style:"display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px"},[
+      h("div",{style:"padding:12px;border:1px solid var(--line);border-radius:10px"},[
+        h("div",{style:"font-weight:700;color:var(--ink);margin-bottom:4px"},"↕ Trục dọc — Vai trò sản phẩm"),
+        h("div",{class:"hint"},"Từ dưới lên: tính ứng dụng (daily / công năng / giá trị sử dụng) → tính thời trang (statement / thiết kế / thủ công). Càng lên cao, chiếc túi càng là tuyên ngôn phong cách hơn là vật dụng."),
+      ]),
+      h("div",{style:"padding:12px;border:1px solid var(--line);border-radius:10px"},[
+        h("div",{style:"font-weight:700;color:var(--ink);margin-bottom:4px"},"↔ Trục ngang — Hai thái cực của mass Việt"),
+        h("div",{class:"hint"},"Từ trái sang phải: tính ngọt (cute / sweet / playful) → tính tối giản (cool / minimal / polished). Đây là hai đầu của gu đại chúng nữ Việt hiện nay."),
+      ]),
+    ]),
+  ]));
+
+  // --- 8 định nghĩa ---
+  const order=["W","NW","N","NE","E","SE","S","SW"]; // theo chiều vòng tròn
+  const isPeak=(k)=>["W","N","E","S"].includes(k);
+  const sectorCard=(k)=>{const s=SECTOR_BY_KEY[k];const d=DOSSIER[k];
+    return h("div",{style:"padding:12px;border:1px solid var(--line);border-left:3px solid "+s.color+";border-radius:10px"},[
+      h("div",{style:"display:flex;align-items:center;gap:8px;margin-bottom:4px"},[
+        h("span",{style:"font-size:12.5px;font-weight:700;color:"+s.color},s.en),
+        h("span",{class:"pill",style:"font-size:9.5px;padding:1px 7px"},isPeak(k)?"đỉnh":"xen kẽ"),
+      ]),
+      h("div",{class:"hint",style:"font-size:11.5px;margin-bottom:5px"},s.vn),
+      h("div",{class:"hint",style:"font-size:12px"},d?d.def:""),
+    ]);};
+  wrap.appendChild(card([
+    H("2 · Tám lãnh thổ phong cách — 4 đỉnh + 4 vùng xen kẽ"),
+    P("Bốn đầu trục cho ra bốn nguyên mẫu thuần (Sweet ở trái, Seoul Cool ở phải, Design Object ở đỉnh, Practical Utility ở đáy). Tại mỗi góc phần tư, một định nghĩa lai được chèn vào để nối hai đỉnh kề — tạo thành tám lãnh thổ liền mạch quanh vòng tròn:"),
+    h("div",{style:"display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px"},order.map(sectorCard)),
+  ]));
+
+  // --- Phân tích chuyên môn ---
+  wrap.appendChild(card([
+    H("3 · Vì sao tám định nghĩa này hợp lý về chuyên môn"),
+    P("① Hai trục độc lập về khái niệm (orthogonal): một trục trả lời “chiếc túi để dùng hay để biểu đạt”, trục kia trả lời “gu ngọt hay gu tiết chế”. Chúng không chồng lấn nhau, nên kết hợp lại bao phủ gần như toàn bộ không gian thẩm mỹ của túi nữ phân khúc mass."),
+    P("② Bốn đỉnh là bốn cực thuần khiết; bốn vùng xen kẽ là vùng lai ở mỗi góc, mang đồng thời đặc tính của hai đỉnh kề. Ví dụ NE (Editorial Cool / Architectural) vừa “tối giản” như E vừa “thiên thiết kế” như N — đúng vị trí góc trên-phải."),
+    P("③ Tính liên tục theo vòng tròn: đi quanh một vòng — Sweet → Romantic Craft → Design Object → Editorial Cool → Seoul Minimal → Urban Street → Practical Utility → Soft Cute Daily → trở lại Sweet — mỗi lãnh thổ chỉ khác lãnh thổ kề đúng một “bước” trên một trục. Không có bước nhảy đột ngột (ví dụ không thể nhảy thẳng từ kawaii sang street utility mà không đi qua vùng trung gian). Chính trật tự vòng này phản ánh cách gu thẩm mỹ dịch chuyển dần trong thực tế, và cho phép đọc “đường tiến hóa” khả dĩ của một thương hiệu như một cung trên vòng tròn."),
+  ]));
+
+  // --- Phương pháp ---
+  wrap.appendChild(card([
+    H("4 · Tiêu chí xếp brand & cách bảo đảm khách quan"),
+    P("Mỗi thương hiệu được định vị bằng ba thông số: tọa độ (x, y) trên hai trục; Tier — cường độ / độ rõ của phong cách (từ Tier 0 đại chúng trung tính đến Tier 4 cực tính & thể nghiệm); và Territory — lãnh thổ phong cách chủ đạo."),
+    h("div",{class:"glabel"},"Để kết quả khách quan nhất có thể"),
+    h("ul",{class:"learn"},[
+      "Nghiên cứu sâu từng thương hiệu từ nguồn gốc: rà toàn bộ dải sản phẩm thật (không chỉ 1 mẫu signature), bộ sưu tập, campaign, chất liệu, giá, xuất xứ và tệp khách hàng — thay vì suy đoán theo ấn tượng.",
+      "Đối chiếu nhiều nguồn: website chính thức, kênh bán lẻ, báo chí/phỏng vấn, mạng xã hội — để tránh lệ thuộc vào một góc nhìn marketing.",
+      "Mỗi tọa độ đều có khối “◎ Bằng chứng tọa độ” truy vết được trong bảng chi tiết của từng brand, ghi rõ lý do và nguồn dẫn tới con số đó.",
+      "Lưu lịch sử phiên bản tọa độ (tab “🕐 Coord History” và các chip trên bản đồ) để so sánh trước/sau mỗi đợt nghiên cứu — định vị có thể được hiệu chỉnh khi có bằng chứng mới, một cách minh bạch.",
+    ]),
+    P("Nói cách khác: tọa độ không phải phán đoán cảm tính cố định, mà là một giả thuyết định vị có bằng chứng, có thể kiểm chứng và cập nhật."),
+  ]));
+
+  stage.appendChild(h("div",{class:"pad"},wrap));
+}
 function viewHistory(){
   const stage=document.getElementById("stage");
   const versions=coordVersionsAll();
@@ -1214,13 +1286,14 @@ function viewRadar(){
 }
 
 /* ---------- RENDER ---------- */
-const TABS=[["orbit","🗺 Orbit Map"],["proximity","◎ MateMade Proximity"],["radar","△ Brand Comparison"],["opp","◆ Strategic Opportunity"],["history","🕐 Coord History"]];
+const TABS=[["about","ℹ️ Về ma trận"],["orbit","🗺 Orbit Map"],["proximity","◎ MateMade Proximity"],["radar","△ Brand Comparison"],["opp","◆ Strategic Opportunity"],["history","🕐 Coord History"]];
 function renderTab(){
   const stage=document.getElementById("stage");stage.innerHTML="";detailEl=null;
   if(state.tab==="orbit")buildWorld("orbit");
   else if(state.tab==="opp")buildWorld("opp");
   else if(state.tab==="proximity")buildWorld("proximity");
   else if(state.tab==="history")viewHistory();
+  else if(state.tab==="about")viewAbout();
   else viewRadar();
 }
 function renderTabs(){const t=document.getElementById("tabs");t.innerHTML="";
