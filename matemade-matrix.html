@@ -238,7 +238,7 @@ const VECTORS={E:"Toward Restraint",NE:"Restrained Signature",N:"Toward Signatur
 const CORE_TERR={en:"Mass Polished Feminine",vn:"Lõi nữ tính phổ thông"};
 // per-brand v2.0 assignment
 const LOGIC={
-  matemade:{tier:2,terr:"W",str:"strong",mEn:"Charmable Self-expression",mVn:"Kẹo ngọt cá nhân hóa qua charm/phụ kiện",note:"Vùng chiến lược chính: đào sâu tier trong territory Sweet (Modular Candy Utility)."},
+  matemade:{tier:2,terr:"W",str:"medium",mEn:"Charmable soft daily (W↔SW border)",mVn:"Daily mềm neutral + accent ngọt qua charm/bow, biên W↔SW",note:"Deep-dive 2026 (nghiên cứu lại chính chủ — chủ thể của ma trận): catalog thật 20 SP (Charm Mocha, Cloudy w/ Bow, Cinnamon, Half-moon Hobo, Iris Crossbody, Slim Rectangle, Tote Canvas...) chủ đạo MÀU NEUTRAL/EARTH (kem/tan/nâu/burgundy/đen/navy/xám), chất liệu da mịn/leather-look, brand tự mô tả 'elegant simplicity, understated elegance, daily'. Charm là quà tặng kèm + vài bow tiết chế → giữ nét ngọt nhưng KHÔNG phải candy-pastel kawaii cực đoan. Kết luận: thực tế nằm ở biên W↔SW, gần tâm hơn nhiều so với placement cũ (−0.78). Kéo x −0.78→−0.48, y giữ daily-leaning −0.08. ⚠️ Lưu ý chiến lược: ngôn ngữ marketing nội bộ ('kẹo ngọt'/Sincere Girlhood) đang NGỌT hơn sản phẩm thực — đây vừa là cơ hội (đã có nền neutral để nâng cấp) vừa là điểm cần thống nhất giữa branding và sản phẩm.",coordCheck:true,coordEvidence:{old:[-0.78,-0.06],now:[-0.48,-0.08],points:["Catalog 20 SP với bảng màu chủ đạo neutral/earth (kem, tan, nâu, burgundy, đen, navy, xám) — KHÔNG phải candy pastel như placement cũ giả định.","Chất liệu da mịn/leather-look + mô tả chính chủ 'elegant simplicity, understated elegance, professional to casual daily'.","Form mềm (Cloudy, Cinnamon) + charm tặng kèm + vài bow giữ nét ngọt, nhưng tiết chế → biên W↔SW chứ không sâu trong W.","Giá 626k–790k, target nữ trẻ 18–35 cân bằng công sở/đi chơi — daily-led, không novelty cute như Toutou/Vanwalk.","x kéo từ −0.78→−0.48 (bớt cực ngọt), y giữ −0.08 (daily). Khoảng cách tới Stand Oil (0.42,0.20) và Carlyn (−0.26,0.03) thu hẹp — củng cố nhận định 2 brand này là aspiration ref gần.","⚠️ Branding ('kẹo ngọt') hiện ngọt hơn sản phẩm thực — cần đồng bộ."]}},
   vascara:{tier:0,terr:"CORE",str:"faint",mEn:"Soft professional mass",mVn:"Công sở mềm, dễ phối",note:"Gu phổ thông nữ tính, ít tuyên ngôn, dễ thay thế. ✅ Deep-dive 2026 (nghiên cứu lại độc lập): founded 2007, thuộc Stripe International từ 2019; ra BST mới hàng tháng theo trend quốc tế (pleated, drawstring, metallic 2025); phục vụ công sở/tiệc/casual/du lịch. Xác nhận đúng core mass, trend-following hơn là design-led — tọa độ giữ nguyên."},
   juno:{tier:0,terr:"CORE",str:"faint",mEn:"Safe mass feminine",mVn:"Nữ tính an toàn",note:"Mass feminine an toàn, giá vừa. ✅ Deep-dive 2026: founded 2005, tagline 'Vietnamese shoe brand - European standard'; mềm, giá phải chăng, đa dạng mẫu, made-in-Vietnam. Xác nhận đúng core mass an toàn — tọa độ giữ nguyên."},
   hapas:{tier:0,terr:"CORE",str:"faint",mEn:"Mass aspiration",mVn:"Nữ tính vừa đủ, đại trà nâng cấp nhẹ",note:"Gần tâm nhất, không có style territory cực đoan. ✅ Deep-dive 2026: tagline 'PRETTY NORMAL — Making ordinary things beautiful'; La Muse (best-seller) form vuông, metal tag nhẹ, PU mềm, tông neutral. Xác nhận đúng mass aspiration mid-premium — tọa độ giữ nguyên."},
@@ -272,7 +272,7 @@ const LOGIC={
 BRANDS.forEach(b=>{const L=LOGIC[b.id];if(L)Object.assign(b,L);});
 // ===== positions-final-reconciled (Claude + ChatGPT) — tọa độ kiểm chứng =====
 const FINAL_POS={
-  matemade:[-0.78,-0.06], vascara:[0.29,-0.09], juno:[0.11,-0.16], hapas:[0.05,0.15],
+  matemade:[-0.48,-0.08], vascara:[0.29,-0.09], juno:[0.11,-0.16], hapas:[0.05,0.15],
   yuumy:[0.01,-0.38], camelia:[0.22,-0.76], lesac:[0.45,0.15], toutou:[-1.20,-0.10],
   vanwalk:[-0.88,-0.46], oui:[-0.55,-0.22], samantha_vega:[-0.79,0.30], carlyn:[-0.26,0.03],
   karatta:[-0.45,0.55], ngaos:[-0.52,0.87], thergab:[-0.05,0.97], floralpunk:[0.20,0.50],
@@ -299,6 +299,16 @@ const COORD_HISTORY=[
     chautfifth:[0.50,1.07], standoil:[0.99,0.37], mossdoom:[0.70,-0.42], spoiled:[0.60,-0.38],
     saigonswagger:[0.70,-1.15], aeta:[0.30,0.88], osoi:[0.82,0.78], vunque:[0.78,0.50],
     marge_sherwood:[0.48,0.58], minitmute:[0.45,-0.02], lyn:[0.35,-0.05], pipatchara:[0.10,1.22],
+    jelly_bunny:[-0.55,-0.35],
+  }},
+  {id:"v1",label:"Sau deep-dive 28 brand đối thủ",date:"2026-06-21",pos:{
+    matemade:[-0.78,-0.06], vascara:[0.29,-0.09], juno:[0.11,-0.16], hapas:[0.05,0.15],
+    yuumy:[0.01,-0.38], camelia:[0.22,-0.76], lesac:[0.45,0.15], toutou:[-1.20,-0.10],
+    vanwalk:[-0.88,-0.46], oui:[-0.55,-0.22], samantha_vega:[-0.79,0.30], carlyn:[-0.26,0.03],
+    karatta:[-0.45,0.55], ngaos:[-0.52,0.87], thergab:[-0.05,0.97], floralpunk:[0.20,0.50],
+    chautfifth:[0.40,0.90], standoil:[0.42,0.20], mossdoom:[0.70,-0.42], spoiled:[0.48,-0.15],
+    saigonswagger:[0.70,-1.15], aeta:[0.30,0.88], osoi:[0.82,0.78], vunque:[0.78,0.50],
+    marge_sherwood:[0.48,0.58], minitmute:[0.30,0.12], lyn:[0.35,-0.05], pipatchara:[0.05,1.35],
     jelly_bunny:[-0.55,-0.35],
   }},
 ];
