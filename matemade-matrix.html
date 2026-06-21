@@ -283,6 +283,38 @@ const FINAL_POS={
 };
 BRANDS.forEach(b=>{const p=FINAL_POS[b.id];if(p){b.x=p[0];b.y=p[1];}});
 
+/* ===== COORD HISTORY (version log tọa độ) =====
+   Mỗi entry là 1 SNAPSHOT ĐÓNG BĂNG của FINAL_POS tại 1 thời điểm trong quá khứ.
+   "Hiện tại" KHÔNG nằm trong list này — nó luôn đọc trực tiếp từ FINAL_POS phía trên (live).
+   CÁCH LƯU VERSION MỚI (khi có nghiên cứu tiếp theo và sắp sửa FINAL_POS):
+     1. Copy nguyên object FINAL_POS hiện tại (TRƯỚC khi sửa) thành 1 entry mới ở cuối mảng dưới đây.
+     2. Đặt id duy nhất, label mô tả ngắn, date = ngày hôm đó.
+     3. Sau đó mới sửa FINAL_POS với giá trị nghiên cứu mới — "Hiện tại" sẽ tự động phản ánh giá trị mới. */
+const COORD_HISTORY=[
+  {id:"v0",label:"Ban đầu (trước deep-dive)",date:"2026-06-19",pos:{
+    matemade:[-0.78,-0.06], vascara:[0.29,-0.09], juno:[0.11,-0.16], hapas:[0.23,0.01],
+    yuumy:[0.01,-0.38], camelia:[0.22,-0.76], lesac:[0.39,-0.21], toutou:[-1.20,-0.10],
+    vanwalk:[-0.88,-0.46], oui:[-0.68,-0.28], samantha_vega:[-0.79,0.30], carlyn:[-0.42,-0.05],
+    karatta:[-0.25,0.62], ngaos:[-0.52,0.87], thergab:[-0.05,0.97], floralpunk:[0.30,0.68],
+    chautfifth:[0.50,1.07], standoil:[0.99,0.37], mossdoom:[0.70,-0.42], spoiled:[0.60,-0.38],
+    saigonswagger:[0.70,-1.15], aeta:[0.30,0.88], osoi:[0.82,0.78], vunque:[0.78,0.50],
+    marge_sherwood:[0.48,0.58], minitmute:[0.45,-0.02], lyn:[0.35,-0.05], pipatchara:[0.10,1.22],
+    jelly_bunny:[-0.55,-0.35],
+  }},
+  {id:"v1",label:"Sau deep-dive Stand Oil & Carlyn",date:"2026-06-21",pos:{
+    matemade:[-0.78,-0.06], vascara:[0.29,-0.09], juno:[0.11,-0.16], hapas:[0.23,0.01],
+    yuumy:[0.01,-0.38], camelia:[0.22,-0.76], lesac:[0.39,-0.21], toutou:[-1.20,-0.10],
+    vanwalk:[-0.88,-0.46], oui:[-0.68,-0.28], samantha_vega:[-0.79,0.30], carlyn:[-0.26,0.03],
+    karatta:[-0.25,0.62], ngaos:[-0.52,0.87], thergab:[-0.05,0.97], floralpunk:[0.30,0.68],
+    chautfifth:[0.50,1.07], standoil:[0.42,0.20], mossdoom:[0.70,-0.42], spoiled:[0.60,-0.38],
+    saigonswagger:[0.70,-1.15], aeta:[0.30,0.88], osoi:[0.82,0.78], vunque:[0.78,0.50],
+    marge_sherwood:[0.48,0.58], minitmute:[0.45,-0.02], lyn:[0.35,-0.05], pipatchara:[0.10,1.22],
+    jelly_bunny:[-0.55,-0.35],
+  }},
+];
+function coordSnapshotNow(){const o={};BRANDS.forEach(b=>{o[b.id]=FINAL_POS[b.id]||[b.x,b.y];});return o;}
+function coordVersionsAll(){return [...COORD_HISTORY,{id:"now",label:"Hiện tại",date:"live",pos:coordSnapshotNow()}];}
+
 /* ===== A. TERRITORY DOSSIER (từ điển phong cách) ===== */
 const DOSSIER={
   W:{def:"Ngọt, vui, dễ thương, nữ tính trẻ — túi để 'chơi' và chụp hình. Dễ mua, dễ phối, social-friendly.",
@@ -678,7 +710,7 @@ function h(tag,a,k){const e=document.createElement(tag);
   if(k)(Array.isArray(k)?k:[k]).forEach(c=>{if(c==null)return;e.appendChild(typeof c==="string"?document.createTextNode(c):c);});return e;}
 
 /* ---------- STATE ---------- */
-let state={tab:"orbit", sel:null, picks:["matemade","carlyn","standoil"], showImages:true, colorMode:"territory", heatmap:false, lens:"position", countryFilter:new Set()};
+let state={tab:"orbit", sel:null, picks:["matemade","carlyn","standoil"], showImages:true, colorMode:"territory", heatmap:false, lens:"position", countryFilter:new Set(), histA:"v0", histB:"now"};
 let view={k:1,tx:0,ty:0}; // world transform
 let worldEl=null, vpEl=null, hudEye=null, hudColor=null, hudHeat=null, curMate=false, lensBarEl=null, countryBarEl=null;
 function setLens(k){state.lens=k;rebuildNodes();const old=lensBarEl;const nb=buildLensBar();if(old)old.replaceWith(nb);refreshLegend();}
@@ -1113,6 +1145,48 @@ function viewProximity(){
         h("div",{class:"arrow"},"→ Modular Self-expression"),
         h("div",{class:"arrow"},"→ Modular Candy Utility")])])])));
 }
+function viewHistory(){
+  const stage=document.getElementById("stage");
+  const versions=coordVersionsAll();
+  const mkSelect=(cur,onSet)=>h("select",{onchange:(e)=>onSet(e.target.value)},
+    versions.map(v=>h("option",{value:v.id},v.label+" ("+v.date+")")));
+  const selA=mkSelect(state.histA,(v)=>{state.histA=v;viewHistory();});
+  const selB=mkSelect(state.histB,(v)=>{state.histB=v;viewHistory();});
+  selA.value=state.histA; selB.value=state.histB;
+  const A=versions.find(v=>v.id===state.histA), B=versions.find(v=>v.id===state.histB);
+  const rows=BRANDS.map(b=>{
+    const pa=A.pos[b.id], pb=B.pos[b.id];
+    if(!pa||!pb)return null;
+    const dx=pb[0]-pa[0], dy=pb[1]-pa[1], dist=Math.sqrt(dx*dx+dy*dy);
+    return {b,pa,pb,dx,dy,dist};
+  }).filter(Boolean).sort((x,y)=>y.dist-x.dist);
+  const table=h("table",{style:"width:100%;border-collapse:collapse;font-size:12.5px"},[
+    h("tr",{style:"border-bottom:1px solid var(--line)"},[
+      h("th",{style:"text-align:left;padding:6px 8px;color:var(--gold)"},"Brand"),
+      h("th",{style:"text-align:right;padding:6px 8px;color:var(--muted)"},A.label),
+      h("th",{style:"text-align:right;padding:6px 8px;color:var(--muted)"},B.label),
+      h("th",{style:"text-align:right;padding:6px 8px;color:var(--gold)"},"Δ"),
+    ]),
+    ...rows.map(r=>h("tr",{style:"border-bottom:1px solid var(--line)"+(r.dist>0.05?";background:rgba(232,160,184,.06)":"")},[
+      h("td",{style:"padding:6px 8px;cursor:pointer",onclick:()=>{state.tab="orbit";state.sel=r.b.id;renderTabs();renderTab();openDetail();}},r.b.name),
+      h("td",{style:"text-align:right;padding:6px 8px;color:var(--muted)"},"("+r.pa[0].toFixed(2)+", "+r.pa[1].toFixed(2)+")"),
+      h("td",{style:"text-align:right;padding:6px 8px"},"("+r.pb[0].toFixed(2)+", "+r.pb[1].toFixed(2)+")"),
+      h("td",{style:"text-align:right;padding:6px 8px;font-weight:700;color:"+(r.dist>0.15?"var(--accent)":r.dist>0.05?"var(--gold)":"var(--muted)")},r.dist.toFixed(3)),
+    ])),
+  ]);
+  const card=h("div",{class:"card"},[
+    h("div",{class:"sidetitle"},"So sánh version tọa độ"),
+    h("div",{style:"display:flex;gap:10px;align-items:center;margin:10px 0 16px;flex-wrap:wrap"},[
+      h("span",{class:"hint"},"Từ:"),selA,h("span",{class:"hint"},"→ Đến:"),selB,
+    ]),
+    h("div",{class:"hint",style:"margin-bottom:12px"},
+      "Click tên brand để mở chi tiết. Dòng tô hồng = thay đổi đáng kể (Δ>0.05). Sắp xếp theo độ thay đổi giảm dần."),
+    h("div",{class:"scroll",style:"max-height:70vh"},table),
+    h("div",{class:"hint",style:"margin-top:14px;font-style:italic"},
+      "Để lưu version mới: khi có nghiên cứu tiếp theo, snapshot FINAL_POS hiện tại sẽ được đóng băng thành 1 entry mới trong COORD_HISTORY trước khi áp giá trị mới — \"Hiện tại\" luôn tự cập nhật."),
+  ]);
+  stage.appendChild(h("div",{class:"pad"},h("div",{class:"layout"},[card,h("div")])));
+}
 function viewRadar(){
   const stage=document.getElementById("stage");
   const metricHint=h("div",{class:"hint",style:"margin-top:10px;font-size:12px;line-height:1.6"},
@@ -1128,12 +1202,13 @@ function viewRadar(){
 }
 
 /* ---------- RENDER ---------- */
-const TABS=[["orbit","🗺 Orbit Map"],["proximity","◎ MateMade Proximity"],["radar","△ Brand Comparison"],["opp","◆ Strategic Opportunity"]];
+const TABS=[["orbit","🗺 Orbit Map"],["proximity","◎ MateMade Proximity"],["radar","△ Brand Comparison"],["opp","◆ Strategic Opportunity"],["history","🕐 Coord History"]];
 function renderTab(){
   const stage=document.getElementById("stage");stage.innerHTML="";detailEl=null;
   if(state.tab==="orbit")buildWorld("orbit");
   else if(state.tab==="opp")buildWorld("opp");
   else if(state.tab==="proximity")buildWorld("proximity");
+  else if(state.tab==="history")viewHistory();
   else viewRadar();
 }
 function renderTabs(){const t=document.getElementById("tabs");t.innerHTML="";
