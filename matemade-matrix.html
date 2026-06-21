@@ -710,9 +710,9 @@ function h(tag,a,k){const e=document.createElement(tag);
   if(k)(Array.isArray(k)?k:[k]).forEach(c=>{if(c==null)return;e.appendChild(typeof c==="string"?document.createTextNode(c):c);});return e;}
 
 /* ---------- STATE ---------- */
-let state={tab:"orbit", sel:null, picks:["matemade","carlyn","standoil"], showImages:true, colorMode:"territory", heatmap:false, lens:"position", countryFilter:new Set(), histA:"v0", histB:"now"};
+let state={tab:"orbit", sel:null, picks:["matemade","carlyn","standoil"], showImages:true, colorMode:"territory", heatmap:false, lens:"position", countryFilter:new Set(), histA:"v0", histB:"now", activeVersion:"now"};
 let view={k:1,tx:0,ty:0}; // world transform
-let worldEl=null, vpEl=null, hudEye=null, hudColor=null, hudHeat=null, curMate=false, lensBarEl=null, countryBarEl=null;
+let worldEl=null, vpEl=null, hudEye=null, hudColor=null, hudHeat=null, curMate=false, lensBarEl=null, countryBarEl=null, versionBarEl=null;
 function setLens(k){state.lens=k;rebuildNodes();const old=lensBarEl;const nb=buildLensBar();if(old)old.replaceWith(nb);refreshLegend();}
 function buildCountryBar(){
   countryBarEl=h("div",{style:"position:absolute;top:10px;left:50%;transform:translateX(-50%);display:flex;gap:4px;flex-wrap:wrap;justify-content:center;align-items:center;background:rgba(20,18,16,0.82);padding:4px 6px;border-radius:999px;z-index:30;max-width:92%;box-shadow:0 2px 12px #0007"},
@@ -732,6 +732,24 @@ function buildCountryBar(){
       onclick:()=>{state.countryFilter.clear();rebuildNodes();}},"✕ Tất cả"),
     ]);
   return countryBarEl;
+}
+function applyVersion(id){
+  state.activeVersion=id;
+  const v=coordVersionsAll().find(x=>x.id===id);
+  if(v)BRANDS.forEach(b=>{const p=v.pos[b.id];if(p){b.x=p[0];b.y=p[1];}});
+  renderTab();
+}
+function buildVersionBar(){
+  const versions=coordVersionsAll();
+  versionBarEl=h("div",{style:"position:absolute;top:50px;left:50%;transform:translateX(-50%);display:flex;gap:4px;flex-wrap:wrap;justify-content:center;align-items:center;background:rgba(20,18,16,0.82);padding:4px 6px;border-radius:999px;z-index:30;max-width:92%;box-shadow:0 2px 12px #0007"},
+    [h("span",{style:"font-size:11px;color:#8a8278;font-weight:700;padding:0 4px"},"🕐"),
+    ...versions.map(v=>{
+      const on=state.activeVersion===v.id;
+      return h("button",{style:"border:1px solid "+(on?"var(--accent)":"var(--line)")+";cursor:pointer;font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap;transition:.15s;background:"+(on?"var(--accent)":"transparent")+";color:"+(on?"#1a1110":"var(--muted)"),
+        title:v.date,onclick:()=>applyVersion(v.id)},v.label);
+    }),
+    ]);
+  return versionBarEl;
 }
 function buildLensBar(){
   lensBarEl=h("div",{style:"position:absolute;top:10px;left:50%;transform:translateX(-50%);display:flex;gap:4px;flex-wrap:wrap;justify-content:center;align-items:center;background:rgba(20,18,16,0.82);padding:5px 7px;border-radius:999px;z-index:30;max-width:92%;box-shadow:0 2px 12px #0007"},
@@ -941,6 +959,7 @@ function buildWorld(mode){
   stage.appendChild(vpEl);stage.appendChild(hud);stage.appendChild(legend);
   // stage.appendChild(buildLensBar()); // lens tạm tắt
   stage.appendChild(buildCountryBar());
+  stage.appendChild(buildVersionBar());
   stage.appendChild(detailPanel());
   requestAnimationFrame(fitView);
 }
