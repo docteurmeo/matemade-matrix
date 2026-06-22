@@ -1,0 +1,22 @@
+{
+  "name": "brand-matrix",
+  "version": "1.0.0",
+  "description": "MateMade brand positioning matrix — automated brand DNA research",
+  "type": "module",
+  "scripts": {
+    "fetch": "node scripts/1-fetch-images.js",
+    "analyze": "node scripts/2-analyze-brands.js",
+    "cluster": "node scripts/3-cluster-brands.js",
+    "visualize": "node scripts/4-visualize.js",
+    "all": "npm run fetch && npm run analyze && npm run cluster && npm run visualize"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.54.0",
+    "axios": "^1.7.2",
+    "cheerio": "^1.0.0",
+    "dotenv": "^16.4.5",
+    "fs-extra": "^11.2.0",
+    "playwright-core": "^1.61.0",
+    "sharp": "^0.33.4"
+  }
+}

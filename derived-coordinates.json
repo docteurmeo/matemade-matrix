@@ -1,1334 +1,540 @@
 {
-  "method": "Derived from AI brand-analysis.json via keyword scoring",
+  "method": "AI-scored from dnaSummary via claude-haiku",
   "axes": {
     "x": "Cute/Sweet/Playful (-1.2) ↔ Cool/Minimal/Polished (+1.2)",
     "y": "Daily/Utility/Value (-1.2) ↔ Statement/Design/Craft (+1.2)"
   },
   "brands": [
     {
+      "id": "juno",
+      "name": "Juno",
+      "x": -0.9,
+      "y": -0.5,
+      "xReason": "Kawaii doll-core charm, K-pop idol fantasy, maximalist playful femininity",
+      "yReason": "Budget-accessible everyday bags, functional utility, social-media-driven trends",
+      "dnaSummary": "Juno is a budget-accessible Vietnamese brand translating K-pop idol fantasy and doll-core femininity into compact, charm-adorned bags for the social-media-native Southeast Asian youth consumer."
+    },
+    {
       "id": "matemade",
       "name": "MateMade",
-      "x": -0.85,
-      "y": -0.05,
-      "rawX": -5.95,
-      "rawY": -0.35,
-      "xTrace": [
-        "gen-z(-0.4)",
-        "charm-heavy(-1)",
-        "sweet(-1)",
-        "expressive(-0.5)",
-        "playful(-0.9)",
-        "bow-core(-1.1)",
-        "sincere-cute(-1)",
-        "price:affordable(-0.05)"
-      ],
-      "yTrace": [
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)",
-        "price:affordable(-0.1)"
-      ]
+      "x": -0.8,
+      "y": -0.1,
+      "xReason": "Coquette-kawaii charm with intentional cuteness, soft Y2K romanticism",
+      "yReason": "Everyday functional accessories with modest emotional craft elevation",
+      "dnaSummary": "MateMade is a Vietnamese coquette-kawaii accessories brand that translates the emotional language of Korean girlhood romanticism into compact, charm-laden silhouettes at democratic price points."
     },
     {
       "id": "sandy-liang",
       "name": "Sandy Liang",
-      "x": -0.61,
-      "y": 0.06,
-      "rawX": -4.3,
-      "rawY": 0.4,
-      "xTrace": [
-        "girlhood(-0.9)",
-        "bow-core(-1.1)",
-        "feminine-maximalist(-0.7)",
-        "girlish(-0.8)",
-        "downtown(+0.5)",
-        "maximalist(-0.6)",
-        "coquette(-0.8)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)",
-        "occasion:evening(+0.45)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "floral-punk",
-      "name": "Floral Punk",
-      "x": -0.38,
-      "y": -0.05,
-      "rawX": -2.65,
-      "rawY": -0.35,
-      "xTrace": [
-        "bold-print(-0.5)",
-        "maximalist(-0.6)",
-        "feminine-punk(-0.3)",
-        "local-statement(-0.3)",
-        "playful(-0.9)",
-        "price:affordable(-0.05)"
-      ],
-      "yTrace": [
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)",
-        "price:affordable(-0.1)"
-      ]
-    },
-    {
-      "id": "saabi",
-      "name": "Saabi",
-      "x": -0.36,
-      "y": -0.21,
-      "rawX": -2.5,
-      "rawY": -1.45,
-      "xTrace": [
-        "cute(-1)",
-        "feminine(-0.15)",
-        "colorful(-0.5)",
-        "accessible-fashion(-0.5)",
-        "accessible(-0.3)",
-        "price:affordable(-0.05)"
-      ],
-      "yTrace": [
-        "accessible-fashion(-0.5)",
-        "accessible(-0.5)",
-        "occasion:everyday(-0.35)",
-        "price:affordable(-0.1)"
-      ]
+      "x": -0.7,
+      "y": 0.5,
+      "xReason": "Cute girlhood nostalgia with downtown ironic self-awareness.",
+      "yReason": "Premium craft execution elevates everyday intimates into statement pieces.",
+      "dnaSummary": "Sandy Liang weaponizes girlhood nostalgia — translating the emotional residue of childhood sleepwear, anime prints, and lace-trimmed innocence into premium ready-to-wear for downtown women who understand the cultural irony and mean it sincerely at the same time."
     },
     {
       "id": "cou-cou",
       "name": "Cou Cou Intimates",
-      "x": -0.29,
-      "y": 0.06,
-      "rawX": -2,
-      "rawY": 0.45,
-      "xTrace": [
-        "soft-feminine(-0.7)",
-        "cotton-candy(-0.8)",
-        "indie-girl(-0.5)"
-      ],
-      "yTrace": [
-        "slow-fashion(+0.7)",
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)"
-      ]
-    },
-    {
-      "id": "by-far",
-      "name": "By Far",
-      "x": -0.19,
-      "y": 0.2,
-      "rawX": -1.35,
-      "rawY": 1.4,
-      "xTrace": [
-        "feminine(-0.15)",
-        "nostalgic(-0.4)",
-        "playful(-0.9)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "sculptural(+1.1)",
-        "occasion:evening(+0.45)",
-        "occasion:everyday(-0.35)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "jacquemus",
-      "name": "Jacquemus",
-      "x": -0.17,
-      "y": 0.41,
-      "rawX": -1.2,
-      "rawY": 2.9,
-      "xTrace": [
-        "playful(-0.9)",
-        "romantic(-0.4)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "statement(+1)",
-        "sculptural(+1.1)",
-        "viral-moment(+0.5)",
-        "occasion:evening(+0.45)",
-        "occasion:everyday(-0.35)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "marimekko",
-      "name": "Marimekko",
-      "x": -0.16,
-      "y": -0.07,
-      "rawX": -1.1,
-      "rawY": -0.5,
-      "xTrace": [
-        "bold-print(-0.5)",
-        "maximalist(-0.6)"
-      ],
-      "yTrace": [
-        "occasion:everyday(-0.35)",
-        "occasion:travel(-0.15)"
-      ]
-    },
-    {
-      "id": "juno",
-      "name": "Juno",
-      "x": -0.15,
-      "y": -0.35,
-      "rawX": -1.05,
-      "rawY": -2.45,
-      "xTrace": [
-        "feminine(-0.15)",
-        "colorful(-0.5)",
-        "accessible(-0.3)",
-        "price:budget(-0.1)"
-      ],
-      "yTrace": [
-        "mass-market(-0.6)",
-        "practical(-0.7)",
-        "accessible(-0.5)",
-        "occasion:everyday(-0.35)",
-        "price:budget(-0.3)"
-      ]
-    },
-    {
-      "id": "vascara",
-      "name": "Vascara",
-      "x": -0.14,
-      "y": -0.23,
-      "rawX": -1,
-      "rawY": -1.6,
-      "xTrace": [
-        "mass-aspiration(-0.1)",
-        "feminine(-0.15)",
-        "fashion-accessible(-0.2)",
-        "accessible(-0.3)",
-        "mainstream(-0.2)",
-        "price:affordable(-0.05)"
-      ],
-      "yTrace": [
-        "mass-aspiration(-0.4)",
-        "accessible(-0.5)",
-        "occasion:office(-0.25)",
-        "occasion:everyday(-0.35)",
-        "price:affordable(-0.1)"
-      ]
-    },
-    {
-      "id": "sezane",
-      "name": "Sézane",
-      "x": -0.14,
-      "y": -0.06,
-      "rawX": -0.95,
-      "rawY": -0.4,
-      "xTrace": [
-        "feminine(-0.15)",
-        "nostalgic(-0.4)",
-        "romantic(-0.4)"
-      ],
-      "yTrace": [
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)",
-        "occasion:travel(-0.15)"
-      ]
-    },
-    {
-      "id": "paloma-wool",
-      "name": "Paloma Wool",
-      "x": -0.13,
-      "y": 0.34,
-      "rawX": -0.9,
-      "rawY": 2.35,
-      "xTrace": [
-        "playful(-0.9)"
-      ],
-      "yTrace": [
-        "indie-artsy(+0.8)",
-        "spanish-craft(+0.7)",
-        "wearable-art(+1.1)",
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)"
-      ]
-    },
-    {
-      "id": "doen",
-      "name": "Dôen",
-      "x": -0.12,
-      "y": -0.01,
-      "rawX": -0.85,
-      "rawY": -0.05,
-      "xTrace": [
-        "feminine(-0.15)",
-        "nostalgic(-0.4)",
-        "romantic(-0.4)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "occasion:weekend(+0.1)",
-        "occasion:everyday(-0.35)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "ader-error",
-      "name": "Ader Error",
-      "x": -0.11,
-      "y": 0.15,
-      "rawX": -0.8,
-      "rawY": 1.05,
-      "xTrace": [
-        "playful(-0.9)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "conceptual(+1.1)",
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "hapas",
-      "name": "Hapas",
-      "x": -0.09,
-      "y": -0.39,
-      "rawX": -0.6,
-      "rawY": -2.7,
-      "xTrace": [
-        "mass-aspiration(-0.1)",
-        "feminine(-0.15)",
-        "accessible(-0.3)",
-        "price:affordable(-0.05)"
-      ],
-      "yTrace": [
-        "mass-aspiration(-0.4)",
-        "accessible(-0.5)",
-        "practical(-0.7)",
-        "ol-image(-0.4)",
-        "occasion:office(-0.25)",
-        "occasion:everyday(-0.35)",
-        "price:affordable(-0.1)"
-      ]
-    },
-    {
-      "id": "chau-fifth",
-      "name": "Châu Fifth",
-      "x": -0.07,
-      "y": -0.14,
-      "rawX": -0.5,
-      "rawY": -0.95,
-      "xTrace": [
-        "accessible(-0.3)",
-        "feminine(-0.15)",
-        "price:affordable(-0.05)"
-      ],
-      "yTrace": [
-        "accessible(-0.5)",
-        "occasion:everyday(-0.35)",
-        "price:affordable(-0.1)"
-      ]
-    },
-    {
-      "id": "staud",
-      "name": "Staud",
-      "x": -0.06,
-      "y": 0.03,
-      "rawX": -0.4,
-      "rawY": 0.2,
-      "xTrace": [
-        "structured(+0.5)",
-        "playful(-0.9)"
-      ],
-      "yTrace": [
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)",
-        "occasion:evening(+0.45)"
-      ]
-    },
-    {
-      "id": "andgather",
-      "name": "Andgather",
-      "x": -0.03,
-      "y": 0.04,
-      "rawX": -0.2,
-      "rawY": 0.25,
-      "xTrace": [
-        "feminine(-0.15)",
-        "price:affordable(-0.05)"
-      ],
-      "yTrace": [
-        "local-craft(+0.6)",
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)",
-        "price:affordable(-0.1)"
-      ]
-    },
-    {
-      "id": "ganni",
-      "name": "Ganni",
-      "x": 0,
-      "y": 0.06,
-      "rawX": 0,
-      "rawY": 0.4,
-      "xTrace": [
-        "scandi-playful(+0.4)",
-        "colorful(-0.5)",
-        "playful(-0.9)",
-        "cool(+0.9)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)",
-        "occasion:evening(+0.45)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "loeffler-randall",
-      "name": "Loeffler Randall",
-      "x": 0,
-      "y": -0.04,
-      "rawX": 0,
-      "rawY": -0.25,
-      "xTrace": [],
-      "yTrace": [
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)"
-      ]
-    },
-    {
-      "id": "kayu",
-      "name": "Kayu",
-      "x": 0,
-      "y": 0.08,
-      "rawX": 0,
-      "rawY": 0.55,
-      "xTrace": [],
-      "yTrace": [
-        "artisan-summer(+0.6)",
-        "occasion:weekend(+0.1)",
-        "occasion:travel(-0.15)"
-      ]
-    },
-    {
-      "id": "cult-gaia",
-      "name": "Cult Gaia",
-      "x": 0,
-      "y": 0.44,
-      "rawX": 0,
-      "rawY": 3.05,
-      "xTrace": [],
-      "yTrace": [
-        "sculptural(+1.1)",
-        "instagram-viral(+0.4)",
-        "statement(+1)",
-        "occasion:evening(+0.45)",
-        "occasion:weekend(+0.1)"
-      ]
-    },
-    {
-      "id": "hunting-season",
-      "name": "Hunting Season",
-      "x": 0.01,
-      "y": 0.54,
-      "rawX": 0.1,
-      "rawY": 3.8,
-      "xTrace": [
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "exotic-materials(+0.9)",
-        "artisan(+0.9)",
-        "unique(+0.7)",
-        "collector-piece(+1)",
-        "occasion:evening(+0.45)",
-        "occasion:everyday(-0.35)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "cesta-collective",
-      "name": "Cesta Collective",
-      "x": 0.01,
-      "y": 0.17,
-      "rawX": 0.1,
-      "rawY": 1.2,
-      "xTrace": [
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "artisan-story(+0.9)",
-        "conscious(+0.5)",
-        "occasion:weekend(+0.1)",
-        "occasion:travel(-0.15)",
-        "occasion:everyday(-0.35)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "jw-anderson",
-      "name": "JW Anderson",
-      "x": 0.01,
-      "y": 0.56,
-      "rawX": 0.1,
-      "rawY": 3.9,
-      "xTrace": [
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "conceptual(+1.1)",
-        "quirky(+0.8)",
-        "british-wit(+0.7)",
-        "conversation-starter(+1)",
-        "occasion:evening(+0.45)",
-        "occasion:everyday(-0.35)",
-        "price:premium(+0.2)"
-      ]
+      "x": -0.6,
+      "y": 0.4,
+      "xReason": "Coquette femininity and vintage nostalgia lean cute; not architectural.",
+      "yReason": "Intentional aesthetic statement elevates beyond basic utility loungewear.",
+      "dnaSummary": "Cou Cou Intimates translates vintage lingerie sensibility and coquette nostalgia into wearable everyday softness — where bedroom dressing becomes a deliberate, culturally fluent aesthetic statement."
     },
     {
       "id": "simone-rocha",
       "name": "Simone Rocha",
-      "x": 0.01,
-      "y": 0.46,
-      "rawX": 0.1,
-      "rawY": 3.2,
-      "xTrace": [
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "dark-romantic(+0.7)",
-        "floral-ornate(+0.7)",
-        "feminine-strong(+0.6)",
-        "editorial(+0.9)",
-        "occasion:evening(+0.45)",
-        "occasion:everyday(-0.35)",
-        "price:premium(+0.2)"
-      ]
+      "x": -0.6,
+      "y": 0.8,
+      "xReason": "Hyper-feminine girlhood iconography leans cute, but subversive irony adds cool restraint.",
+      "yReason": "Conceptual high-low juxtaposition and baroque detailing elevate beyond everyday utility.",
+      "dnaSummary": "Simone Rocha weaponizes girlhood iconography — pearls, crystals, blush — against utilitarian or unexpected substrates to create accessories that are simultaneously tender and transgressive."
     },
     {
-      "id": "bottega-veneta",
-      "name": "Bottega Veneta",
-      "x": 0.02,
-      "y": 0.44,
-      "rawX": 0.15,
-      "rawY": 3.05,
-      "xTrace": [
-        "price:luxury(+0.15)"
-      ],
-      "yTrace": [
-        "intrecciato-craft(+1.1)",
-        "no-logo(+0.6)",
-        "sculptural(+1.1)",
-        "occasion:evening(+0.45)",
-        "occasion:office(-0.25)",
-        "occasion:everyday(-0.35)",
-        "price:luxury(+0.4)"
-      ]
+      "id": "doen",
+      "name": "Dôen",
+      "x": -0.4,
+      "y": 0.5,
+      "xReason": "Vintage-feminine romanticism with California ease, not minimal.",
+      "yReason": "Thoughtful botanical narratives and silhouette craft elevate everyday.",
+      "dnaSummary": "Dôen is California prairie-romanticism distilled — a brand that packages vintage-feminine silhouettes and botanical color stories into effortless resort-to-everyday dressing for the aesthetically literate modern woman."
     },
     {
-      "id": "hender-scheme",
-      "name": "Hender Scheme",
-      "x": 0.06,
-      "y": 0.1,
-      "rawX": 0.4,
-      "rawY": 0.7,
-      "xTrace": [
-        "functional(+0.3)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "japanese-craft(+1)",
-        "functional(-0.8)",
-        "wabi-sabi(+0.9)",
-        "occasion:everyday(-0.35)",
-        "occasion:office(-0.25)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "porter",
-      "name": "Porter (Yoshida)",
-      "x": 0.07,
-      "y": -0.51,
-      "rawX": 0.5,
-      "rawY": -3.55,
-      "xTrace": [
-        "utilitarian(+0.2)",
-        "functional(+0.3)"
-      ],
-      "yTrace": [
-        "functional-excellence(-0.8)",
-        "nylon-craft(-0.3)",
-        "utilitarian(-0.9)",
-        "functional(-0.8)",
-        "occasion:everyday(-0.35)",
-        "occasion:travel(-0.15)",
-        "occasion:office(-0.25)"
-      ]
-    },
-    {
-      "id": "manu-atelier",
-      "name": "Manu Atelier",
-      "x": 0.09,
-      "y": 0.15,
-      "rawX": 0.6,
-      "rawY": 1.05,
-      "xTrace": [
-        "structured(+0.5)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "artisan-craft(+1)",
-        "occasion:office(-0.25)",
-        "occasion:evening(+0.45)",
-        "occasion:everyday(-0.35)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "strathberry",
-      "name": "Strathberry",
-      "x": 0.09,
-      "y": 0.33,
-      "rawX": 0.6,
-      "rawY": 2.3,
-      "xTrace": [
-        "structured(+0.5)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "heritage-craft(+0.9)",
-        "british(+0.4)",
-        "royal-adjacent(+0.6)",
-        "occasion:office(-0.25)",
-        "occasion:evening(+0.45)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "nanushka",
-      "name": "Nanushka",
-      "x": 0.09,
-      "y": 0.24,
-      "rawX": 0.6,
-      "rawY": 1.65,
-      "xTrace": [
-        "contemporary(+0.5)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "sustainable-luxe(+0.6)",
-        "eastern-european(+0.5)",
-        "conscious(+0.5)",
-        "occasion:everyday(-0.35)",
-        "occasion:office(-0.25)",
-        "occasion:evening(+0.45)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "vasic",
-      "name": "Vasic",
-      "x": 0.09,
-      "y": -0.25,
-      "rawX": 0.6,
-      "rawY": -1.75,
-      "xTrace": [
-        "structured(+0.5)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "commuter-chic(-0.5)",
-        "practical(-0.7)",
-        "occasion:office(-0.25)",
-        "occasion:travel(-0.15)",
-        "occasion:everyday(-0.35)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "tod-s",
-      "name": "Tod's",
+      "id": "loeffler-randall",
+      "name": "Loeffler Randall",
       "x": 0.1,
-      "y": 0.04,
-      "rawX": 0.7,
-      "rawY": 0.25,
-      "xTrace": [
-        "classic(+0.6)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "old-money(+0.8)",
-        "occasion:office(-0.25)",
-        "occasion:everyday(-0.35)",
-        "occasion:travel(-0.15)",
-        "price:premium(+0.2)"
-      ]
+      "y": 0.6,
+      "xReason": "Bohemian warmth tempers cool; balanced feminine American ease.",
+      "yReason": "Artisanal suede-and-stud craftsmanship elevates beyond everyday utility.",
+      "dnaSummary": "Loeffler Randall operates at the intersection of American bohemia and understated elegance — delivering suede-and-stud craftsmanship with a resort sensibility that feels handpicked rather than mass-produced."
     },
     {
-      "id": "87mm",
-      "name": "87MM",
-      "x": 0.13,
-      "y": -0.3,
-      "rawX": 0.9,
-      "rawY": -2.1,
-      "xTrace": [
-        "streetwear-adjacent(+0.4)",
-        "functional(+0.3)",
-        "utilitarian(+0.2)"
-      ],
-      "yTrace": [
-        "functional(-0.8)",
-        "utilitarian(-0.9)",
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)",
-        "occasion:travel(-0.15)"
-      ]
+      "id": "kayu",
+      "name": "Kayu",
+      "x": 0.1,
+      "y": 0.6,
+      "xReason": "Minimal natural aesthetic with coastal ease, not cute or ultra-cool.",
+      "yReason": "Handwoven craft and embroidery elevate beyond daily utility basics.",
+      "dnaSummary": "Kayu translates global basket-weaving traditions into resort-ready, embroidery-accented totes that occupy the sweet spot between ethnographic craft authenticity and accessible California coastal ease."
     },
     {
-      "id": "toteme-ref",
-      "name": "Lemaire",
-      "x": 0.13,
-      "y": 0.01,
-      "rawX": 0.9,
-      "rawY": 0.05,
-      "xTrace": [
-        "intellectual(+0.8)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "intellectual(+0.6)",
-        "occasion:office(-0.25)",
-        "occasion:everyday(-0.35)",
-        "occasion:travel(-0.15)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "the-wayward",
-      "name": "The Wayward",
-      "x": 0.14,
-      "y": -0.1,
-      "rawX": 0.95,
-      "rawY": -0.7,
-      "xTrace": [
-        "minimal(+1)",
-        "price:affordable(-0.05)"
-      ],
-      "yTrace": [
-        "occasion:everyday(-0.35)",
-        "occasion:office(-0.25)",
-        "price:affordable(-0.1)"
-      ]
-    },
-    {
-      "id": "arket",
-      "name": "Arket",
-      "x": 0.14,
-      "y": -0.36,
-      "rawX": 0.95,
-      "rawY": -2.5,
-      "xTrace": [
-        "natural-minimal(+0.8)",
-        "utilitarian(+0.2)",
-        "price:affordable(-0.05)"
-      ],
-      "yTrace": [
-        "natural-minimal(-0.2)",
-        "utilitarian(-0.9)",
-        "quality-basics(-0.4)",
-        "earthy(-0.2)",
-        "practical(-0.7)",
-        "conscious(+0.5)",
-        "occasion:everyday(-0.35)",
-        "occasion:travel(-0.15)",
-        "price:affordable(-0.1)"
-      ]
-    },
-    {
-      "id": "celine",
-      "name": "Celine",
-      "x": 0.14,
-      "y": 0.16,
-      "rawX": 0.95,
-      "rawY": 1.15,
-      "xTrace": [
-        "sophisticated(+0.8)",
-        "price:luxury(+0.15)"
-      ],
-      "yTrace": [
-        "luxury-reference(+0.9)",
-        "occasion:office(-0.25)",
-        "occasion:evening(+0.45)",
-        "occasion:everyday(-0.35)",
-        "price:luxury(+0.4)"
-      ]
-    },
-    {
-      "id": "loewe",
-      "name": "Loewe",
-      "x": 0.16,
-      "y": 0.15,
-      "rawX": 1.15,
-      "rawY": 1.05,
-      "xTrace": [
-        "architectural(+1)",
-        "price:luxury(+0.15)"
-      ],
-      "yTrace": [
-        "design-forward(+0.8)",
-        "occasion:evening(+0.45)",
-        "occasion:office(-0.25)",
-        "occasion:everyday(-0.35)",
-        "price:luxury(+0.4)"
-      ]
-    },
-    {
-      "id": "aeta",
-      "name": "Aeta",
-      "x": 0.16,
-      "y": 0.19,
-      "rawX": 1.1,
-      "rawY": 1.3,
-      "xTrace": [
-        "minimal(+1)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "natural-aging(+0.8)",
-        "wabi-sabi(+0.9)",
-        "occasion:everyday(-0.35)",
-        "occasion:office(-0.25)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "boyy",
-      "name": "BOYY",
-      "x": 0.16,
-      "y": 0.01,
-      "rawX": 1.1,
-      "rawY": 0.05,
-      "xTrace": [
-        "architectural(+1)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "occasion:evening(+0.45)",
-        "occasion:office(-0.25)",
-        "occasion:everyday(-0.35)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "danse-lente",
-      "name": "Danse Lente",
-      "x": 0.16,
-      "y": 0.12,
-      "rawX": 1.1,
-      "rawY": 0.85,
-      "xTrace": [
-        "architectural(+1)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "geometric-patchwork(+0.8)",
-        "occasion:everyday(-0.35)",
-        "occasion:office(-0.25)",
-        "occasion:evening(+0.45)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "yuzefi",
-      "name": "Yuzefi",
-      "x": 0.16,
-      "y": 0.46,
-      "rawX": 1.1,
-      "rawY": 3.2,
-      "xTrace": [
-        "architectural(+1)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "sculptural-knot(+0.9)",
-        "editorial(+0.9)",
-        "sculptural(+1.1)",
-        "occasion:evening(+0.45)",
-        "occasion:everyday(-0.35)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "matin-kim",
-      "name": "Matin Kim",
-      "x": 0.17,
-      "y": -0.17,
-      "rawX": 1.2,
-      "rawY": -1.2,
-      "xTrace": [
-        "korean-chic(+0.7)",
-        "structured(+0.5)"
-      ],
-      "yTrace": [
-        "practical(-0.7)",
-        "occasion:office(-0.25)",
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)"
-      ]
-    },
-    {
-      "id": "rejina-pyo",
-      "name": "Rejina Pyo",
+      "id": "hapas",
+      "name": "Hapas",
       "x": 0.2,
-      "y": 0.16,
-      "rawX": 1.4,
-      "rawY": 1.15,
-      "xTrace": [
-        "contemporary(+0.5)",
-        "sophisticated(+0.8)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "sculptural(+1.1)",
-        "occasion:office(-0.25)",
-        "occasion:evening(+0.45)",
-        "occasion:everyday(-0.35)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "flore-paris",
-      "name": "Flore Paris",
-      "x": 0.21,
-      "y": -0.16,
-      "rawX": 1.5,
-      "rawY": -1.1,
-      "xTrace": [
-        "minimal(+1)",
-        "clean(+0.8)",
-        "accessible(-0.3)"
-      ],
-      "yTrace": [
-        "accessible(-0.5)",
-        "occasion:everyday(-0.35)",
-        "occasion:office(-0.25)"
-      ]
-    },
-    {
-      "id": "a-wang",
-      "name": "Alexander Wang",
-      "x": 0.21,
-      "y": 0,
-      "rawX": 1.5,
-      "rawY": 0,
-      "xTrace": [
-        "downtown(+0.5)",
-        "edgy(+0.6)",
-        "sporty(+0.3)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "sporty(-0.4)",
-        "occasion:evening(+0.45)",
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "cuyana",
-      "name": "Cuyana",
-      "x": 0.26,
-      "y": -0.24,
-      "rawX": 1.8,
-      "rawY": -1.65,
-      "xTrace": [
-        "minimal(+1)",
-        "timeless(+0.7)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "fewer-better(-0.3)",
-        "functional-luxury(-0.1)",
-        "practical(-0.7)",
-        "occasion:office(-0.25)",
-        "occasion:everyday(-0.35)",
-        "occasion:travel(-0.15)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "wandler",
-      "name": "Wandler",
-      "x": 0.26,
-      "y": 0.17,
-      "rawX": 1.8,
-      "rawY": 1.2,
-      "xTrace": [
-        "geometric(+0.7)",
-        "architectural(+1)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "editorial(+0.9)",
-        "occasion:everyday(-0.35)",
-        "occasion:evening(+0.45)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "acne-studios",
-      "name": "Acne Studios",
-      "x": 0.26,
-      "y": 0.09,
-      "rawX": 1.8,
-      "rawY": 0.65,
-      "xTrace": [
-        "intellectual(+0.8)",
-        "cool(+0.9)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "intellectual(+0.6)",
-        "occasion:everyday(-0.35)",
-        "occasion:office(-0.25)",
-        "occasion:evening(+0.45)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "andersson-bell",
-      "name": "Andersson Bell",
-      "x": 0.26,
-      "y": -0.15,
-      "rawX": 1.8,
-      "rawY": -1.05,
-      "xTrace": [
-        "korean-contemporary(+0.6)",
-        "functional(+0.3)",
-        "cool(+0.9)"
-      ],
-      "yTrace": [
-        "functional(-0.8)",
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)"
-      ]
-    },
-    {
-      "id": "low-classic",
-      "name": "Low Classic",
-      "x": 0.27,
-      "y": 0.54,
-      "rawX": 1.9,
-      "rawY": 3.8,
-      "xTrace": [
-        "architectural(+1)",
-        "intellectual(+0.8)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "avant-garde(+1)",
-        "deconstructed(+1)",
-        "art-world(+0.9)",
-        "intellectual(+0.6)",
-        "occasion:evening(+0.45)",
-        "occasion:everyday(-0.35)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "the-row",
-      "name": "The Row",
-      "x": 0.28,
-      "y": 0.12,
-      "rawX": 1.95,
-      "rawY": 0.85,
-      "xTrace": [
-        "minimal(+1)",
-        "intellectual(+0.8)",
-        "price:luxury(+0.15)"
-      ],
-      "yTrace": [
-        "intellectual(+0.6)",
-        "occasion:evening(+0.45)",
-        "occasion:office(-0.25)",
-        "occasion:everyday(-0.35)",
-        "price:luxury(+0.4)"
-      ]
-    },
-    {
-      "id": "lak-store",
-      "name": "Lak Store",
-      "x": 0.29,
-      "y": -0.21,
-      "rawX": 2.05,
-      "rawY": -1.5,
-      "xTrace": [
-        "minimal(+1)",
-        "clean(+0.8)",
-        "functional(+0.3)",
-        "price:affordable(-0.05)"
-      ],
-      "yTrace": [
-        "functional(-0.8)",
-        "occasion:everyday(-0.35)",
-        "occasion:office(-0.25)",
-        "price:affordable(-0.1)"
-      ]
-    },
-    {
-      "id": "cos",
-      "name": "COS",
-      "x": 0.29,
-      "y": -0.1,
-      "rawX": 2.05,
-      "rawY": -0.7,
-      "xTrace": [
-        "ultra-minimal(+1.1)",
-        "minimal(+1)",
-        "price:affordable(-0.05)"
-      ],
-      "yTrace": [
-        "functional-first(-0.6)",
-        "no-logo(+0.6)",
-        "occasion:everyday(-0.35)",
-        "occasion:office(-0.25)",
-        "price:affordable(-0.1)"
-      ]
-    },
-    {
-      "id": "savette",
-      "name": "Savette",
-      "x": 0.29,
-      "y": 0.01,
-      "rawX": 2,
-      "rawY": 0.05,
-      "xTrace": [
-        "refined(+0.9)",
-        "architectural(+1)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "occasion:evening(+0.45)",
-        "occasion:office(-0.25)",
-        "occasion:everyday(-0.35)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "other-stories",
-      "name": "& Other Stories",
-      "x": 0.32,
-      "y": -0.27,
-      "rawX": 2.25,
-      "rawY": -1.9,
-      "xTrace": [
-        "editorial-accessible(+0.3)",
-        "minimal(+1)",
-        "structured(+0.5)",
-        "accessible(-0.3)",
-        "clean(+0.8)",
-        "price:affordable(-0.05)"
-      ],
-      "yTrace": [
-        "accessible(-0.5)",
-        "practical(-0.7)",
-        "occasion:everyday(-0.35)",
-        "occasion:office(-0.25)",
-        "price:affordable(-0.1)"
-      ]
-    },
-    {
-      "id": "mansur-gavriel",
-      "name": "Mansur Gavriel",
-      "x": 0.37,
-      "y": -0.04,
-      "rawX": 2.6,
-      "rawY": -0.3,
-      "xTrace": [
-        "new-york-minimal(+0.9)",
-        "pastel-neutral(-0.2)",
-        "understated(+1)",
-        "clean(+0.8)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "occasion:everyday(-0.35)",
-        "occasion:office(-0.25)",
-        "occasion:weekend(+0.1)",
-        "price:premium(+0.2)"
-      ]
-    },
-    {
-      "id": "marhen-j",
-      "name": "Marhen.J",
-      "x": 0.41,
-      "y": -0.19,
-      "rawX": 2.9,
-      "rawY": -1.3,
-      "xTrace": [
-        "architectural-minimal(+1.1)",
-        "structured(+0.5)",
-        "korean-functional(+0.5)",
-        "clean(+0.8)"
-      ],
-      "yTrace": [
-        "practical(-0.7)",
-        "occasion:everyday(-0.35)",
-        "occasion:office(-0.25)"
-      ]
+      "y": -0.2,
+      "xReason": "Korean-cool minimalism balanced with soft-girl accessible femininity",
+      "yReason": "Design-conscious trend pieces prioritizing everyday utility over statement craft",
+      "dnaSummary": "Hapas is a Vietnamese accessible-fashion bag brand translating K-fashion and European micro-bag trends into affordable, aesthetically cohesive pieces for style-driven Southeast Asian Gen Z consumers."
     },
     {
       "id": "stand-oil",
       "name": "Stand Oil",
-      "x": 0.51,
-      "y": -0.04,
-      "rawX": 3.6,
-      "rawY": -0.25,
-      "xTrace": [
-        "korean-cool(+1)",
-        "understated(+1)",
-        "timeless(+0.7)",
-        "cool(+0.9)"
-      ],
-      "yTrace": [
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)"
-      ]
+      "x": 0.3,
+      "y": -0.3,
+      "xReason": "Korean street cool with minimal fuss, balanced toward accessible modern",
+      "yReason": "Everyday practical accessories prioritized over sculptural craft statements",
+      "dnaSummary": "Stand Oil is the Korean street-fashion insider's mid-market answer to expressive everyday accessories — bold in color and attitude, grounded in urban practicality and digital-native cool."
     },
     {
-      "id": "toteme",
-      "name": "Toteme",
-      "x": 0.57,
-      "y": -0.08,
-      "rawX": 4,
-      "rawY": -0.55,
-      "xTrace": [
-        "scandi-minimal(+1)",
-        "architectural(+1)",
-        "quiet-luxury(+1)",
-        "cool(+0.9)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "occasion:office(-0.25)",
-        "occasion:everyday(-0.35)",
-        "occasion:travel(-0.15)",
-        "price:premium(+0.2)"
-      ]
+      "id": "staud",
+      "name": "Staud",
+      "x": 0.3,
+      "y": 0.6,
+      "xReason": "Effortlessly feminine without trying, balanced cool restraint.",
+      "yReason": "Artisan-leaning, tactile craft focus, elevated beyond basics.",
+      "dnaSummary": "Staud is American resort dressing distilled into artisan-leaning, nature-toned pieces that feel effortlessly feminine without trying — accessible romanticism for the aesthetically literate woman."
     },
     {
-      "id": "wood-wood",
-      "name": "Wood Wood",
+      "id": "vascara",
+      "name": "Vascara",
+      "x": 0.4,
+      "y": 0.1,
+      "xReason": "Soft minimalism with feminine polish, Korean-influenced but refined.",
+      "yReason": "Accessible everyday sophistication, standard craft quality, not statement pieces.",
+      "dnaSummary": "Vascara is Vietnam's answer to accessible European resort minimalism — delivering quietly sophisticated, femininity-forward bags and accessories that bridge Korean clean-girl aesthetics with Mediterranean leisure at a democratic price point."
+    },
+    {
+      "id": "andgather",
+      "name": "Andgather",
+      "x": 0.4,
+      "y": 0.1,
+      "xReason": "Cool-leaning minimalism with understated feminine polish",
+      "yReason": "Accessible everyday with subtle designer-informed craft elevation",
+      "dnaSummary": "Andgather is a Vietnamese fast-accessible brand fluent in luxury visual codes — translating designer silhouette, hardware, and color language into democratized, trend-responsive pieces for the aesthetic-aware, budget-conscious consumer."
+    },
+    {
+      "id": "saabi",
+      "name": "Saabi",
+      "x": 0.4,
+      "y": -0.4,
+      "xReason": "Cool minimalist luxury codes, balanced with accessible trend responsiveness",
+      "yReason": "Everyday utility focus with aspirational design interpretation, not craft",
+      "dnaSummary": "Saabi is a Vietnamese fast-fashion accessories label that systematically interprets current luxury and contemporary bag silhouettes for price-sensitive consumers seeking aspirational aesthetics at commodity price points."
+    },
+    {
+      "id": "marimekko",
+      "name": "Marimekko",
+      "x": 0.4,
+      "y": 0.6,
+      "xReason": "Bold graphic patterns lean cool/polished; Nordic minimalism tempers sweetness.",
+      "yReason": "Iconic design craftsmanship elevates everyday utility into intentional statement pieces.",
+      "dnaSummary": "Marimekko is a Finnish design institution that weaponizes bold graphic pattern as a form of Nordic emotional expressionism — where maximalism is not excess but a deeply principled, democratized aesthetic ideology."
+    },
+    {
+      "id": "cesta-collective",
+      "name": "Cesta Collective",
+      "x": 0.4,
+      "y": 1,
+      "xReason": "Minimal Mediterranean aesthetic with charm-forward feminine warmth balance",
+      "yReason": "Handwoven artisan craft luxury, cultural artifacts, collector-grade pieces",
+      "dnaSummary": "Cesta Collective is where Rwandan artisan craftsmanship meets Mediterranean resort fantasy — handwoven bags adorned with gold charms that function as wearable cultural artifacts for the globally conscious luxury consumer."
+    },
+    {
+      "id": "nanushka",
+      "name": "Nanushka",
+      "x": 0.4,
+      "y": 0.8,
+      "xReason": "Post-minimal eclectic with cool restraint, not cute; balanced sophisticated",
+      "yReason": "Sculptural bohemian craft and artisanal maximalism elevate beyond everyday utility",
+      "dnaSummary": "Nanushka translates Eastern European craft consciousness into globally nomadic, sensory-rich dressing — where animal-print silk meets patchwork tweed and sculptural pendant jewelry, creating a distinctive 'cultured wanderer' aesthetic that sits between Marni's artisanal maximalism and Toteme's restrained precision."
+    },
+    {
+      "id": "paloma-wool",
+      "name": "Paloma Wool",
+      "x": 0.4,
+      "y": 0.6,
+      "xReason": "70s bohemian softness tempered by European minimalist cool restraint",
+      "yReason": "Wearable art intention elevated above basic daily utility; thoughtful design craft",
+      "dnaSummary": "Paloma Wool is a Barcelona-born romanticism rooted in 70s European femininity — soft, body-aware, and color-muted — dressing the culturally literate woman who treats clothing as wearable art without pretension."
+    },
+    {
+      "id": "boyy",
+      "name": "BOYY",
+      "x": 0.4,
+      "y": 0.6,
+      "xReason": "Ironic softness and pastels temper cool minimalism with conceptual edge.",
+      "yReason": "Graphic sportswear and feminist conceptual framework elevate beyond everyday utility.",
+      "dnaSummary": "BOYY deploys retro-feminist graphic sportswear in washed pastels to create a knowing, culturally literate casualwear identity that weaponizes softness against conventional luxury codes."
+    },
+    {
+      "id": "cult-gaia",
+      "name": "Cult Gaia",
+      "x": 0.4,
+      "y": 1,
+      "xReason": "Sculptural and architectural but bohemian-sensorial, not austere minimal.",
+      "yReason": "Wearable sculpture with ancient craftsmanship; collector-grade artisanal pieces.",
+      "dnaSummary": "Cult Gaia translates ancient craftsmanship and body-aware architecture into wearable sculpture for the aesthetically literate woman who treats fashion as art."
+    },
+    {
+      "id": "loewe",
+      "name": "Loewe",
+      "x": 0.5,
+      "y": 1.1,
+      "xReason": "Minimal restraint with organic warmth, not cold architectural",
+      "yReason": "Sculptural leather craft elevated to conceptual art object",
+      "dnaSummary": "Loewe operates at the precise intersection of Spanish leather mastery and contemporary conceptual art — transforming utilitarian bag construction into a sculptural manifesto where the knot is not ornament but architecture."
+    },
+    {
+      "id": "matin-kim",
+      "name": "Matin Kim",
       "x": 0.6,
-      "y": -0.16,
-      "rawX": 4.2,
-      "rawY": -1.15,
-      "xTrace": [
-        "copenhagen-street(+0.5)",
-        "sporty-minimal(+0.7)",
-        "clean(+0.8)",
-        "sporty(+0.3)",
-        "understated(+1)",
-        "cool(+0.9)"
-      ],
-      "yTrace": [
-        "sporty-minimal(-0.5)",
-        "sporty(-0.4)",
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)"
-      ]
+      "y": -0.2,
+      "xReason": "Bold branding and cool aesthetic with accessible, wearable streetwear sensibility.",
+      "yReason": "Utility-focused daily wear with subtle design-forward details, not precious craft.",
+      "dnaSummary": "Matin Kim is Seoul's answer to elevated street-utility — a brand that weaponizes washed denim, oversized silhouettes, and bold script branding to create an insider cool accessible enough to wear daily but distinct enough to signal taste."
+    },
+    {
+      "id": "87mm",
+      "name": "87MM",
+      "x": 0.6,
+      "y": 0.1,
+      "xReason": "Korean streetwear cool with minimal logos, restrained aesthetic.",
+      "yReason": "Elevated everyday essentials; fabric quality matters more than craft.",
+      "dnaSummary": "87MM's MMLG line distills Korean streetwear restraint into pigment-dyed, logo-minimal essentials that communicate cultural fluency through fabric quality and tonal discipline rather than graphic statement."
+    },
+    {
+      "id": "andersson-bell",
+      "name": "Andersson Bell",
+      "x": 0.6,
+      "y": 0.4,
+      "xReason": "Cool minimal European restraint with Seoul street intelligence balance",
+      "yReason": "Considered design objects elevate beyond everyday utility baseline",
+      "dnaSummary": "Andersson Bell operates in the space between Seoul street intelligence and European minimalist restraint, producing accessories that feel like considered design objects rather than fashion accessories."
+    },
+    {
+      "id": "rejina-pyo",
+      "name": "Rejina Pyo",
+      "x": 0.6,
+      "y": 0.7,
+      "xReason": "Post-minimal cool with Korean precision, not austere; considered maximalism",
+      "yReason": "Artisanal hardware and sculptural silhouettes elevate beyond daily utility",
+      "dnaSummary": "Rejina Pyo operates at the intersection of Korean design precision and London conceptualism — delivering bold color blocking and artisanal hardware within rigorously relaxed silhouettes for women who dress with curatorial intentionality."
+    },
+    {
+      "id": "danse-lente",
+      "name": "Danse Lente",
+      "x": 0.6,
+      "y": 1,
+      "xReason": "Bauhaus minimalism with playful sculptural gesture, not austere",
+      "yReason": "Architectural craft objects, collectible leather art, designer-intentional",
+      "dnaSummary": "Danse Lente is an architect's handbag brand — marrying Bauhaus structural rigidity with a single disruptive sculptural gesture to create collectible leather objects for the design-conscious creative class."
+    },
+    {
+      "id": "low-classic",
+      "name": "Low Classic",
+      "x": 0.7,
+      "y": 0.4,
+      "xReason": "Minimal, polished, intellectual—cool without coldness or extremity.",
+      "yReason": "Thoughtful construction and craft elevates basics beyond everyday utility.",
+      "dnaSummary": "Low Classic is the sartorial language of the Seoul creative class — achromatic, intellectually minimal, and deliberately unshowy, translating Phoebe Philo-era sensitivity through a distinctly Korean lens of effortless wearability."
     },
     {
       "id": "noirer",
       "name": "Noirer",
-      "x": 0.67,
-      "y": 0.01,
-      "rawX": 4.7,
-      "rawY": 0.1,
-      "xTrace": [
-        "dark-minimal(+1)",
-        "structured(+0.5)",
-        "contemporary(+0.5)",
-        "clean(+0.8)",
-        "cool(+0.9)",
-        "understated(+1)"
-      ],
-      "yTrace": [
-        "occasion:everyday(-0.35)",
-        "occasion:evening(+0.45)"
-      ]
+      "x": 0.7,
+      "y": 0.4,
+      "xReason": "Quiet-cool minimalism with European restraint, less austere than Celine",
+      "yReason": "Thoughtful design & texture craft elevated above basic daily wear",
+      "dnaSummary": "Noirer is a Seoul-based quiet-cool label translating continental European sartorial restraint through a Korean lens — building a wardrobe language of desaturated tones, fluid textures, and unfussy silhouettes for the aesthetically literate."
     },
     {
-      "id": "apc",
-      "name": "A.P.C.",
-      "x": 0.71,
-      "y": 0.04,
-      "rawX": 5,
-      "rawY": 0.3,
-      "xTrace": [
-        "french-minimal(+1)",
-        "clean(+0.8)",
-        "understated(+1)",
-        "classic-with-edge(+0.7)",
-        "intellectual(+0.8)",
-        "classic(+0.6)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "intellectual(+0.6)",
-        "occasion:everyday(-0.35)",
-        "occasion:office(-0.25)",
-        "occasion:weekend(+0.1)",
-        "price:premium(+0.2)"
-      ]
+      "id": "hunting-season",
+      "name": "Hunting Season",
+      "x": 0.7,
+      "y": 0.9,
+      "xReason": "Minimal aesthetic with tropical warmth, anti-logo refined restraint.",
+      "yReason": "Handcrafted artisanal luxury, natural materials, collector-quality construction.",
+      "dnaSummary": "Hunting Season is a New York-based artisanal accessories brand offering handcrafted, natural-material bags that channel effortless resort luxury for the anti-logo, craft-conscious consumer."
+    },
+    {
+      "id": "ganni",
+      "name": "Ganni",
+      "x": 0.7,
+      "y": 0.8,
+      "xReason": "Scandinavian cool minimalism tempered by organic, approachable ease",
+      "yReason": "Sculptural leather craft and design idiosyncrasy elevate beyond daily utility",
+      "dnaSummary": "Ganni bags occupy the precise intersection of Scandinavian utilitarian ease and sculptural leather craft — delivering quiet, tactile luxury with enough design idiosyncrasy to signal taste without announcing wealth."
+    },
+    {
+      "id": "other-stories",
+      "name": "& Other Stories",
+      "x": 0.7,
+      "y": 0.2,
+      "xReason": "Scandinavian minimalism with understated cool, not ultra-polished",
+      "yReason": "Quiet luxury craft but primarily accessible everyday wear",
+      "dnaSummary": "& Other Stories delivers democratized Scandinavian quiet-luxury through hardware-free slouchy silhouettes and grounded natural-toned materials — bridging the aesthetic gap between high-street and true minimalist designer at an accessible price point."
+    },
+    {
+      "id": "ader-error",
+      "name": "Ader Error",
+      "x": 0.7,
+      "y": 0.8,
+      "xReason": "Cool minimal aesthetic with post-internet restraint, not ultra-minimal",
+      "yReason": "Conceptual art collective vision elevates beyond everyday utility",
+      "dnaSummary": "Ader Error operates as a wearable art collective — translating post-internet Korean cool into deconstructed sportswear silhouettes that feel simultaneously academic and street-native, anchored by cold chromatics and deliberate graphic ambiguity."
+    },
+    {
+      "id": "marhen-j",
+      "name": "Marhen.J",
+      "x": 0.8,
+      "y": 0.2,
+      "xReason": "Celine-adjacent minimal language with soft-structured restraint",
+      "yReason": "Elevated everyday bags with considered craft, accessible price point",
+      "dnaSummary": "Marhen.J translates Korean minimalist sensibility into soft-structured, skin-tone-adjacent bags that offer Celine-adjacent visual language at an accessible mid-market price point."
+    },
+    {
+      "id": "jacquemus",
+      "name": "Jacquemus",
+      "x": 0.8,
+      "y": 0.9,
+      "xReason": "Architectural minimal with Parisian cool; restrained but not austere",
+      "yReason": "Sculptural proportion-play elevates handbag to art object; design-forward craft",
+      "dnaSummary": "Jacquemus engineers desire through radical proportion and Mediterranean ease — transforming the handbag into a sculptural object that signals cultural intelligence over conventional luxury."
+    },
+    {
+      "id": "acne-studios",
+      "name": "Acne Studios",
+      "x": 0.8,
+      "y": 0.7,
+      "xReason": "Scandinavian restraint with intellectual minimalism, not maximalist",
+      "yReason": "Deconstructed craft and conceptual design elevate beyond daily utility",
+      "dnaSummary": "Acne Studios translates Stockholm's design-school intellectualism into bags that weaponize restraint — using archival canvas, cognac leather, and deconstructed sport silhouettes to create objects that feel simultaneously institutional and avant-garde."
+    },
+    {
+      "id": "cos",
+      "name": "COS",
+      "x": 0.8,
+      "y": 0.1,
+      "xReason": "Strong minimalist restraint with architectural precision, accessible not ultra-minimal",
+      "yReason": "Elevated everyday basics; functional utility with considered design, not sculptural",
+      "dnaSummary": "COS operates as accessible Scandinavian minimalism — translating architectural restraint and Philo-era sensibility into democratic price points, for consumers who wear their taste quietly."
+    },
+    {
+      "id": "arket",
+      "name": "Arket",
+      "x": 0.8,
+      "y": 0.2,
+      "xReason": "Scandinavian minimalism, architectural structure, quiet luxury restraint.",
+      "yReason": "Considered design and structural integrity elevate beyond pure utility.",
+      "dnaSummary": "Arket bags embody democratic Scandinavian minimalism — rigorously edited, palette-neutral, and structured enough to signal design literacy without crossing into conspicuous consumption."
+    },
+    {
+      "id": "hender-scheme",
+      "name": "Hender Scheme",
+      "x": 0.8,
+      "y": 1,
+      "xReason": "Minimal, restrained, anti-trend Japanese aesthetic with quiet luxury",
+      "yReason": "Sculptural wearable art objects; deconstructivist craft obsession elevated",
+      "dnaSummary": "Hender Scheme translates Japanese artisanal precision and deconstructivist philosophy into bags that function as wearable design objects — utilitarian in purpose, sculptural in execution, and deeply resistant to trend."
+    },
+    {
+      "id": "porter",
+      "name": "Porter (Yoshida)",
+      "x": 0.8,
+      "y": 0.6,
+      "xReason": "Minimal functional design, anti-fashion restraint, quiet polished aesthetic",
+      "yReason": "Japanese monozukuri craft obsession, meticulous construction, elevated utility",
+      "dnaSummary": "Porter by Yoshida is the definitive expression of Japanese monozukuri applied to carry goods — where military utility, craft obsession, and quiet anti-fashion conviction converge into bags that communicate connoisseurship without performance."
+    },
+    {
+      "id": "vasic",
+      "name": "Vasic",
+      "x": 0.8,
+      "y": 0.7,
+      "xReason": "Quiet luxury minimalism with restrained silhouettes, anti-logo ethos",
+      "yReason": "Artisanal craft focus: pebbled leather, knotted hardware, sculptural functionality",
+      "dnaSummary": "Vasic is American quiet-luxury distilled into pebbled leather and knotted hardware — functional sculpture for the anti-logo consumer who measures quality in grain texture and silhouette restraint."
     },
     {
       "id": "second-layer",
       "name": "Second/Layer",
-      "x": 0.77,
-      "y": -0.11,
-      "rawX": 5.4,
-      "rawY": -0.75,
-      "xTrace": [
-        "monochrome-minimal(+1)",
-        "korean-cool(+1)",
-        "sporty-minimal(+0.7)",
-        "clean(+0.8)",
-        "cool(+0.9)",
-        "minimal(+1)"
-      ],
-      "yTrace": [
-        "sporty-minimal(-0.5)",
-        "occasion:everyday(-0.35)",
-        "occasion:weekend(+0.1)"
-      ]
+      "x": 0.8,
+      "y": 0.6,
+      "xReason": "Minimal aesthetic with architectural restraint, not cute; cool-leaning",
+      "yReason": "Elevated craft through deconstruction; everyday base elevated to statement",
+      "dnaSummary": "Second/Layer operates at the intersection of Korean directional fashion and European deconstruction — treating the exposed seam and asymmetric panel as a design language that elevates everyday black basics into architectural propositions."
+    },
+    {
+      "id": "tod-s",
+      "name": "Tod's",
+      "x": 0.8,
+      "y": 0.7,
+      "xReason": "Minimal restraint, no logos, quiet luxury polish",
+      "yReason": "Italian artisanal craft, pebbled leather tactility, heritage",
+      "dnaSummary": "Tod's bags embody Italian bourgeois restraint — pebbled leathers and suedes shaped into quietly confident silhouettes that communicate generational taste and craft longevity over logo spectacle."
+    },
+    {
+      "id": "a-wang",
+      "name": "Alexander Wang",
+      "x": 0.8,
+      "y": 0.4,
+      "xReason": "Downtown cool minimalism with anti-precious restraint, not quite Celine extreme",
+      "yReason": "Luxury materials and considered construction elevate beyond daily utility",
+      "dnaSummary": "Alexander Wang weaponizes restraint — delivering downtown New York grit through luxury materials and anti-logoism logoism, creating bags that perform nonchalance as a power move."
     },
     {
       "id": "polene",
       "name": "Polène",
-      "x": 0.83,
-      "y": -0.18,
-      "rawX": 5.8,
-      "rawY": -1.25,
-      "xTrace": [
-        "parisian-minimal(+1)",
-        "architectural(+1)",
-        "quiet-luxury(+1)",
-        "restrained(+1)",
-        "geometric(+0.7)",
-        "french-minimal(+1)",
-        "price:premium(+0.1)"
-      ],
-      "yTrace": [
-        "practical(-0.7)",
-        "occasion:everyday(-0.35)",
-        "occasion:office(-0.25)",
-        "occasion:travel(-0.15)",
-        "price:premium(+0.2)"
-      ]
+      "x": 0.8,
+      "y": 0.9,
+      "xReason": "Parisian intellectual minimalism, deliberately undecorated, quiet luxury restraint",
+      "yReason": "Handcrafted leather, construction technique as aesthetic, artisanal process visibility",
+      "dnaSummary": "Polène distills Parisian intellectual minimalism into handcrafted leather objects where construction technique IS the aesthetic — merging artisanal process visibility with a deliberately undecorated sensibility that positions craft as the ultimate quiet luxury signal."
+    },
+    {
+      "id": "cuyana",
+      "name": "Cuyana",
+      "x": 0.8,
+      "y": 0.6,
+      "xReason": "Minimal aesthetic with California restraint, no logo spectacle",
+      "yReason": "Craft-focused materials and modular design elevate everyday utility",
+      "dnaSummary": "Cuyana speaks to the post-logo consumer through warm-material minimalism and modular functionality — luxury coded in craft and restraint rather than branding or spectacle."
+    },
+    {
+      "id": "by-far",
+      "name": "By Far",
+      "x": 0.8,
+      "y": 0.6,
+      "xReason": "Modernist restraint with minimal palette, softly architectural forms",
+      "yReason": "Elevated leather craft and considered design, beyond everyday utility",
+      "dnaSummary": "By Far translates Eastern European modernist restraint into softly architectural leather goods and footwear — occupying the precise intersection of accessible intellectual luxury and body-conscious minimalism."
+    },
+    {
+      "id": "manu-atelier",
+      "name": "Manu Atelier",
+      "x": 0.8,
+      "y": 0.9,
+      "xReason": "Minimal, refined form with quiet-luxury restraint and continental polish.",
+      "yReason": "Turkish leather craftsmanship heritage, artisanal material richness, collector-worthy.",
+      "dnaSummary": "Manu Atelier distills Turkish leather craftsmanship into a quietly authoritative accessories language — minimal in form, rich in material, and deliberately legible only to those already fluent in quality."
+    },
+    {
+      "id": "jw-anderson",
+      "name": "JW Anderson",
+      "x": 0.8,
+      "y": 0.9,
+      "xReason": "Minimal restraint with subversive twists; cool intellectual approach.",
+      "yReason": "Conceptual deconstruction elevates everyday pieces to art objects.",
+      "dnaSummary": "JW Anderson is a British institution in quiet rebellion — applying rigorous conceptual deconstruction to heritage outerwear codes, producing pieces that are simultaneously archival and avant-garde, familiar and deeply unsettling in proportion."
+    },
+    {
+      "id": "yuzefi",
+      "name": "Yuzefi",
+      "x": 0.8,
+      "y": 1,
+      "xReason": "Architectural minimalism with restrained branding, European cool aesthetic",
+      "yReason": "Sculptural silhouettes and artisanal craft elevate everyday bags to art objects",
+      "dnaSummary": "Yuzefi operates at the intersection of architectural sculpture and artisanal restraint — producing bags whose formal drama is expressed through silhouette and material rather than branding or hardware."
+    },
+    {
+      "id": "wandler",
+      "name": "Wandler",
+      "x": 0.85,
+      "y": 0.95,
+      "xReason": "Architectural geometry and European restraint, minimal logocentrism, quiet luxury",
+      "yReason": "Material obsession, sculptural artistry, craft-forward design, collectible leather objects",
+      "dnaSummary": "Wandler is a Dutch purveyor of geometry-led, material-obsessed leather goods that occupy the precise intersection of sculptural artistry and everyday wearability — luxury communicated through form and texture rather than heritage or logocentrism."
+    },
+    {
+      "id": "strathberry",
+      "name": "Strathberry",
+      "x": 0.9,
+      "y": 0.6,
+      "xReason": "Architecturally precise, minimal, quiet-luxury restraint approach.",
+      "yReason": "Proprietary bar-closure craft and refined leather goods elevation.",
+      "dnaSummary": "Strathberry is a Scottish-rooted, architecturally precise leather goods brand that occupies the quiet-luxury tier through disciplined geometric silhouettes, a proprietary bar-closure signature, and an earth-toned material philosophy — positioning itself as an attainable alternative to Celine or Polène for the anti-logo professional woman."
+    },
+    {
+      "id": "savette",
+      "name": "Savette",
+      "x": 0.9,
+      "y": 1,
+      "xReason": "Architectural-minimal aesthetic with quiet-luxury restraint, Parisian modernist sensibility.",
+      "yReason": "Sculptural design objects with artisanal craft and construction density focus.",
+      "dnaSummary": "Savette operates at the intersection of functional architecture and artisanal craft — producing bags that read as resolved design objects rather than fashion accessories, for a customer who measures luxury in construction density and conceptual coherence."
+    },
+    {
+      "id": "mansur-gavriel",
+      "name": "Mansur Gavriel",
+      "x": 0.9,
+      "y": 0.6,
+      "xReason": "Architectural minimalism, logo-free restraint, New York cool aesthetic",
+      "yReason": "Material honesty, structured craft, elevated everyday but not sculptural art",
+      "dnaSummary": "Mansur Gavriel distills American minimalism to its moral core — structured, logo-free, material-honest bags for the anti-status consumer who communicates sophistication through deliberate restraint."
+    },
+    {
+      "id": "apc",
+      "name": "A.P.C.",
+      "x": 0.9,
+      "y": 0.2,
+      "xReason": "Rigorously minimal, intellectual restraint, Parisian quiet luxury aesthetic",
+      "yReason": "Elevated everyday basics with considered craft, not sculptural but intentional",
+      "dnaSummary": "A.P.C. distills Parisian bourgeois pragmatism into rigorously unfussy garments — clothing for people who find virtue in subtraction and permanence over novelty."
+    },
+    {
+      "id": "bottega-veneta",
+      "name": "Bottega Veneta",
+      "x": 0.9,
+      "y": 1,
+      "xReason": "Minimal restraint, logoless design, architectural material focus throughout",
+      "yReason": "Intrecciato signature craft, sculptural bags, collector-grade luxury pieces",
+      "dnaSummary": "Bottega Veneta is the definitive expression of logoless Italian craft-luxury — where intrecciato weave replaces the monogram and material mastery speaks louder than branding, appealing to the fashion-literate who equate visibility with vulgarity."
+    },
+    {
+      "id": "toteme-ref",
+      "name": "Lemaire",
+      "x": 0.95,
+      "y": 0.85,
+      "xReason": "Intellectual restraint, quiet luxury, minimal trend-aversion, cool poised",
+      "yReason": "Archaeologically-crafted objects, material integrity, artisanal precision, elevated utilitarian",
+      "dnaSummary": "Lemaire translates French intellectual restraint into objects that feel archaeologically discovered rather than designed — utilitarian forms elevated through material integrity, craft precision, and a studied avoidance of trend."
+    },
+    {
+      "id": "toteme",
+      "name": "Toteme",
+      "x": 1,
+      "y": 0.6,
+      "xReason": "Scandinavian minimalism, tonal purity, anti-logo restraint philosophy",
+      "yReason": "Precision cutting and material integrity elevate beyond everyday utility",
+      "dnaSummary": "Toteme is the definitive expression of post-logo Scandinavian quiet luxury — a brand built on the radical proposition that precision of cut, tonal purity, and material integrity are the only ornament a confident woman needs."
+    },
+    {
+      "id": "celine",
+      "name": "Celine",
+      "x": 1.1,
+      "y": 0.4,
+      "xReason": "Ultra-minimal aesthetic, architectural silhouettes, logomania rejection.",
+      "yReason": "Luxury craft in materials and precision tailoring, elevated beyond basic.",
+      "dnaSummary": "Celine embodies Parisian intellectual luxury — a philosophy of maximum sophistication through minimum gesture, where silhouette precision and material integrity speak louder than logomania."
+    },
+    {
+      "id": "the-row",
+      "name": "The Row",
+      "x": 1.15,
+      "y": 0.4,
+      "xReason": "Ultra-minimal architectural restraint, anti-fashion, post-logomania ethos",
+      "yReason": "Engineered utilitarian objects with refined craft, elevated beyond daily",
+      "dnaSummary": "The Row produces anti-fashion objects of pure utilitarian beauty — bags engineered to communicate that their owner has transcended the need to communicate anything at all."
     }
   ]
 }

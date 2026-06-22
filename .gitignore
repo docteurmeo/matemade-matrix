@@ -3,3 +3,5 @@ archive/brand-matrix-intl-scraper/node_modules/
 archive/brand-matrix-intl-scraper/.env
 archive/brand-matrix-intl-scraper/data/images/
 archive/brand-matrix-intl-scraper/output/
+.claude/
+logs/

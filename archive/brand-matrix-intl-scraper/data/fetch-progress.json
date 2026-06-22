@@ -1,0 +1,270 @@
+{
+  "matemade": {
+    "count": 4,
+    "method": "browser-website"
+  },
+  "hapas": {
+    "count": 4,
+    "method": "browser-website"
+  },
+  "vascara": {
+    "count": 4,
+    "method": "browser-website"
+  },
+  "juno": {
+    "count": 4,
+    "method": "intercept"
+  },
+  "lak-store": {
+    "count": 0,
+    "method": "failed"
+  },
+  "the-wayward": {
+    "count": 0,
+    "method": "failed"
+  },
+  "andgather": {
+    "count": 4,
+    "method": "lyst"
+  },
+  "saabi": {
+    "count": 4,
+    "method": "lyst"
+  },
+  "stand-oil": {
+    "count": 4,
+    "method": "musinsa"
+  },
+  "matin-kim": {
+    "count": 4,
+    "method": "musinsa"
+  },
+  "marhen-j": {
+    "count": 4,
+    "method": "intercept"
+  },
+  "87mm": {
+    "count": 4,
+    "method": "intercept"
+  },
+  "low-classic": {
+    "count": 4,
+    "method": "browser-website"
+  },
+  "noirer": {
+    "count": 4,
+    "method": "intercept"
+  },
+  "ader-error": {
+    "count": 4,
+    "method": "browser-website"
+  },
+  "polene": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "mansur-gavriel": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "apc": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "toteme": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "cuyana": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "wandler": {
+    "count": 4,
+    "method": "lyst"
+  },
+  "by-far": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "staud": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "jacquemus": {
+    "count": 4,
+    "method": "lyst"
+  },
+  "manu-atelier": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "strathberry": {
+    "count": 4,
+    "method": "browser-website"
+  },
+  "hunting-season": {
+    "count": 4,
+    "method": "lyst"
+  },
+  "cesta-collective": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "sezane": {
+    "count": 0,
+    "method": "failed"
+  },
+  "ganni": {
+    "count": 4,
+    "method": "browser-website"
+  },
+  "nanushka": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "acne-studios": {
+    "count": 4,
+    "method": "html"
+  },
+  "other-stories": {
+    "count": 4,
+    "method": "lyst"
+  },
+  "cos": {
+    "count": 4,
+    "method": "lyst"
+  },
+  "arket": {
+    "count": 4,
+    "method": "browser-website"
+  },
+  "doen": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "jw-anderson": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "simone-rocha": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "loewe": {
+    "count": 4,
+    "method": "intercept"
+  },
+  "celine": {
+    "count": 4,
+    "method": "browser-website"
+  },
+  "the-row": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "toteme-ref": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "bottega-veneta": {
+    "count": 4,
+    "method": "html"
+  },
+  "hender-scheme": {
+    "count": 4,
+    "method": "lyst"
+  },
+  "aeta": {
+    "count": 0,
+    "method": "failed"
+  },
+  "porter": {
+    "count": 4,
+    "method": "lyst"
+  },
+  "sandy-liang": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "rejina-pyo": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "paloma-wool": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "andersson-bell": {
+    "count": 4,
+    "method": "musinsa"
+  },
+  "marimekko": {
+    "count": 4,
+    "method": "browser-website"
+  },
+  "vasic": {
+    "count": 4,
+    "method": "lyst"
+  },
+  "loeffler-randall": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "second-layer": {
+    "count": 4,
+    "method": "musinsa"
+  },
+  "tod-s": {
+    "count": 4,
+    "method": "lyst"
+  },
+  "boyy": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "flore-paris": {
+    "count": 0,
+    "method": "failed"
+  },
+  "kayu": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "danse-lente": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "savette": {
+    "count": 4,
+    "method": "intercept"
+  },
+  "a-wang": {
+    "count": 4,
+    "method": "lyst"
+  },
+  "floral-punk": {
+    "count": 0,
+    "method": "failed"
+  },
+  "chau-fifth": {
+    "count": 0,
+    "method": "failed"
+  },
+  "cou-cou": {
+    "count": 4,
+    "method": "lyst"
+  },
+  "yuzefi": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "cult-gaia": {
+    "count": 4,
+    "method": "shopify"
+  },
+  "wood-wood": {
+    "count": 4,
+    "method": "lyst"
+  }
+}

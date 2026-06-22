@@ -1,0 +1,591 @@
+{
+  "aeta": {
+    "slug": "aeta",
+    "dnaSummary": "A minimalist, design-forward contemporary brand that crafts thoughtfully constructed bags and accessories for culturally aware consumers who value understated quality and functional elegance.",
+    "aestheticStyle": [
+      "minimalist",
+      "architectural",
+      "monochromatic",
+      "refined craft"
+    ],
+    "occasionFit": [
+      "everyday",
+      "office",
+      "weekend",
+      "travel"
+    ],
+    "pricePerception": "premium",
+    "x": 0.9,
+    "y": 0.7,
+    "xReason": "Minimalist architectural aesthetic with refined monochromatic restraint",
+    "yReason": "Thoughtfully constructed craft pieces valued for design intentionality"
+  },
+  "camelia": {
+    "slug": "camelia",
+    "dnaSummary": "A contemporary Vietnamese accessories brand that democratizes minimalist, textured design for aspirational young professionals seeking quality craftsmanship at accessible price points.",
+    "aestheticStyle": [
+      "Modern minimalism",
+      "Quilted textures",
+      "Soft color palette",
+      "Functional design"
+    ],
+    "occasionFit": [
+      "everyday",
+      "office",
+      "weekend",
+      "travel"
+    ],
+    "pricePerception": "affordable",
+    "x": 0.6,
+    "y": 0.3,
+    "xReason": "Minimalist aesthetic with polished restraint, not playful",
+    "yReason": "Textured craftsmanship elevates beyond utility despite accessible pricing"
+  },
+  "carlyn": {
+    "slug": "carlyn",
+    "dnaSummary": "Carlyn is a contemporary Korean accessories brand that blends playful, textured quilted bags with minimalist silhouettes, appealing to fashion-forward Gen Z consumers seeking Instagram-worthy statement pieces at accessible price points.",
+    "aestheticStyle": [
+      "Quilted textures",
+      "Soft minimalism",
+      "Y2K-influenced",
+      "Playful contemporary"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "office"
+    ],
+    "pricePerception": "affordable",
+    "x": 0.1,
+    "y": 0.6,
+    "xReason": "Soft minimalism with playful quilted textures, balanced contemporary",
+    "yReason": "Instagram-worthy statement pieces with design focus, accessible luxury"
+  },
+  "chau-fifth": {
+    "slug": "chau-fifth",
+    "dnaSummary": "Chaufifth is a contemporary Vietnamese accessories brand that signals playful sophistication and creative individuality through whimsical, texture-rich handbags and footwear for style-conscious Gen-Z and millennial consumers.",
+    "aestheticStyle": [
+      "maximalist",
+      "playful",
+      "textured",
+      "feminine"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "evening"
+    ],
+    "pricePerception": "mid-range",
+    "x": 0.5,
+    "y": 0.8,
+    "xReason": "Playful aesthetic with polished execution, accessible sophistication",
+    "yReason": "Statement textures and creative design elevate beyond utility"
+  },
+  "floral-punk": {
+    "slug": "floral-punk",
+    "dnaSummary": "FLORAL PUNK is a contemporary accessories brand that blends minimalist sophistication with subtle edgy details, appealing to style-conscious urban professionals who want functional luxury without overt branding.",
+    "aestheticStyle": [
+      "minimalist-luxe",
+      "urban-refined",
+      "modern-utility",
+      "understated-edge"
+    ],
+    "occasionFit": [
+      "everyday",
+      "office",
+      "weekend",
+      "travel"
+    ],
+    "pricePerception": "premium",
+    "x": 0.7,
+    "y": 0.5,
+    "xReason": "Minimalist-luxe sophistication with restrained, polished aesthetic",
+    "yReason": "Functional luxury accessories with thoughtful design craft"
+  },
+  "hapas": {
+    "slug": "hapas",
+    "dnaSummary": "HAPAS is a contemporary Vietnamese accessories brand that positions itself as an accessible luxury label, targeting style-conscious women who seek elevated everyday pieces with refined aesthetics and thoughtful craftsmanship.",
+    "aestheticStyle": [
+      "minimalist elegance",
+      "soft femininity",
+      "contemporary sophistication",
+      "pastel-forward colorway"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "office",
+      "evening"
+    ],
+    "pricePerception": "mid-range",
+    "x": 0.2,
+    "y": 0.1,
+    "xReason": "Minimalist elegance with soft femininity, balanced accessible sophistication",
+    "yReason": "Refined everyday craftsmanship elevates utility with thoughtful design details"
+  },
+  "jelly-bunny": {
+    "slug": "jelly-bunny",
+    "dnaSummary": "A playful, youth-oriented Korean accessories brand that blends cute character aesthetics with trendy functionality, targeting Gen-Z consumers seeking Instagram-worthy, collectible pieces.",
+    "aestheticStyle": [
+      "cute kawaii",
+      "Y2K nostalgia",
+      "pastel minimalism",
+      "character-driven"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "travel"
+    ],
+    "pricePerception": "affordable",
+    "x": -0.7,
+    "y": 0.3,
+    "xReason": "Playful character aesthetics with cute kawaii DNA, balanced accessible appeal",
+    "yReason": "Collectible Instagram-worthy pieces elevate beyond pure utility, design-forward trendy"
+  },
+  "juno": {
+    "slug": "juno",
+    "dnaSummary": "A contemporary K-beauty/fashion brand targeting Gen Z and young millennials with playful, Instagram-native campaigns that blend minimalist aesthetics with whimsical styling and aspirational lifestyle positioning.",
+    "aestheticStyle": [
+      "minimalist-chic",
+      "pastel-dreamy",
+      "playful-editorial",
+      "Y2K-contemporary"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "travel"
+    ],
+    "pricePerception": "affordable",
+    "x": 0.1,
+    "y": 0.3,
+    "xReason": "Minimalist-chic base with playful whimsy, balanced accessibility",
+    "yReason": "Editorial styling elevates everyday wear beyond pure utility"
+  },
+  "karatta": {
+    "slug": "karatta",
+    "dnaSummary": "ARATTA is a contemporary Vietnamese accessories brand that signals minimalist sophistication and effortless everyday elegance, appealing to young professionals and design-conscious consumers seeking quality basics with understated charm.",
+    "aestheticStyle": [
+      "minimalist",
+      "soft femininity",
+      "playful minimalism",
+      "contemporary Asian design"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "office",
+      "travel"
+    ],
+    "pricePerception": "mid-range",
+    "x": 0.35,
+    "y": 0.4,
+    "xReason": "Minimalist sophistication with subtle playful touches, not austere",
+    "yReason": "Elevated everyday basics with design intention, not pure utility"
+  },
+  "lesac": {
+    "slug": "lesac",
+    "dnaSummary": "LESAC is a contemporary Vietnamese accessories brand that signals modern minimalism and playful sophistication, appealing to style-conscious Gen Z and millennial urbanites seeking versatile, Instagram-worthy bags.",
+    "aestheticStyle": [
+      "minimalist-modern",
+      "playful-minimalism",
+      "clean-lines",
+      "color-blocking"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "office"
+    ],
+    "pricePerception": "affordable",
+    "x": 0.5,
+    "y": 0.3,
+    "xReason": "Clean minimalism with playful color-blocking, not overly cute",
+    "yReason": "Instagram-worthy design details elevate beyond pure utility"
+  },
+  "lyn": {
+    "slug": "lyn",
+    "dnaSummary": "LYN is a contemporary Korean accessories brand that democratizes luxury-inspired handbags and leather goods for fashion-forward millennials and Gen Z consumers seeking designer aesthetics at accessible price points.",
+    "aestheticStyle": [
+      "Modern minimalist",
+      "Playful feminine",
+      "Trend-responsive",
+      "Korean contemporary"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "office",
+      "evening"
+    ],
+    "pricePerception": "affordable",
+    "x": 0.3,
+    "y": 0.4,
+    "xReason": "Minimalist modern Korean aesthetic with subtle playful feminine touches",
+    "yReason": "Trend-responsive design-forward pieces beyond basic utility carry"
+  },
+  "marge-sherwood": {
+    "slug": "marge-sherwood",
+    "dnaSummary": "Marge Sherwood is a contemporary British accessories brand that crafts bold, sculptural leather bags with playful design details, appealing to fashion-forward consumers who value craftsmanship and individuality over logomania.",
+    "aestheticStyle": [
+      "maximalist",
+      "sculptural",
+      "playful-luxe",
+      "British-contemporary"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "evening"
+    ],
+    "pricePerception": "premium",
+    "x": 0.6,
+    "y": 0.85,
+    "xReason": "Playful details balance minimalist sculptural leather construction",
+    "yReason": "Handcrafted artisanal bags elevated to wearable design statement"
+  },
+  "matemade": {
+    "slug": "matemade",
+    "dnaSummary": "A contemporary Korean accessories brand that blends playful romanticism with minimalist design, targeting Gen Z and millennial consumers seeking approachable luxury through cute, heart-motif pieces.",
+    "aestheticStyle": [
+      "cute minimalism",
+      "romantic playfulness",
+      "pastel femininity",
+      "contemporary K-beauty"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend"
+    ],
+    "pricePerception": "affordable",
+    "x": -0.7,
+    "y": 0.3,
+    "xReason": "Playful romantic aesthetic with cute heart motifs, minimal restraint",
+    "yReason": "Thoughtful contemporary design elevates everyday accessories beyond pure utility"
+  },
+  "minitmute": {
+    "slug": "minitmute",
+    "dnaSummary": "Minimute is a contemporary accessories brand targeting Gen-Z and young millennials with playful, versatile mini bags and pouches that balance minimalist design with vibrant color accents and casual luxury appeal.",
+    "aestheticStyle": [
+      "minimalist-with-attitude",
+      "color-blocking",
+      "playful-contemporary",
+      "understated-luxury"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "office"
+    ],
+    "pricePerception": "affordable",
+    "x": 0.3,
+    "y": 0.4,
+    "xReason": "Minimalist foundation with playful color-blocking attitude",
+    "yReason": "Thoughtful design-forward accessories beyond basic utility"
+  },
+  "mossdoom": {
+    "slug": "mossdoom",
+    "dnaSummary": "MOSSDOOM is an accessible contemporary accessories brand that blends minimalist design with playful functionality, targeting style-conscious Gen Z and millennial consumers seeking quality basics with personality.",
+    "aestheticStyle": [
+      "minimalist modern",
+      "soft textures",
+      "earthy neutrals",
+      "functional fashion"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "office",
+      "travel"
+    ],
+    "pricePerception": "affordable",
+    "x": 0.3,
+    "y": 0.2,
+    "xReason": "Minimalist modern aesthetic with subtle playful functional touches",
+    "yReason": "Quality basics with design personality, accessible everyday statement pieces"
+  },
+  "ngaos": {
+    "slug": "ngaos",
+    "dnaSummary": "An ultra-feminine Vietnamese contemporary accessories brand targeting Gen-Z and millennial women who embrace maximalist pink aesthetics, cottagecore sensibilities, and aspirational luxury through quilted bags and coordinated lifestyle products.",
+    "aestheticStyle": [
+      "cottagecore-maximalist",
+      "pink-romantic",
+      "quilted-textured",
+      "fairy-tale aesthetic"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "evening"
+    ],
+    "pricePerception": "affordable",
+    "x": -0.5,
+    "y": 0.9,
+    "xReason": "Maximalist pink romanticism with coquette charm, not minimal",
+    "yReason": "Sculptural quilted design craft elevates beyond daily utility"
+  },
+  "osoi": {
+    "slug": "osoi",
+    "dnaSummary": "OSOI is a contemporary Italian accessories brand that crafts understated, sculptural handbags for discerning minimalists who appreciate quality craftsmanship and timeless design over trend-driven aesthetics.",
+    "aestheticStyle": [
+      "sculptural minimalism",
+      "tactile leather",
+      "architectural silhouettes",
+      "modern restraint"
+    ],
+    "occasionFit": [
+      "everyday",
+      "office",
+      "weekend"
+    ],
+    "pricePerception": "premium",
+    "x": 1,
+    "y": 0.8,
+    "xReason": "Architectural minimalism, restrained aesthetic, Celine-adjacent cool",
+    "yReason": "Sculptural handbags, premium craftsmanship, curated design objects"
+  },
+  "oui": {
+    "slug": "oui",
+    "dnaSummary": "Oui the brand is a Vietnamese contemporary accessories label that signals intentional minimalism and sustainable craftsmanship, appealing to digitally-native Gen Z consumers seeking meaningful, locally-made pieces.",
+    "aestheticStyle": [
+      "minimalist",
+      "earthy-tones",
+      "understated-luxury",
+      "artisanal"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "office"
+    ],
+    "pricePerception": "affordable",
+    "x": 0.7,
+    "y": 0.6,
+    "xReason": "Minimalist aesthetic with understated luxury, polished restraint",
+    "yReason": "Intentional craftsmanship and sustainable design elevate beyond utility"
+  },
+  "pipatchara": {
+    "slug": "pipatchara",
+    "dnaSummary": "PIPATCHARA is a contemporary luxury accessories brand specializing in sculptural, textured handbags and statement pieces that signal sophisticated taste and artistic sensibility to discerning fashion-forward consumers.",
+    "aestheticStyle": [
+      "Sculptural maximalism",
+      "Textured luxury",
+      "Artistic craftsmanship",
+      "Contemporary glamour"
+    ],
+    "occasionFit": [
+      "evening",
+      "weekend",
+      "office"
+    ],
+    "pricePerception": "premium",
+    "x": 0.7,
+    "y": 1,
+    "xReason": "Sophisticated, polished aesthetic with minimal cuteness, architectural handbag forms",
+    "yReason": "Sculptural art objects, premium craftsmanship, statement collector pieces, artistic vision"
+  },
+  "saigon-swagger": {
+    "slug": "saigon-swagger",
+    "dnaSummary": "SGS is a contemporary Vietnamese accessories brand that blends minimalist design with playful utility, targeting young urban professionals who value functional sophistication with subtle personality.",
+    "aestheticStyle": [
+      "minimalist modernism",
+      "utility-forward",
+      "clean geometry",
+      "subtle maximalism"
+    ],
+    "occasionFit": [
+      "everyday",
+      "office",
+      "weekend",
+      "travel"
+    ],
+    "pricePerception": "mid-range",
+    "x": 0.6,
+    "y": 0.3,
+    "xReason": "Minimalist modernism with clean geometry, subtle personality touch",
+    "yReason": "Functional sophistication for everyday use with design intentionality"
+  },
+  "samantha-vega": {
+    "slug": "samantha-vega",
+    "dnaSummary": "Samantha Thavasa is a Japanese contemporary accessories brand that signals refined femininity and accessible luxury through romantic, pastel-hued handbags and charm pieces favored by style-conscious young women seeking elevated everyday elegance.",
+    "aestheticStyle": [
+      "romantic minimalism",
+      "pastel femininity",
+      "Japanese sophistication",
+      "modern elegance"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "office"
+    ],
+    "pricePerception": "premium",
+    "x": 0.3,
+    "y": 0.4,
+    "xReason": "Refined femininity with minimal embellishment, polished Japanese aesthetic",
+    "yReason": "Elevated everyday accessories with thoughtful design craft and quality"
+  },
+  "spoiled": {
+    "slug": "spoiled",
+    "dnaSummary": "Spoiled Made is a contemporary luxury accessories brand targeting Gen-Z and millennial consumers who prioritize bold, statement-making bags with playful branding and croc-textured finishes across multiple colorways.",
+    "aestheticStyle": [
+      "maximalist",
+      "playful-luxury",
+      "y2k-contemporary",
+      "croc-textured"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "evening"
+    ],
+    "pricePerception": "mid-range",
+    "x": -0.3,
+    "y": 0.4,
+    "xReason": "Playful branding and y2k charm with modern luxury polish",
+    "yReason": "Statement bags with bold croc texture elevate everyday utility"
+  },
+  "stand-oil": {
+    "slug": "stand-oil",
+    "dnaSummary": "A Gen-Z-native contemporary accessories brand emphasizing playful, sustainable minimalism through slouchy silhouettes and pastel colorways, carried by style-conscious young women seeking affordable luxury alternatives.",
+    "aestheticStyle": [
+      "minimalist",
+      "playful",
+      "slouchy",
+      "pastel-forward"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "travel"
+    ],
+    "pricePerception": "affordable",
+    "x": 0.35,
+    "y": -0.1,
+    "xReason": "Minimal aesthetic with playful slouchy silhouettes, not overly cute",
+    "yReason": "Everyday accessible accessories, utility-focused with design intention"
+  },
+  "ther-gab": {
+    "slug": "ther-gab",
+    "dnaSummary": "A contemporary Korean accessories brand that democratizes minimalist luxury through sculptural, slouchy bags and lifestyle pieces that appeal to fashion-forward Gen Z and millennials seeking understated sophistication.",
+    "aestheticStyle": [
+      "minimalist",
+      "sculptural",
+      "soft-luxury",
+      "editorial"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "evening",
+      "travel"
+    ],
+    "pricePerception": "premium",
+    "x": 0.8,
+    "y": 0.6,
+    "xReason": "Minimalist, sculptural aesthetic with understated cool sophistication",
+    "yReason": "Premium soft-luxury design pieces with editorial, artistic intention"
+  },
+  "toutou": {
+    "slug": "toutou",
+    "dnaSummary": "TOUTOU is a playful, collectible accessories brand targeting Gen-Z and millennials who value quirky character-driven design and Instagram-worthy statement pieces over minimalist sophistication.",
+    "aestheticStyle": [
+      "kawaii-inspired",
+      "whimsical",
+      "maximalist",
+      "nostalgic-playful"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend"
+    ],
+    "pricePerception": "affordable",
+    "x": -1.1,
+    "y": -0.2,
+    "xReason": "Kawaii-inspired, whimsical, character-driven design philosophy",
+    "yReason": "Affordable everyday accessories with playful utility focus"
+  },
+  "vanwalk": {
+    "slug": "vanwalk",
+    "dnaSummary": "Vanwalk is a Gen-Z–focused Korean accessories brand that blends playful, nostalgic Y2K aesthetics with functional everyday bags, positioned as an accessible alternative to premium lifestyle brands.",
+    "aestheticStyle": [
+      "Y2K-inspired",
+      "kawaii/cute",
+      "preppy-casual",
+      "pastel & patterned"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "travel"
+    ],
+    "pricePerception": "affordable",
+    "x": -0.6,
+    "y": 0.1,
+    "xReason": "Y2K kawaii playful aesthetic with cute pastels, not minimal",
+    "yReason": "Functional everyday bags with design personality, accessible standard"
+  },
+  "vascara": {
+    "slug": "vascara",
+    "dnaSummary": "Vascara is a contemporary South Korean accessories brand that delivers polished, vacation-ready lifestyle pieces for aspirational young professionals seeking European-inflected sophistication at accessible price points.",
+    "aestheticStyle": [
+      "coastal minimalism",
+      "contemporary elegant",
+      "resort-ready",
+      "clean modernism"
+    ],
+    "occasionFit": [
+      "weekend",
+      "travel",
+      "everyday",
+      "evening"
+    ],
+    "pricePerception": "affordable",
+    "x": 0.7,
+    "y": 0.3,
+    "xReason": "Polish and minimalism with European sophistication, minimal playfulness",
+    "yReason": "Design-focused accessories with statement pieces, above daily utility"
+  },
+  "vunque": {
+    "slug": "vunque",
+    "dnaSummary": "Luxury Italian heritage brand (Anya Hindmarch) known for sculptural, architectural handbags with distinctive hardware and playful sophistication, carried by design-conscious professionals and fashion-forward women seeking investment pieces.",
+    "aestheticStyle": [
+      "architectural",
+      "minimalist-luxury",
+      "sculptural",
+      "contemporary-classic"
+    ],
+    "occasionFit": [
+      "everyday",
+      "office",
+      "evening",
+      "weekend"
+    ],
+    "pricePerception": "luxury",
+    "x": 0.8,
+    "y": 0.9,
+    "xReason": "Architectural minimalism with polished luxury restraint, not playful",
+    "yReason": "Sculptural design craftsmanship; investment piece collector appeal"
+  },
+  "yuumy": {
+    "slug": "yuumy",
+    "dnaSummary": "YUUMY is a Vietnamese contemporary accessories brand that signals modern femininity and accessible elegance, targeting style-conscious young women seeking quality bags and lifestyle products at mainstream price points.",
+    "aestheticStyle": [
+      "minimalist chic",
+      "soft pastels",
+      "modern Vietnamese",
+      "polished casual"
+    ],
+    "occasionFit": [
+      "everyday",
+      "weekend",
+      "office"
+    ],
+    "pricePerception": "affordable",
+    "x": 0.1,
+    "y": 0.2,
+    "xReason": "Minimalist chic with soft pastels, polished but accessible femininity",
+    "yReason": "Quality everyday accessories with design consideration, mainstream not utilitarian"
+  }
+}
