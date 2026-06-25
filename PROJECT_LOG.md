@@ -3,7 +3,7 @@
 **Dự án:** Công cụ bản đồ định vị (territory map) tương tác cho thương hiệu túi xách MateMade (Gen Z, Việt Nam).
 **Mục tiêu:** Trực quan hóa vị trí tương quan của MateMade và **29 brand** đối thủ/tham chiếu trên hệ trục 2 chiều, lấy "Mass Feminine Việt Nam" làm tâm, nhằm tìm vùng định vị chiến lược.
 **Trạng thái:** Prototype hoạt động (local, mở bằng `file://`). 29 brand · 120 ảnh; đã kiểm chứng tọa độ + visual audit; có Semantic + Lens Mode, Research sources, heatmap mượt, white-space strategy beta. Từ 2026-06-21/22: thêm lớp nghiên cứu kể chuyện (`research/`) + hệ thống phản biện đa nhân cách (`personas/` — Researcher/Debator/PM) đã chạy thật, có báo cáo cuối gắn nhãn độ tin cậy.
-**Cập nhật gần nhất:** 2026-06-22.
+**Cập nhật gần nhất:** 2026-06-25.
 
 ---
 
@@ -67,11 +67,11 @@
 ## 3. Tính năng hiện có
 
 ### Tab 1 — Orbit Map (tâm Mass Feminine)
-- Canvas toàn màn hình kiểu Google Maps: **scroll = zoom về con trỏ**, **kéo = pan**, HUD `+ / − / ⤢ (fit) / 👁`.
-- Mỗi brand = **collage masonry 2 cột** (tới 8 ảnh, giữ đúng tỉ lệ, không crop). MateMade viền hồng nổi bật.
-- Brand chưa có ảnh → placeholder (mã màu orbit + chữ cái đầu tên).
-- Click collage → **panel chi tiết** trượt phải: ảnh sản phẩm (tới 9), product code, 7 metrics dạng bar, độ liên quan với MateMade, orbit.
-- Legend orbit + nhãn vòng góc trên trái.
+- Canvas toàn màn hình kiểu Google Maps: **scroll = zoom về con trỏ**, **kéo = pan**. HUD = 2 pill kính mờ (zoom `+ / − / fit` · công cụ `ảnh / T·# / heatmap / phân tích`), **icon line SVG monochrome** (xem v1.8).
+- Mỗi brand = **card iOS**: 1 ảnh hero + tên + chip màu territory (đại tu từ collage masonry ở v1.8). MateMade có badge "Bạn ở đây" + viền hồng.
+- Brand chưa có ảnh → placeholder (mã màu + chữ cái đầu tên).
+- Click card → **panel chi tiết** dạng sheet bo góc nổi trượt phải: ảnh sản phẩm, product code, 7 metrics dạng bar, độ liên quan với MateMade, sources.
+- Legend **gập được** (header + chevron) góc trên trái; filter quốc gia + version nằm trong topbar (v1.8).
 
 ### Tab 2 — MateMade Proximity (tâm MateMade)
 - Cùng cơ chế pan/zoom/collage nhưng **dời tâm về MateMade**; vòng = khoảng cách gần/xa quanh MateMade (Lõi → Rất gần → Gần → Có định hướng rõ → Xa hơn).
@@ -82,8 +82,11 @@
 ### Tab 4 — Strategic Opportunity
 - Orbit Map + highlight **vùng cơ hội** "Modular Candy Utility" (góc trái-dưới mở rộng).
 
-### Nút bật/tắt ảnh 👁
-- 👁 = hiện collage · 🙈 = chỉ còn dot màu orbit + tên + territory (xem vị trí tương quan không bị ảnh che). **Giữ nguyên zoom/pan** khi bật tắt.
+### Nút bật/tắt ảnh (icon mắt)
+- Mắt mở = hiện card ảnh · mắt-gạch (nút mờ đi) = chỉ còn dot màu + tên + territory (xem vị trí tương quan không bị ảnh che). **Giữ nguyên zoom/pan** khi bật tắt.
+
+### Sáng / Tối (Light/Dark) — v1.8
+- Nút ☀️/🌙 góc phải topbar đổi theme, **nhớ lựa chọn** qua localStorage. Mặc định Dark.
 
 ---
 
@@ -252,6 +255,16 @@ D:\WORK\2606\MateMade\gen-research-manifest.ps1
 - **Phát hiện quan trọng từ phiên tranh luận:** tọa độ MateMade đã đổi 3 lần trong 3 ngày (−0.78→−0.48→−0.55) — 2 điểm dữ liệu liên tiếp chưa đủ để khẳng định hội tụ thật, nên `FINAL_REPORT.md` dán nhãn tọa độ này "tạm thời/Trung bình" thay vì coi là chốt cứng. Cũng phát hiện mục "3 gap chiến lược" trong methodology bỏ sót lập luận chi tiết hơn đã có sẵn trong `docs/strategy/MATEMADE_WHITESPACE_STRATEGY_BETA.md` — cần hợp nhất 2 luồng khi viết brief chính thức.
 - **Output cuối cho user:** `personas/pm/FINAL_REPORT.md` — mọi kết luận chiến lược được viết lại kèm nhãn độ tin cậy (Cao/Trung bình/Thấp) + 4 action item cụ thể (tiêu chí mẫu, dữ liệu catalog/bestseller thật, validate nhu cầu khách hàng cho white space, audit từ bên thứ 3 hoàn toàn độc lập).
 
+### v1.8 — Đại tu UI/UX (vibe iOS) + Light mode *(2026-06-25)*
+- **Bối cảnh:** giao diện cũ "nặng & outdate"; yêu cầu nâng cấp UX/UI cho chuyên nghiệp, hiện đại, thân thiện, vibe iOS. Làm hoàn toàn trong `matemade-matrix.html` (không đụng dữ liệu/tọa độ). Verify từng bước qua DOM trong preview (0 lỗi console).
+- **A. Card thương hiệu (thay đổi chiếm phần lớn màn hình):** bỏ **collage masonry tới 8 ảnh nhỏ** (rối) → **card iOS sạch**: 1 ảnh hero + tên (chấm màu) + **chip màu territory** ngắn (lấy `terrInfo().vn`, không phải câu `mVn` dài). MateMade thêm badge "Bạn ở đây" + viền accent; marker dot-mode = sao to hơn (42px) có animation pulse.
+- **B. Panel chi tiết → sheet iOS nổi:** bo góc 22px, cách mép 12px, nền kính mờ (blur 28px), handle bar + brand-hero (đã có từ phiên trước, giữ).
+- **C. Legend gập được:** header có chevron bấm gập/mở (animation), rows territory thành **pill bấm được** (hover sáng, dấu ›); **giới hạn chiều cao động** (`calc(100vh - 430px)`) để **không bao giờ đè nút zoom HUD** (sửa bug bố cục: legend từng che HUD).
+- **D. HUD bỏ emoji → icon line:** thay 👁🔥📊 và ký tự +−⤢ bằng **icon SVG monochrome đồng nhất** (bộ `ICON{}`); tách thành **2 pill** (zoom / công cụ) kiểu iOS Maps; **active state thật**: bật heatmap → nút sáng accent, tắt ảnh → nút mắt mờ + đổi icon mắt-gạch. (Nút đổi màu giữ chữ "T/#" vì là nhãn 2-trạng-thái.)
+- **E. Gộp thanh quốc gia + version vào topbar:** bỏ **2 thanh nổi** che đỉnh bản đồ (thanh quốc gia wrap 2 dòng + thanh version rộng 900px). Gộp vào **giữa topbar**: filter quốc gia = **6 toggle cờ gọn** (cờ-only, tooltip tên nước, bật thì viền theo màu nước + nút ✕ xóa lọc); version = **pill ngắn** `v0/v1/v2/Hiện tại` (tooltip giữ nguyên mô tả dài + ngày). Tự **ẩn** khi ở tab About/Comparison. Hàm mới `renderTopTools()` thay `buildCountryBar()/buildVersionBar()`.
+- **F. Light mode:** nút ☀️/🌙 ở topbar, **lưu localStorage** + áp sớm trong `<head>` (không nháy màu khi load). Bảng màu light kiểu **iOS Settings** (nền xám sáng, surface trắng, chữ đậm, accent sâu hơn) qua 1 block `html[data-theme="light"]` override mọi surface tối hardcode (viewport, card, glass legend/HUD/detail, topbar, tabs, tools, panel phụ). **SVG map theme-aware** qua `svgPal()` (trục, nhãn vòng, chấm tâm, đổ bóng chữ territory đổi theo theme; toggle re-render). Màu thương hiệu/territory giữ nguyên (đọc tốt trên cả 2 nền). Quét 3 tab ở light: 0 surface tối lọt, 0 chữ sáng-trên-sáng.
+- **Hạ tầng dev:** thêm `.claude/launch.json` + `.claude/static-server.js` (static server Node để preview; `.claude/` đã gitignore — không commit). 3 commit: `8bde3a6` (đại tu UI), `cecc9de` (light mode).
+
 ---
 
 ## 6. Việc đang chờ / hướng tiếp theo
@@ -266,6 +279,7 @@ D:\WORK\2606\MateMade\gen-research-manifest.ps1
 - [x] **Research sources** trong brand detail (v1.5); **polish UI + wording + heatmap mượt** (v1.6).
 - [x] **White-space strategy beta** (`MATEMADE_WHITESPACE_STRATEGY_BETA.md`, v1.6).
 - [x] **Tài liệu phương pháp `research/` + hệ thống phản biện đa nhân cách `personas/`** (v1.7) — báo cáo cuối: `personas/pm/FINAL_REPORT.md`.
+- [x] **Đại tu UI/UX vibe iOS + Light mode** (v1.8, 2026-06-25) — card hero, sheet chi tiết, legend gập, HUD icon line, gộp tools vào topbar, theme sáng/tối lưu localStorage. Sửa bug legend đè HUD.
 - [x] **Debate chuyên đề tọa độ 28 brand đối thủ** (`COORDINATE_DEBATE.md`, 2026-06-22) — rà toàn bộ `FINAL_POS` theo 4 tiêu chí (bước nhảy lớn chưa đo lại, chỉ 1 nguồn nghiên cứu, tọa độ rìa trục, brand category-adjacent lẫn vào phép tính khoảng cách). Phát hiện: Stand Oil có Δx=0.57 — bước nhảy lớn nhất toàn ma trận, chưa từng dán nhãn tạm thời; 10/28 brand (36%) chỉ có 1 nguồn nghiên cứu duy nhất; toàn bộ 28/28 brand không có công thức quy đổi định lượng (giới hạn cấu trúc, không riêng case nào).
 - [x] **Gộp COORD_HISTORY v1+v2** (2026-06-22) → còn 3 mốc: v0 "Ban đầu" → v1 "Sau deep-dive 28 đối thủ + MateMade (trước Codex audit)" → "Hiện tại".
 - [x] **Deep-dive vòng "Photography Vibe" (2026-06-22)** — góc nhìn mới: chỉ dựa trên đặc điểm sản phẩm có thể không đủ khách quan vì brand hay "mass hóa" sản phẩm để dễ bán; điểm phân hóa thật nằm ở **phong cách hình ảnh chính thống** (model/casting, bối cảnh, góc máy, color grading, art direction). Scan 29 brand qua `BRAND_SOURCES`, 5 nhóm research song song qua WebFetch/WebSearch.
